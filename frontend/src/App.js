@@ -13,7 +13,7 @@ function App() {
       <Navbar />
       <div className="app-container">
         <Routes>
-          {/* <Route path="/" element={<SliderComponent />} /> */}
+          <Route path="/" element={<SliderComponent />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
         </Routes>

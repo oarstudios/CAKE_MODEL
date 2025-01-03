@@ -1,0 +1,59 @@
+.slider-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding-top: 8rem; */
+    position: relative; /* Add this */
+    height: 100vh; /* Ensure full height for proper positioning */
+}
+
+.slider-page::before {
+    content: "";
+    position: absolute;
+    bottom: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1300px;
+    height: 1050px;
+    background: url(../../images/cakeslider.jpg) no-repeat center/cover;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.slider-content {
+    position: relative;
+    z-index: 2;
+}
+
+.slider-footer {
+    width: 100%; /* Change this */
+    max-width: 85%; 
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+    padding: 1rem;
+    background-color: #a50000;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+    font-size: 1rem;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.contact-info span {
+    margin: 0 1rem;
+}
+
+
+
+
+
+
+
+
+
