@@ -1,44 +1,29 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
-
-dotenv.config();
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes')
+const bodyParser = require('body-parser')
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Middleware
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/users', userRoutes)
 
-// Routes
-app.get("/", (req, res) => {
-  res.send("Backend server is running!");
-});
+const PORT = process.env.PORT;
 
-// User routes (example for Sign In and Sign Up)
-app.post("/api/signup", (req, res) => {
-  const { name, email, password } = req.body;
+// Connect to database
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
-  if (!name || !email || !password) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
+app.get('/', (req, res) => {
+    res.send('Hello from the backend!');
+  });
 
-  res.status(200).json({ message: "User signed up successfully!" });
-});
-
-app.post("/api/signin", (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: "Email and password are required" });
-  }
-
-  res.status(200).json({ message: "User signed in successfully!" });
-});
-
-// Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+    console.log('Listening on PORT:', PORT);
 });
