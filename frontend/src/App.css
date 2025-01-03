@@ -1,3 +1,4 @@
+/* App.css */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -6,6 +7,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 /* Hide scrollbar for all elements */
 * {
   scrollbar-width: none; /* For Firefox */
@@ -14,4 +16,23 @@
 
 *::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* Striped background for App */
+.app-container {
+  background: repeating-linear-gradient(
+    90deg,
+    #e5e1d7,
+    #e5e1d7 30px,
+    #ffffff 30px,
+    #ffffff 60px
+  );
+  min-height: 100vh;
+}
+
+/* Navbar and Footer should have solid background */
+.navbar, .footer {
+  background: #fff;
+  position: relative;
+  z-index: 10; /* Ensure they overlay the background */
 }
