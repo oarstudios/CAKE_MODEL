@@ -1,0 +1,121 @@
+.footer {
+    background: #e5e1d7;
+    padding: 4rem 2rem;
+  }
+  
+  .footer-top {
+    display: flex;
+    justify-content: space-between; /* Even spacing */
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 8rem; /* Add consistent spacing between sections */
+  }
+  
+  .footer-logo {
+    flex: 1; /* Ensures all sections take equal space */
+    display: flex;
+    justify-content: center; /* Center the logo */
+  }
+  
+  .logo {
+    width: 20rem;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: space-around; /* Equal spacing within sections */
+    flex: 3;
+  }
+  
+  .footer-column {
+    flex: 1; /* Ensures equal space for each column */
+
+  }
+  
+  .footer-column h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    font-family: "Josefin Sans", serif;
+    color: #471d06;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin: 0.5rem 0;
+  }
+  
+  .footer-column ul li a {
+    text-decoration: none;
+    color: #8e8e8e;
+    font-family: "Jost", serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+  }
+  
+  .footer-column ul li a:hover {
+    color: #d5b26b;
+  }
+  
+  .footer-bottom {
+    margin-top: 6rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4rem;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-social img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .footer-social img:hover {
+    filter: brightness(0.8);
+  }
+  
+  .footer-copyright {
+    font-size: 20px;
+    color: #8e8e8e;
+    font-weight: 700;
+    font-family: "Jost", serif;
+    text-align: center;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem; /* Increase spacing for mobile */
+    }
+  
+    .footer-links {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  
+    .footer-column {
+      text-align: center;
+    }
+  
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+  }
+  

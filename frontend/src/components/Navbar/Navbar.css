@@ -1,0 +1,42 @@
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 3rem;
+    border: 1px solid #D5B26B;
+  }
+  
+  .navbar-logo img {
+    height: 4rem;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar-links li a {
+    text-decoration: none;
+    color: #471D06;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Josefin Sans", serif;
+    /* transition: color 0.3s; */
+  }
+  
+  .navbar-links li a:hover {
+    color: #D5B26B;
+  }
+  
+  .navbar-icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar-icons img {
+    height: 1.2rem;
+    cursor: pointer;
+  }
+  
