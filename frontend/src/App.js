@@ -7,6 +7,8 @@ import SignUpPage from "./components/LoginANDSignUp/SignUpPage";
 import SignInPage from "./components/LoginANDSignUp/SignInPage";
 import SliderComponent from "./components/Slider/SliderComponent";
 import BestSellingCakes from "./components/BestSellingCakes/BestSellingCakes"; // Import the component
+import BestSellingCoco from "./components/BestSellingCoco/BestSellingCoco";
+import CakeOfTheWeek from "./components/CakeOfTheWeek/CakeOfTheWeek";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
             <>
               {/* <SliderComponent />  */}
               <BestSellingCakes /> {/* Add Best Selling Cakes here */}
+              <CakeOfTheWeek/>
+              <BestSellingCoco/>
+            
             </>
           } />
           <Route path="/signup" element={<SignUpPage />} />

@@ -32,7 +32,7 @@
 
 /* Navbar and Footer should have solid background */
 .navbar, .footer {
-  background: #fff;
+  /* background: #fff; */
   position: relative;
   z-index: 10; /* Ensure they overlay the background */
 }

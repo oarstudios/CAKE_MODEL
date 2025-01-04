@@ -1,7 +1,7 @@
 import React from "react";
-import "./BestSellingCakes.css";
-import cake1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png"
-import cake2 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1.png"
+import "./BestSellingCoco.css";
+import cake1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
+import cake2 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1.png";
 
 const cakes = [
   {
@@ -67,27 +67,28 @@ const cakes = [
     image: cake1,
     tag: null,
   },
-  // Repeat more items to make 3 rows
 ];
 
-const BestSellingCakes = () => {
+const BestSellingCoco = () => {
   return (
     <>
-    <section className="best-selling-cakes">
-      <h2 className="section-title">Best Selling Cakes</h2>
-      <div className="cake-grid">
+    <section className="best-selling-coco">
+      <h2 className="section-title-coco">Best Selling Choclates</h2>
+      <div className="coco-grid">
         {cakes.map((cake) => (
-          <div className="cake-card" key={cake.id}>
-            <div className="cake-image">
+          <div className="coco-card" key={cake.id}>
+            <div className="coco-image">
               <img src={cake.image} alt={cake.name} />
-              {cake.tag && <span className="cake-tag">{cake.tag}</span>}
+              {cake.tag && <span className="coco-tag">{cake.tag}</span>}
             </div>
-            <div className="cake-details">
-              <h3 className="cake-name">{cake.name}</h3>
-              <p className="cake-price"><span className="cake-price-span">from</span> Rs. {cake.price}</p>
-              <div className="cake-buttons">
-                <button className="view-button">View</button>
-                <button className="add-button">Add to Basket</button>
+            <div className="coco-details">
+              <h3 className="coco-name">{cake.name}</h3>
+              <p className="coco-price">
+                <span className="coco-price-span">from</span> Rs. {cake.price}
+              </p>
+              <div className="coco-buttons">
+                <button className="view-button-coco">View</button>
+                <button className="add-button-coco">Add to Basket</button>
               </div>
             </div>
           </div>
@@ -99,4 +100,4 @@ const BestSellingCakes = () => {
   );
 };
 
-export default BestSellingCakes;
+export default BestSellingCoco;
