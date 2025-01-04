@@ -6,6 +6,7 @@ import Footer from "./components/Footer/Footer";
 import SignUpPage from "./components/LoginANDSignUp/SignUpPage";
 import SignInPage from "./components/LoginANDSignUp/SignInPage";
 import SliderComponent from "./components/Slider/SliderComponent";
+import BestSellingCakes from "./components/BestSellingCakes/BestSellingCakes"; // Import the component
 
 function App() {
   return (
@@ -13,7 +14,12 @@ function App() {
       <Navbar />
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<SliderComponent />} />
+          <Route path="/" element={
+            <>
+              {/* <SliderComponent />  */}
+              <BestSellingCakes /> {/* Add Best Selling Cakes here */}
+            </>
+          } />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
         </Routes>
@@ -24,3 +30,4 @@ function App() {
 }
 
 export default App;
+

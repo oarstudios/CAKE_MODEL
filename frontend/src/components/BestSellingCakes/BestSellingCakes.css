@@ -1,0 +1,137 @@
+.best-selling-cakes {
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    padding: 2rem;
+    background-color: #FDFAF5;
+  margin: 0rem 2rem;
+  }
+  
+  .section-title {
+ 
+    color: #D5B26B;
+    margin-bottom: 2rem;
+
+    font-size: 48px;
+    font-weight: 600;
+    font-family: "Josefin Sans", serif;
+  }
+  
+  .cake-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .cake-card {
+
+    border: 1px solid #D5B26B;
+    border-radius: 20px;
+ 
+    overflow: hidden;
+
+
+
+  }
+  
+  .cake-image {
+    position: relative;
+  }
+  
+  .cake-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .cake-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #FDFAF5;
+    color: #D5B26B;
+    font-size: 16px;
+    padding: 0.3rem 0.5rem;
+    border-radius: 10px;
+    font-weight: 400;
+    font-family: "Josefin Sans", serif;
+
+    border: 1px solid #D5B26B;
+  }
+  
+  .cake-details {
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .cake-name {
+    font-size: 24px;
+    color: #471D06;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    font-family: "Jost", serif;
+
+  }
+  .cake-price-span{
+    font-size: 16px;
+    color: #471D06;
+    font-weight: 400;
+    font-family: "Jost", serif;
+  }
+  
+  .cake-price {
+   
+   
+    margin-bottom: 1rem;
+    font-size: 24px;
+    color: #471D06;
+    font-weight: 600;
+    font-family: "Jost", serif;
+  }
+  
+  .cake-buttons {
+    display: flex;
+  
+  }
+  
+  .view-button{
+    flex: 1;
+    padding: 0.7rem;
+    color: #FDFAF5;
+    background-color: #D5B26B;
+    border: none;
+    border-radius: 5px 0px 0px 10px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "Josefin Sans", serif;
+    cursor: pointer;
+  }
+  
+  .add-button {
+    background-color:#FDFAF5;
+    border: 1px solid #D5B26B;
+
+    flex: 2;
+    padding: 0.7rem;
+    color: #524938;
+   
+ 
+    border-radius: 0px 5px 10px 0px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "Josefin Sans", serif;
+    cursor: pointer;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .cake-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cake-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
