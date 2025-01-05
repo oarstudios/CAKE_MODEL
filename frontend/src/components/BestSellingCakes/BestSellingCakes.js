@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./BestSellingCakes.css";
 import cake1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png"
 import cake2 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1.png"
@@ -73,28 +74,32 @@ const cakes = [
 const BestSellingCakes = () => {
   return (
     <>
-    <section className="best-selling-cakes">
-      <h2 className="section-title">Best Selling Cakes</h2>
-      <div className="cake-grid">
-        {cakes.map((cake) => (
-          <div className="cake-card" key={cake.id}>
-            <div className="cake-image">
-              <img src={cake.image} alt={cake.name} />
-              {cake.tag && <span className="cake-tag">{cake.tag}</span>}
-            </div>
-            <div className="cake-details">
-              <h3 className="cake-name">{cake.name}</h3>
-              <p className="cake-price"><span className="cake-price-span">from</span> Rs. {cake.price}</p>
-              <div className="cake-buttons">
-                <button className="view-button">View</button>
-                <button className="add-button">Add to Basket</button>
+      <section className="best-selling-cakes">
+        <h2 className="section-title">Best Selling Cakes</h2>
+        <div className="cake-grid">
+          {cakes.map((cake) => (
+            <div className="cake-card" key={cake.id}>
+              <div className="cake-image">
+                <Link to="/product">
+                  <img src={cake.image} alt={cake.name} />
+                </Link>
+                {cake.tag && <span className="cake-tag">{cake.tag}</span>}
+              </div>
+              <div className="cake-details">
+                <h3 className="cake-name">{cake.name}</h3>
+                <p className="cake-price">
+                  <span className="cake-price-span">from</span> Rs. {cake.price}
+                </p>
+                <div className="cake-buttons">
+                  <button className="view-button">View</button>
+                  <button className="add-button">Add to Basket</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
-    <div className="section-line"></div>
+          ))}
+        </div>
+      </section>
+      <div className="section-line"></div>
     </>
   );
 };

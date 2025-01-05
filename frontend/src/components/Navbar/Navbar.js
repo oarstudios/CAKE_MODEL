@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./Navbar.css";
 import logo from "../../images/Pink Modern Simple Bakery Logo (1) 1.png";
 import search from "../../images/Group.png";
@@ -15,16 +16,34 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src={logo} alt="Keki's Bakery Logo" />
+        {/* Link the logo to '/' */}
+        <Link to="/">
+          <img src={logo} alt="Keki's Bakery Logo" />
+        </Link>
       </div>
       <ul className={`navbar-links ${menuOpen ? "open" : ""}`}>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#luxury-cakes">Luxury Cakes</a></li>
-        <li><a href="#chocolates">Chocolates</a></li>
-        <li><a href="#gifting">Gifting</a></li>
-        <li><a href="#contact-us">Contact Us</a></li>
-        <li><a href="#about-us">About Us</a></li>
+        {/* Update Home link to redirect to '/' */}
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <a href="#shop">Shop</a>
+        </li>
+        <li>
+          <a href="#luxury-cakes">Luxury Cakes</a>
+        </li>
+        <li>
+          <a href="#chocolates">Chocolates</a>
+        </li>
+        <li>
+          <a href="#gifting">Gifting</a>
+        </li>
+        <li>
+          <a href="#contact-us">Contact Us</a>
+        </li>
+        <li>
+          <a href="#about-us">About Us</a>
+        </li>
       </ul>
       <div className="navbar-icons">
         <img src={search} alt="Search Icon" />

@@ -44,8 +44,8 @@
 .navbar-links li a {
   text-decoration: none;
   color: #471D06;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 500;
   font-family: "Josefin Sans", serif;
 }
 
@@ -69,10 +69,10 @@
   .navbar-links {
     display: none;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     position: absolute;
     top: 5rem;
-    right: 3rem;
+    right: 1.5rem;
     background-color: #FDFAF5;
     padding: 1rem 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

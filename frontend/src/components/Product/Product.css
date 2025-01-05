@@ -1,0 +1,344 @@
+.product-container {
+    display: flex;
+    gap: 2.5rem;
+    padding: 4rem;
+    background-color: #fdfaf5;
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  .product-image-section {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+   
+  }
+
+  
+  .main-image {
+    width: 100%; /* Image scaled down */
+ 
+  
+    border-radius: 20px;
+  }
+  
+  .thumbnail-container {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .product-details-section {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  
+  .product-name {
+    font-size: 48px;
+  
+    color: #D5B26B;
+    font-weight: 600;
+    font-family: "Jost", serif;
+  }
+  
+  .product-price {
+    font-size: 40px;
+  
+    color: #471D06;
+    font-weight: 400;
+    font-family: "Jost", serif;
+  }
+  
+  .product-description {
+    font-size: 24px;
+  
+    color: #471D06;
+    font-weight: 300;
+    font-family: "Jost", serif;
+  }
+  .smallHeadings{
+    font-size: 32px;
+  
+    color: #471D06;
+    font-weight: 400;
+    font-family: "Jost", serif;
+
+  }
+
+  .product-note-title{
+    font-size: 32px;
+  
+    color: #471D06;
+    font-weight: 400;
+    font-family: "Jost", serif;
+    margin-bottom: 1rem;
+  }
+
+  .productPage-quantity-selector {
+    display: flex;
+  
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.productPage-quantity-button {
+    color: #471d06;
+    font-size: 1.5rem;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-color: #fdfaf5;
+}
+
+.productPage-quantity {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    border: 1px solid #471D06;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+  
+  .product-quantity-weight {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  
+  .weight-selector {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+
+  
+  .weight-option {
+    padding: 13px 18px;
+    border: 1px solid #8E8E8E;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #8E8E8E;
+    font-weight: 400;
+    font-family: "Jost", serif;
+    font-size: 24px;
+  }
+  
+  .weight-option.selected {
+    border: 1px solid #471D06;
+    color: #471D06;
+  }
+  
+ 
+  
+  .product-note {
+    font-size: 0.9rem;
+    color: #471d06;
+    margin-top: 1rem;
+  }
+  
+ 
+  
+  .product-note ul {
+    padding-left: 1rem;
+  }
+  .product-note ul li{
+    text-decoration: none;
+    list-style: none;
+    font-size: 24px;
+  
+    color: #471D06;
+    font-weight: 300;
+    font-family: "Jost", serif;
+  }
+  
+  .forcolor{
+    background-color: #FDFAF5;
+  }
+
+
+  /* Styling for the horizontal line at the bottom */
+.cotw-divider {
+
+    border-top: 1px solid #8E8E8E; /* Custom line styling */
+    width: 90%; /* Adjust width */
+    margin-left: auto; /* Center the line */
+    margin-right: auto; /* Center the line */
+    color: #FDFAF5;
+  }
+  
+
+
+
+  /* Base Styles: Remain unchanged */
+
+/* Media Query for Tablets (e.g., 768px to 1024px) */
+@media (max-width: 1024px) {
+  .product-container {
+    flex-direction: column; /* Stack sections vertically */
+    padding: 2rem; /* Reduce padding */
+  }
+
+  .product-image-section, 
+  .product-details-section {
+    flex: 1 1 100%;
+  }
+
+  .product-name {
+    font-size: 36px; /* Adjust font size for tablet screens */
+  }
+
+  .product-price {
+    font-size: 32px; /* Adjust font size */
+  }
+
+  .product-description {
+    font-size: 20px; /* Adjust font size */
+  }
+
+  .smallHeadings, .product-note-title {
+    font-size: 28px; /* Adjust font size */
+  }
+
+  .weight-option {
+    font-size: 20px; /* Adjust button text size */
+    padding: 10px 15px; /* Adjust padding */
+  }
+
+  .product-note ul li {
+    font-size: 20px; /* Adjust font size for notes */
+  }
+
+  .cotw-divider {
+    width: 100%; /* Full width for tablets */
+  }
+}
+
+/* Media Query for Mobile Devices (e.g., up to 768px) */
+@media (max-width: 768px) {
+  .product-container {
+    padding: 1.5rem; /* Further reduce padding */
+    gap: 1.5rem; /* Reduce gap between sections */
+  }
+
+  .main-image {
+    width: 100%;
+    border-radius: 15px; /* Slightly reduce radius */
+  }
+
+  .thumbnail {
+    width: 50px; /* Smaller thumbnails */
+    height: 50px;
+  }
+
+  .product-name {
+    font-size: 30px; /* Adjust font size for smaller screens */
+  }
+
+  .product-price {
+    font-size: 26px; /* Smaller font for prices */
+  }
+
+  .product-description {
+    font-size: 18px; /* Smaller font for descriptions */
+  }
+
+  .smallHeadings, .product-note-title {
+    font-size: 24px; /* Smaller font for headings */
+  }
+
+  .weight-option {
+    font-size: 18px; /* Adjust button text size */
+    padding: 8px 12px; /* Adjust padding */
+  }
+
+  .product-note ul li {
+    font-size: 18px; /* Smaller font size for notes */
+  }
+}
+
+/* Media Query for Small Laptops (e.g., 1024px to 1366px) */
+@media (max-width: 1366px) {
+  .product-container {
+    padding: 3rem; /* Adjust padding for smaller laptops */
+  }
+
+  .product-name {
+    font-size: 40px; /* Adjust font size */
+  }
+
+  .product-price {
+    font-size: 36px; /* Adjust font size */
+  }
+
+  .product-description {
+    font-size: 22px; /* Adjust font size */
+  }
+
+  .smallHeadings, .product-note-title {
+    font-size: 30px; /* Adjust font size */
+  }
+
+  .weight-option {
+    font-size: 22px; /* Adjust button text size */
+    padding: 12px 16px; /* Adjust padding */
+  }
+
+  .product-note ul li {
+    font-size: 22px; /* Adjust font size for notes */
+  }
+}
+
+/* Ensure a good user experience on very small screens (e.g., less than 480px) */
+@media (max-width: 480px) {
+  .product-container {
+    padding: 1rem; /* Minimal padding */
+    gap: 1rem;
+  }
+
+  .thumbnail {
+    width: 40px; /* Even smaller thumbnails */
+    height: 40px;
+  }
+
+  .product-name {
+    font-size: 24px;
+  }
+
+  .product-price {
+    font-size: 20px;
+  }
+
+  .product-description {
+    font-size: 16px;
+  }
+
+  .smallHeadings {
+    font-size: 20px;
+  }
+  .product-note-title{
+    font-size: 20px;
+  }
+
+  .weight-option {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  .product-note ul li {
+    font-size: 16px;
+  }
+}
