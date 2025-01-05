@@ -14,7 +14,6 @@ const UserModel = mongoose.Schema({
     },
     phoneNumber: {
         type: Number,
-        required: true
     },
     password: {
         type: String,
@@ -22,15 +21,12 @@ const UserModel = mongoose.Schema({
     },
     address: {
         type: String,
-        required: true
     },
     age: {
         type: Number,
-        required: true
     },
     gender: {
         type: String,
-        required: true,
         enum: ["Male", "Female", "Others"]
     },
     userType: {
@@ -40,9 +36,9 @@ const UserModel = mongoose.Schema({
     }
 }, {timestamps: true});
 
-UserModel.statics.signup = async function(username, email, phoneNumber, password, address, age, gender, userType)
+UserModel.statics.signup = async function(username, email, password, userType)
 {
-    if(!username || !email || !phoneNumber || !password || !address || !age || !gender || !userType)
+    if(!username || !email || !password || !userType)
     {
         throw Error('All fields must be filled')
     }
@@ -69,11 +65,7 @@ UserModel.statics.signup = async function(username, email, phoneNumber, password
     const user = await this.create({
         username, 
         email,
-        phoneNumber,
         password: hash,
-        address,
-        age,
-        gender,
         userType
     })
 
@@ -82,9 +74,9 @@ UserModel.statics.signup = async function(username, email, phoneNumber, password
 
 }
 
-UserModel.statics.login = async function(username, email, password)
+UserModel.statics.login = async function(email, password)
 {
-    if(!username || !email || !password)
+    if(!email || !password)
     {
         throw Error('All fields must be filled')
     }
