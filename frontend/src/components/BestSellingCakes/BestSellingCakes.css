@@ -24,6 +24,13 @@
   border: 1px solid #D5B26B;
   border-radius: 20px;
   overflow: hidden;
+
+
+
+  
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensures all cards have the same height */
 }
 
 .cake-image {
@@ -53,6 +60,11 @@
 .cake-details {
   padding: 1rem;
   text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes the price and button to the bottom */
+  height: 100%;
 }
 
 .cake-name {
@@ -127,6 +139,7 @@
   .cake-buttons button {
     font-size: 1rem;
   }
+
   .cake-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 cards per row for tablets */
   }
@@ -144,27 +157,65 @@
 
 @media (max-width: 480px) {
   .best-selling-cakes {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem;
     margin: 0;
   }
+  .cake-details{
+    padding: 0.6rem;
+  }
+  .cake-card{
+    border-radius: 8px !important; 
+}
 
   .section-title {
     font-size: 1.5rem;
   }
 
   .cake-name {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .cake-price-span{
+    font-size: 0.7rem;
   }
 
   .cake-price {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
   }
 
   .cake-buttons button {
     font-size: 0.9rem;
-    padding: 0.5rem;
+    padding: 0.3rem;
+    background-color: #D5B26B;
+    color: #FDFAF5;
+    border-radius: 5px 5px 5px 5px;
   }
+
   .cake-grid {
-    grid-template-columns: 1fr; /* 1 card per row for mobile phones */
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for mobile phones */
+    gap: 1rem;
+  }
+  .cake-tag{
+    font-size: 0.6rem;
+    top: 5px;
+    right: 5px;
+    color: #471D06;
+    padding: 0.2rem 0.4rem;
+  }
+  /* Hide view button on mobile */
+  .view-button {
+    display: none;
   }
 }
+
+
+
+
+
+
+
+
+
+
+

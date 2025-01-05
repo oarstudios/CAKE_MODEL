@@ -25,12 +25,14 @@
   cursor: pointer;
   background: none;
   border: none;
+
+ 
 }
 
 .hamburger-line {
   width: 25px;
   height: 3px;
-  background-color: #471D06;
+  background-color: #D5B26B;
 }
 
 .navbar-links {
