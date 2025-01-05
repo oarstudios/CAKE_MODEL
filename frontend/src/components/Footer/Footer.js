@@ -1,9 +1,9 @@
 import React from "react";
 import "./Footer.css";
-import logo from "../../images/logo.png";
+import logo from "../../images/Pink Modern Simple Bakery Logo (1) 1 (1).png";
 import linkedin from "../../images/mdi_linkedin.png";
-import twitter from "../../images/prime_twitter.png";
-import facebook from "../../images/ic_baseline-facebook.png";
+import twitter from "../../images/Clip path group.png";
+import facebook from "../../images/Vector (1).png";
 import instagram from "../../images/ri_instagram-fill.png";
 
 const Footer = () => {

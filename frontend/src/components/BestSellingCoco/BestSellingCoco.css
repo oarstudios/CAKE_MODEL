@@ -1,129 +1,168 @@
 .best-selling-coco {
-    text-align: center;
-    font-family: "Arial", sans-serif;
-    padding: 2rem 4rem;
-    background-color: #fdfaf5;
-    margin: 0rem 2rem;
-  }
-  
-  .section-title-coco {
-    color: #d5b26b;
-    margin-bottom: 2rem;
-    font-size: 48px;
-    font-weight: 600;
-    font-family: "Josefin Sans", serif;
-  }
-  
-  .coco-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  
-  .coco-card {
-    border: 1px solid #d5b26b;
-    border-radius: 20px;
-    overflow: hidden;
-  }
-  
-  .coco-image {
-    position: relative;
-  }
-  
-  .coco-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .coco-tag {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #fdfaf5;
-    color: #d5b26b;
-    font-size: 16px;
-    padding: 0.3rem 0.5rem;
-    border-radius: 10px;
-    font-weight: 400;
-    font-family: "Josefin Sans", serif;
-    border: 1px solid #d5b26b;
-  }
-  
-  .coco-details {
-    padding: 1rem;
-    text-align: left;
-  }
-  
-  .coco-name {
-    font-size: 24px;
-    color: #471d06;
-    margin-bottom: 0.5rem;
-    font-weight: 400;
-    font-family: "Jost", serif;
-  }
-  
-  .coco-price-span {
-    font-size: 16px;
-    color: #471d06;
-    font-weight: 400;
-    font-family: "Jost", serif;
-  }
-  
-  .coco-price {
-    margin-bottom: 1rem;
-    font-size: 24px;
-    color: #471d06;
-    font-weight: 600;
-    font-family: "Jost", serif;
-  }
-  
-  .coco-buttons {
-    display: flex;
-  }
-  
-  .view-button-coco {
-    flex: 1;
-    padding: 0.7rem;
-    color: #fdfaf5;
-    background-color: #d5b26b;
-    border: none;
-    border-radius: 5px 0px 0px 10px;
-    font-size: 20px;
-    font-weight: 400;
-    font-family: "Josefin Sans", serif;
-    cursor: pointer;
-  }
-  
-  .add-button-coco {
-    background-color: #fdfaf5;
-    border: 1px solid #d5b26b;
-    flex: 2;
-    padding: 0.7rem;
-    color: #524938;
-    border-radius: 0px 5px 10px 0px;
-    font-size: 20px;
-    font-weight: 400;
-    font-family: "Josefin Sans", serif;
-    cursor: pointer;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  padding: 2rem 4rem; /* Reduced padding for better fit on smaller screens */
+  background-color: #FDFAF5;
+  margin: 0rem 2rem;
+}
+
+.section-title-coco {
+  color: #D5B26B;
+  margin-bottom: 2rem;
+  font-size: 2.5rem; /* Adjusts size based on screen size */
+  font-weight: 600;
+  font-family: "Josefin Sans", serif;
+}
+
+.coco-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Default: 3 cards per row */
+  gap: 1.5rem;
+}
+
+.coco-card {
+  border: 1px solid #D5B26B;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.coco-image {
+  position: relative;
+}
+
+.coco-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.coco-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #FDFAF5;
+  color: #D5B26B;
+  font-size: 0.9rem; /* Scales better for smaller devices */
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 400;
+  font-family: "Josefin Sans", serif;
+  border: 1px solid #D5B26B;
+}
+
+.coco-details {
+  padding: 1rem;
+  text-align: left;
+}
+
+.coco-name {
+  font-size: 1.5rem; /* Scales down for smaller screens */
+  color: #471D06;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-family: "Jost", serif;
+}
+
+.coco-price-span {
+  font-size: 0.9rem; /* Scales better for smaller devices */
+  color: #471D06;
+  font-weight: 400;
+  font-family: "Jost", serif;
+}
+
+.coco-price {
+  margin-bottom: 1rem;
+  font-size: 1.5rem; /* Scales better for smaller devices */
+  color: #471D06;
+  font-weight: 600;
+  font-family: "Jost", serif;
+}
+
+.coco-buttons {
+  display: flex;
+}
+
+.view-button-coco {
+  flex: 1;
+  padding: 0.6rem;
+  color: #FDFAF5;
+  background-color: #D5B26B;
+  border: none;
+  border-radius: 5px 0px 0px 10px;
+  font-size: 1.4rem; /* Scales better for smaller devices */
+  font-weight: 400;
+  font-family: "Josefin Sans", serif;
+  cursor: pointer;
+}
+
+.add-button-coco {
+  background-color: #FDFAF5;
+  border: 1px solid #D5B26B;
+  flex: 2;
+  padding: 0.6rem;
+  color: #524938;
+  border-radius: 0px 5px 10px 0px;
+  font-size: 1.4rem; /* Scales better for smaller devices */
+  font-weight: 400;
+  font-family: "Josefin Sans", serif;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .best-selling-coco {
+    padding: 1.5rem 1rem;
   }
 
-  .section-line {
-    height: 2rem; /* Thickness of the line */
-    background-color: #E5E1D7; /* Match your color scheme */
-  
+  .section-title-coco {
+    font-size: 2rem;
   }
-  
-  
-  @media (max-width: 768px) {
-    .coco-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+
+  .coco-name,
+  .coco-price {
+    font-size: 1.3rem;
   }
-  
-  @media (max-width: 480px) {
-    .coco-grid {
-      grid-template-columns: 1fr;
-    }
+
+  .coco-buttons button {
+    font-size: 1.2rem;
   }
-  
+  .coco-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .coco-grid {
+    grid-template-columns: repeat(2, 1fr); /* Still 2 cards per row for smaller tablets */
+  }
+
+  .section-title-coco {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .best-selling-coco {
+    padding: 2rem 1.5rem;
+    margin: 0;
+  }
+
+  .section-title-coco {
+    font-size: 1.5rem;
+  }
+
+  .coco-name {
+    font-size: 1.2rem;
+  }
+
+  .coco-price {
+    font-size: 1.2rem;
+  }
+
+  .coco-buttons button {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+  .coco-grid {
+    grid-template-columns: 1fr; /* 1 card per row for mobile phones */
+  }
+}

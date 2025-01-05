@@ -40,7 +40,7 @@ const CakeOfTheWeek = () => {
     </div>
   </section>
 
-  <div className="section-line"></div>
+  {/* <div className="section-line"></div> */}
   </>
   
   );

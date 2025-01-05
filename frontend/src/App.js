@@ -9,6 +9,7 @@ import SliderComponent from "./components/Slider/SliderComponent";
 import BestSellingCakes from "./components/BestSellingCakes/BestSellingCakes"; // Import the component
 import BestSellingCoco from "./components/BestSellingCoco/BestSellingCoco";
 import CakeOfTheWeek from "./components/CakeOfTheWeek/CakeOfTheWeek";
+import Banner from "./components/Banner/Banner";
 
 function App() {
   return (
@@ -18,9 +19,10 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
-              {/* <SliderComponent />  */}
+              <SliderComponent /> 
               <BestSellingCakes /> {/* Add Best Selling Cakes here */}
               <CakeOfTheWeek/>
+              <Banner/>
               <BestSellingCoco/>
             
             </>

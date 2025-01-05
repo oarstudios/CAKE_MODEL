@@ -1,7 +1,7 @@
 .signin-page {
   display: flex;
   justify-content: center;
-  padding-top: 10rem;
+  padding-top: 8rem;
 }
 
 .signin-container {
@@ -15,11 +15,11 @@
 .signin-page::before {
   content: "";
   position: absolute;
-  bottom: -500px;
+  bottom: -425px;
   left: 50%;
   transform: translateX(-50%);
-  width: 1200px;
-  height: 1000px;
+  width: 1000px;
+  height: 950px;
   background: #ffffff;
   border-radius: 50%;
   z-index: 1;
@@ -92,10 +92,79 @@
   color: #565656;
   font-size: 24px;
   font-weight: 400;
-  margin-top: 1rem;
+  margin: 1rem;
 }
 
 .signup-link a {
   color: #d5b26b;
   text-decoration: none;
+}
+
+
+/* Responsive for tablets and small laptops */
+@media (max-width: 1024px) {
+  .signin-container {
+    width: 50%;
+  }
+  .signin-page::before {
+    display: none;
+   }
+}
+
+/* Responsive for mobile devices */
+@media (max-width: 768px) {
+  .signin-container {
+    width: 70%;
+  }
+  
+  .signin-title {
+    font-size: 36px;
+  }
+
+  .signin-input,
+  .signin-button,
+  .google-signin-button {
+    font-size: 18px;
+    padding: 0.6rem;
+  }
+
+  .error-message {
+    font-size: 14px;
+  }
+
+  .signup-link {
+    font-size: 18px;
+  }
+  .signin-page::before {
+   display: none;
+  }
+}
+
+/* Responsive for smaller mobile devices */
+@media (max-width: 480px) {
+  .signin-container {
+    width: 90%;
+  }
+
+  .signin-title {
+    font-size: 34px;
+  }
+
+  .signin-input,
+  .signin-button,
+  .google-signin-button {
+    font-size: 20px;
+    padding: 0.5rem;
+  }
+
+  .signup-link {
+    font-size: 20px;
+  }
+
+  .google-icon {
+    height: 24px;
+  }
+  .signin-page::before {
+   display: none;
+  }
 }
