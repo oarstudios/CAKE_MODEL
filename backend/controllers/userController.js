@@ -2,7 +2,7 @@ const User = require('../models/UserModel')
 const jwt = require('jsonwebtoken')
 
 const createToken = (id) =>{
-    return jwt.sign((id), process.env.SECRET, {expiresIn: '30d'})
+    return jwt.sign({id}, process.env.SECRET, {expiresIn: '30d'})
 }
 
 const signupUser = async (req, res) => {
@@ -11,7 +11,7 @@ const signupUser = async (req, res) => {
   try {
     const user = await User.signup(username, email, password, userType);
     const token = createToken(user._id);
-    res.status(200).json({user, token});
+    res.status(200).json({user: user, token: token});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -53,7 +53,7 @@ const getUserById = async(req, res) =>{
             return res.status(404).json("User not found")
         }
 
-        res.status(200).json(user)
+        res.status(200).json({user})
     }catch(error){
         res.status(400).json({error: error.message})
     }
@@ -77,7 +77,7 @@ const updateUser = async(req, res) =>{
 const deleteUser = async(req, res)=>{
     const {id} = req.params;
     try{
-        const user = await User.findById(id)
+        const user = await User.findByIdAndDelete(id)
         if(!user)
         {
             res.status(404).json("User not found")
