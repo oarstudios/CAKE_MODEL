@@ -111,10 +111,21 @@
   }
 
   /* Add blur effect */
-  .signin-page {
+ .signin-page {
     backdrop-filter: blur(5px); /* Apply blur */
     -webkit-backdrop-filter: blur(5px); /* For Safari support */
     background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+    height: 100vh;
+  }
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 30px,
+      #ffffff 30px,
+      #ffffff 60px
+    );
+    min-height: 100vh;
   }
 }
 
@@ -149,9 +160,20 @@
 
   /* Add blur effect */
   .signin-page {
-    backdrop-filter: blur(8px); /* Increase blur for mobile */
-    -webkit-backdrop-filter: blur(8px); /* For Safari support */
+    backdrop-filter: blur(5px); /* Apply blur */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
     background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+    height: 100vh;
+  }
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 30px,
+      #ffffff 30px,
+      #ffffff 60px
+    );
+    min-height: 100vh;
   }
 }
 
@@ -187,8 +209,19 @@
 
   /* Add blur effect */
   .signin-page {
-    backdrop-filter: blur(10px); /* Stronger blur for smaller devices */
-    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    backdrop-filter: blur(5px); /* Apply blur */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
     background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+    height: 100vh;
+  }
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 30px,
+      #ffffff 30px,
+      #ffffff 60px
+    );
+    min-height: 100vh;
   }
 }

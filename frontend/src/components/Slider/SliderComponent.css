@@ -37,7 +37,7 @@
     }
 
     .slider-page::before {
-        height: 80%; /* Adjust the dome height for smaller screens */
+        height: 75%; /* Adjust the dome height for smaller screens */
     }
 
     .slider-content {
