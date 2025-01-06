@@ -1,0 +1,221 @@
+.best-selling-cakes {
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  padding: 2rem 4rem; /* Reduced padding for better fit on smaller screens */
+  background-color: #FDFAF5;
+  margin: 0rem 2rem;
+}
+
+.section-title {
+  color: #D5B26B;
+  margin-bottom: 2rem;
+  font-size: 2.5rem; /* Adjusts size based on screen size */
+  font-weight: 600;
+  font-family: "Josefin Sans", serif;
+}
+
+.cake-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Default: 3 cards per row */
+  gap: 1.5rem;
+}
+
+.cake-card {
+  border: 0.5px solid #D5B26B;
+  border-radius: 20px;
+  overflow: hidden;
+
+
+
+  
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensures all cards have the same height */
+}
+
+.cake-image {
+  position: relative;
+}
+
+.cake-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cake-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #FDFAF5;
+  color: #D5B26B;
+  font-size: 0.9rem; /* Scales better for smaller devices */
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 400;
+  font-family: "Josefin Sans", serif;
+  border: 1px solid #D5B26B;
+}
+
+.cake-details {
+  padding: 1rem;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes the price and button to the bottom */
+  height: 100%;
+}
+
+.cake-name {
+  font-size: 1.5rem; /* Scales down for smaller screens */
+  color: #471D06;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-family: "Jost", serif;
+}
+
+.cake-price-span {
+  font-size: 0.9rem; /* Scales better for smaller devices */
+  color: #471D06;
+  font-weight: 400;
+  font-family: "Jost", serif;
+}
+
+.cake-price {
+  margin-bottom: 1rem;
+  font-size: 1.5rem; /* Scales better for smaller devices */
+  color: #471D06;
+  font-weight: 600;
+  font-family: "Jost", serif;
+}
+
+.cake-buttons {
+  display: flex;
+}
+
+.view-button {
+  flex: 1;
+  padding: 0.6rem;
+  color: #FDFAF5;
+  background-color: #D5B26B;
+  border: none;
+  border-radius: 5px 0px 0px 10px;
+  font-size: 1.4rem; /* Scales better for smaller devices */
+  font-weight: 400;
+  font-family: "Josefin Sans", serif;
+  cursor: pointer;
+}
+
+.add-button {
+  background-color: #FDFAF5;
+  border: 1px solid #D5B26B;
+  flex: 2;
+  padding: 0.6rem;
+  color: #524938;
+  border-radius: 0px 5px 10px 0px;
+  font-size: 1.4rem; /* Scales better for smaller devices */
+  font-weight: 400;
+  font-family: "Josefin Sans", serif;
+  cursor: pointer;
+}
+
+
+
+@media (max-width: 1024px) {
+  .best-selling-cakes {
+    padding: 1.5rem 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .cake-name,
+  .cake-price {
+    font-size: 1.3rem;
+  }
+
+  .cake-buttons button {
+    font-size: 1rem;
+  }
+
+  .cake-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .cake-grid {
+    grid-template-columns: repeat(2, 1fr); /* Still 2 cards per row for smaller tablets */
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .best-selling-cakes {
+    padding: 2rem 1rem;
+    margin: 0;
+  }
+  .cake-details{
+    padding: 0.6rem;
+  }
+  .cake-card{
+    border-radius: 8px !important; 
+}
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .cake-name {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .cake-price-span{
+    font-size: 0.7rem;
+  }
+
+  .cake-price {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .cake-buttons button {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    background-color: #D5B26B;
+    color: #FDFAF5;
+    border-radius: 5px 5px 5px 5px;
+  }
+
+  .cake-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row for mobile phones */
+    gap: 1rem;
+  }
+  .cake-tag{
+    font-size: 0.6rem;
+    top: 5px;
+    right: 5px;
+    color: #471D06;
+    padding: 0.2rem 0.4rem;
+  }
+  /* Hide view button on mobile */
+  .view-button {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

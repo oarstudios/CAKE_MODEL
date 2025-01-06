@@ -1,0 +1,76 @@
+/* Base Styles */
+.slider-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 100vh; /* Ensures full height for proper positioning */
+    overflow: hidden; /* Prevents excess content from showing */
+}
+
+.slider-page::before {
+    content: "";
+    position: absolute;
+    bottom: 0; /* Align the semicircle at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw; /* Full viewport width */
+    height: 95%; /* Maintain height proportional to width */
+    background: url(../../images/Dome.png) no-repeat center/contain; /* Use 'contain' to ensure the full image is visible */
+    background-size: contain; /* Ensures the image fits without cropping */
+    z-index: 1;
+}
+
+.slider-content {
+    position: relative;
+    z-index: 2;
+    padding: 1rem; /* Add padding for spacing */
+    text-align: center;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Small Mobile Devices */
+@media only screen and (max-width: 480px) {
+    .slider-page {
+        height: 42vh; /* Adjust height for smaller screens */
+    }
+
+    .slider-page::before {
+        height: 100%; /* Adjust the dome height for smaller screens */
+    }
+
+    .slider-content {
+        padding: 0.5rem;
+    }
+}
+
+/* Tablets and Larger Mobiles */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .slider-page {
+        height: 100vh;
+    }
+
+    .slider-page::before {
+        height: 100%;
+    }
+
+    .slider-content {
+        padding: 1rem;
+    }
+}
+
+/* Small Screen Laptops */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .slider-page {
+        height: 95vh; /* Slightly smaller height for laptops */
+    }
+
+    .slider-page::before {
+        height: 90%; /* Scale the dome proportionally */
+    }
+
+    .slider-content {
+        padding: 1.5rem;
+    }
+}

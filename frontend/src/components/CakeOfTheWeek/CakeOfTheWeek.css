@@ -1,0 +1,205 @@
+.cotw-section {
+    background-color: #fdfaf5;
+    font-family: "Josefin Sans", sans-serif;
+    padding: 2rem 1.5rem;
+}
+
+.cotw-heading {
+
+    text-align: center;
+    color: #D5B26B;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: "Josefin Sans", serif;
+}
+
+.cotw-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    gap: 1.5rem;
+    overflow: hidden;
+
+}
+
+.cotw-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.cotw-details {
+    text-align: center;
+}
+
+.cotw-name {
+    color: #471D06;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+    font-family: "Jost", serif;
+}
+
+.cotw-price {
+    font-size: 1.4rem;
+    color: #471d06;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    font-family: "Jost", serif;
+}
+
+.cotw-price span {
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.cotw-quantity-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.cotw-quantity-button {
+    color: #471d06;
+    font-size: 1.5rem;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-color: #fdfaf5;
+}
+
+.cotw-quantity {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    border: 1px solid #471D06;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.cotw-description {
+    font-size: 1.2rem;
+    color: #471D06;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-family: "Jost", serif;
+}
+
+.cotw-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cotw-add-to-cart, .cotw-buy-now {
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 400;
+    font-family: "Jost", serif;
+    width: 100%;
+}
+
+.cotw-add-to-cart {
+    background-color: #FDFAF5;
+    color: #471D06;
+    border: 1px solid #471D06;
+}
+
+.cotw-buy-now {
+    background-color: #D5B26B;
+    color: #FDFAF5;
+    border: none;
+}
+
+.section-line {
+    height: 2rem;
+    background-color: #E5E1D7;
+
+}
+@media (max-width:480px){
+    .cotw-section {
+        padding: 2rem 1.5rem;
+        margin: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .cotw-section {
+        padding: 2rem 1.5rem;
+        margin: 0rem 2rem;
+    }
+    
+    .cotw-card {
+        flex-direction: column;
+    }
+
+    .cotw-details {
+        text-align: left;
+    }
+
+    .cotw-name {
+        font-size: 2.0rem;
+    }
+
+    .cotw-price {
+        font-size: 1.5rem;
+    }
+
+    .cotw-price span {
+        font-size: 2.0rem;
+    }
+
+    .cotw-quantity {
+        font-size: 1.8rem;
+    }
+
+    .cotw-description {
+        font-size: 1.2rem;
+    }
+
+    .cotw-buttons {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .cotw-add-to-cart, .cotw-buy-now {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.2rem;
+    }
+    .cotw-quantity-selector{
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .cotw-section {
+        margin: 0rem 2rem;
+        padding: 2rem 4rem;
+    }
+    .cotw-card {
+        flex-direction: row;
+    }
+
+    .cotw-heading {
+        font-size: 3rem;
+    }
+
+    .cotw-image img {
+        max-width: 500px;
+    }
+
+
+    .cotw-quantity {
+        font-size: 2rem;
+    }
+    .cotw-quantity-selector{
+        justify-content: left;
+    }
+
+}
