@@ -117,7 +117,7 @@
 
   .navbar-icons {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     justify-content: flex-end;
     align-items: center;
   }

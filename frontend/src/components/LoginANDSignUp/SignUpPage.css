@@ -1,7 +1,9 @@
+/* Base styles for SignUp Page */
 .signup-page {
   display: flex;
   justify-content: center;
   padding-top: 8rem;
+  position: relative;
 }
 
 .signup-container {
@@ -17,7 +19,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 1000px;
-  height: 950px;
+  height: 980px;
   background: #ffffff;
   border-radius: 50%;
   z-index: 1;
@@ -95,7 +97,6 @@
   text-decoration: none;
 }
 
-
 /* Remove the .signup-page::before effect for tablets and smaller devices */
 @media (max-width: 1024px) {
   .signup-page::before {
@@ -104,6 +105,24 @@
 
   .signup-container {
     width: 50%;
+  }
+
+  /* Add blur effect for tablets */
+  .signup-page {
+    backdrop-filter: blur(5px); /* Apply blur */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+    height: 120vh;
+  }
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 30px,
+      #ffffff 30px,
+      #ffffff 60px
+    );
+    min-height: 120vh;
   }
 }
 
@@ -131,6 +150,24 @@
   .signin-link {
     font-size: 18px;
   }
+
+  /* Add blur effect for mobile */
+  .signup-page {
+    backdrop-filter: blur(5px); /* Apply blur */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+    height: 100vh;
+  }
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 30px,
+      #ffffff 30px,
+      #ffffff 60px
+    );
+    min-height: 100vh;
+  }
 }
 
 /* Responsive for smaller mobile devices */
@@ -147,7 +184,8 @@
   .signup-button,
   .google-signup-button {
     font-size: 20px;
-    padding: 0.5rem;
+    padding: 0.8rem;
+    margin: 0 0.5rem;
   }
 
   .signin-link {
@@ -156,5 +194,23 @@
 
   .google-icon {
     height: 24px;
+  }
+
+  /* Add stronger blur effect for smaller devices */
+  .signup-page {
+    backdrop-filter: blur(5px); /* Apply blur */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+    height: 100vh;
+  }
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 30px,
+      #ffffff 30px,
+      #ffffff 60px
+    );
+    min-height: 100vh;
   }
 }
