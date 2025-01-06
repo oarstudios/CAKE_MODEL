@@ -1,15 +1,15 @@
+/* Base styles for SignIn Page */
 .signin-page {
   display: flex;
   justify-content: center;
   padding-top: 8rem;
+  position: relative;
 }
 
 .signin-container {
   text-align: center;
   width: 35%;
   z-index: 2;
-
-
 }
 
 .signin-page::before {
@@ -100,15 +100,22 @@
   text-decoration: none;
 }
 
-
 /* Responsive for tablets and small laptops */
 @media (max-width: 1024px) {
   .signin-container {
     width: 50%;
   }
+
   .signin-page::before {
     display: none;
-   }
+  }
+
+  /* Add blur effect */
+  .signin-page {
+    backdrop-filter: blur(5px); /* Apply blur */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+  }
 }
 
 /* Responsive for mobile devices */
@@ -116,7 +123,7 @@
   .signin-container {
     width: 70%;
   }
-  
+
   .signin-title {
     font-size: 36px;
   }
@@ -135,8 +142,16 @@
   .signup-link {
     font-size: 18px;
   }
+
   .signin-page::before {
-   display: none;
+    display: none;
+  }
+
+  /* Add blur effect */
+  .signin-page {
+    backdrop-filter: blur(8px); /* Increase blur for mobile */
+    -webkit-backdrop-filter: blur(8px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
   }
 }
 
@@ -154,7 +169,8 @@
   .signin-button,
   .google-signin-button {
     font-size: 20px;
-    padding: 0.5rem;
+    padding: 0.8rem;
+    margin: 0 0.5rem;
   }
 
   .signup-link {
@@ -164,7 +180,15 @@
   .google-icon {
     height: 24px;
   }
+
   .signin-page::before {
-   display: none;
+    display: none;
+  }
+
+  /* Add blur effect */
+  .signin-page {
+    backdrop-filter: blur(10px); /* Stronger blur for smaller devices */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
   }
 }

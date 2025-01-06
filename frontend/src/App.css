@@ -27,7 +27,7 @@
     #ffffff 30px,
     #ffffff 60px
   );
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 /* Navbar and Footer should have solid background */
@@ -36,3 +36,5 @@
   position: relative;
   z-index: 10; /* Ensure they overlay the background */
 }
+
+

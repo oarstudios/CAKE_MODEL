@@ -1,7 +1,9 @@
+/* Base styles for SignUp Page */
 .signup-page {
   display: flex;
   justify-content: center;
   padding-top: 8rem;
+  position: relative;
 }
 
 .signup-container {
@@ -95,7 +97,6 @@
   text-decoration: none;
 }
 
-
 /* Remove the .signup-page::before effect for tablets and smaller devices */
 @media (max-width: 1024px) {
   .signup-page::before {
@@ -104,6 +105,13 @@
 
   .signup-container {
     width: 50%;
+  }
+
+  /* Add blur effect for tablets */
+  .signup-page {
+    backdrop-filter: blur(5px); /* Apply blur */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
   }
 }
 
@@ -131,6 +139,13 @@
   .signin-link {
     font-size: 18px;
   }
+
+  /* Add blur effect for mobile */
+  .signup-page {
+    backdrop-filter: blur(8px); /* Increase blur for mobile */
+    -webkit-backdrop-filter: blur(8px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+  }
 }
 
 /* Responsive for smaller mobile devices */
@@ -156,5 +171,12 @@
 
   .google-icon {
     height: 24px;
+  }
+
+  /* Add stronger blur effect for smaller devices */
+  .signup-page {
+    backdrop-filter: blur(10px); /* Stronger blur for smaller devices */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
   }
 }
