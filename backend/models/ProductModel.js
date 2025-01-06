@@ -13,8 +13,8 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
-        type: String,
+    bestseller: {
+        type: Boolean,
         required: true
     },
     itemInStock:{
@@ -23,7 +23,7 @@ const productSchema = mongoose.Schema({
     },
     productImages: [{
         type: String,
-        // required: true
+        required: true
     }]
 }, {timestamps: true})
 
