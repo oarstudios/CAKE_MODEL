@@ -1,0 +1,245 @@
+.cart-container {
+    padding: 2rem;
+    background-color: #FDFAF5;
+    height: 100%;
+   
+  }
+  
+  .cart-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #D5B26B;
+    font-weight: 600;
+    font-family: "Josefin Sans", serif;
+  }
+  
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #D5B26B;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-family: "Jost", serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .cart-items {
+    margin-bottom: 20px;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .cart-product-info {
+    display: flex;
+    align-items: center;
+    flex: 1 1 60%;
+    min-width: 250px;
+    margin-bottom: 10px;
+  }
+  
+  .cart-product-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .cart-product-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .cart-product-name {
+    font-family: "Jost", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #D5B26B;
+  }
+  
+  .cart-product-price {
+    color: #471D06;
+    font-family: "Jost", serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .quantity-info {
+    display: flex;
+    align-items: center;
+    font-family: "Jost";
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #471D06;
+  }
+  
+  .remove-item {
+    margin-left: 20px;
+  }
+  
+  .remove-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .cart-summary {
+    padding-top: 20px;
+    font-family: "Jost", serif;
+    color: #471D06;
+    margin-bottom: 2rem;
+  }
+  
+  .summary-header,
+  .summary-body {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+  }
+  
+  .summary-title {
+    font-family: "Jost";
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #D5B26B;
+  }
+  
+  .summary-text {
+    flex: 1;
+    line-height: 1.5;
+    color: #471D06;
+    font-family: "Jost";
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  
+  .subtotal-amount {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #471D06;
+    text-align: right;
+  }
+  
+  .cotw-buy-now {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: #D5B26B;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+  }
+  
+  .empty-cart {
+    text-align: center;
+    padding: 50px 0;
+    color: #555;
+  }
+  
+  .empty-cart h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .empty-cart p {
+    margin-top: 10px;
+    color: #777;
+  }
+  
+  /* --- Responsive Design --- */
+  
+  /* --- Responsive Design for Mobile --- */
+/* --- Responsive Design for Mobile --- */
+@media (max-width: 768px) {
+    .cart-item {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .cart-product-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  
+    .cart-product-details {
+      flex: 1;
+      margin-right: 10px;
+    }
+  
+    .cart-product-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #D5B26B;
+    }
+  
+    .cart-product-price {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #471D06;
+    }
+  
+    .quantity-info {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #471D06;
+      margin-left: 10px;
+    }
+  
+    .remove-item {
+      align-self: flex-end;
+      margin-top: 10px;
+    }
+  
+    .remove-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+
+  
+  @media (max-width: 480px) {
+    .cart-title {
+      font-size: 1.8rem;
+    }
+  
+    .cart-product-image {
+      width: 90px;
+      height: 90px;
+    }
+  
+    .cart-product-name,
+    .cart-product-price,
+    .quantity {
+      font-size: 1rem;
+    }
+  
+    .summary-title,
+    .subtotal-amount {
+      font-size: 1.2rem;
+    }
+  
+    .cotw-buy-now {
+      font-size: 1rem;
+    }
+  }
+  

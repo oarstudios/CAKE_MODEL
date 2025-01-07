@@ -14,6 +14,7 @@ import Product from "./components/Product/Product";
 import CustomerReviews from "./components/CustomerReviews/CustomerReviews";
 import YouMayAlsoLike from "./components/YouMayAlsoLike/YouMayAlsoLike";
 
+
 const App = () => {
   return (
     <Router>
@@ -29,6 +30,7 @@ const MainContent = () => {
 
   // Add `app-container` class only if the route is NOT `/product`
   const isProductRoute = location.pathname === "/product";
+
 
   return (
     <div className={isProductRoute ? "" : "app-container"}>
@@ -52,6 +54,8 @@ const MainContent = () => {
 
         {/* Sign In Page Route */}
         <Route path="/signin" element={<SignInPage />} />
+
+       
 
         {/* Product Page Route */}
         <Route
