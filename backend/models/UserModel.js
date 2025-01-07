@@ -29,6 +29,22 @@ const UserModel = mongoose.Schema({
         type: String,
         enum: ["Male", "Female", "Others"]
     },
+    cart: [
+        {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+              },
+              quantity: {
+                type: Number,
+                default: 1,
+                min: 1
+              },
+              weight:{
+                type: Number
+              }
+        }
+    ],
     userType: {
         type: String, 
         required: true,
