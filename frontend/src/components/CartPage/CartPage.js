@@ -63,7 +63,10 @@ const CartPage = () => {
   ))}
 </div>
 
-
+{/* <div className="total-price-container">
+  <p className="total-price-label">Total Price:</p>
+  <p className="total-price-value">Rs {subtotal}</p>
+</div> */}
 
           <div className="cart-summary">
   <div className="summary-header">

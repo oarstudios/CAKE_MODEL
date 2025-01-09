@@ -109,21 +109,11 @@
 
   /* Add blur effect for tablets */
   .signup-page {
-    backdrop-filter: blur(5px); /* Apply blur */
-    -webkit-backdrop-filter: blur(5px); /* For Safari support */
-    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+   
+    background-color: #FDFAF5; /* Add slight overlay */
     height: 120vh;
   }
-  .app-container {
-    background: repeating-linear-gradient(
-      90deg,
-      #e5e1d7,
-      #e5e1d7 30px,
-      #ffffff 30px,
-      #ffffff 60px
-    );
-    min-height: 120vh;
-  }
+ 
 }
 
 /* Responsive for mobile devices */
@@ -153,21 +143,11 @@
 
   /* Add blur effect for mobile */
   .signup-page {
-    backdrop-filter: blur(5px); /* Apply blur */
-    -webkit-backdrop-filter: blur(5px); /* For Safari support */
-    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+   
+    background-color: #FDFAF5; /* Add slight overlay */
     height: 100vh;
   }
-  .app-container {
-    background: repeating-linear-gradient(
-      90deg,
-      #e5e1d7,
-      #e5e1d7 30px,
-      #ffffff 30px,
-      #ffffff 60px
-    );
-    min-height: 100vh;
-  }
+ 
 }
 
 /* Responsive for smaller mobile devices */
@@ -198,19 +178,9 @@
 
   /* Add stronger blur effect for smaller devices */
   .signup-page {
-    backdrop-filter: blur(5px); /* Apply blur */
-    -webkit-backdrop-filter: blur(5px); /* For Safari support */
-    background-color: rgba(255, 255, 255, 0.2); /* Add slight overlay */
+   
+    background-color: #FDFAF5; /* Add slight overlay */
     height: 100vh;
   }
-  .app-container {
-    background: repeating-linear-gradient(
-      90deg,
-      #e5e1d7,
-      #e5e1d7 30px,
-      #ffffff 30px,
-      #ffffff 60px
-    );
-    min-height: 100vh;
-  }
+ 
 }

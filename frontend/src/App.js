@@ -28,12 +28,12 @@ const App = () => {
 const MainContent = () => {
   const location = useLocation();
 
-  // Add `app-container` class only if the route is NOT `/product`
-  const isProductRoute = location.pathname === "/product";
-
+  // Exclude `app-container` class for `/product`, `/signin`, and `/signup` routes
+  const excludedRoutes = ["/product", "/signin", "/signup"];
+  const isExcludedRoute = excludedRoutes.includes(location.pathname);
 
   return (
-    <div className={isProductRoute ? "" : "app-container"}>
+    <div className={isExcludedRoute ? "" : "app-container"}>
       <Routes>
         {/* Home Page Route */}
         <Route
@@ -55,16 +55,14 @@ const MainContent = () => {
         {/* Sign In Page Route */}
         <Route path="/signin" element={<SignInPage />} />
 
-       
-
         {/* Product Page Route */}
         <Route
           path="/product"
           element={
             <>
               <Product />
-              <CustomerReviews/>
-              <YouMayAlsoLike/>
+              <CustomerReviews />
+              <YouMayAlsoLike />
             </>
           }
         />
@@ -72,5 +70,6 @@ const MainContent = () => {
     </div>
   );
 };
+
 
 export default App;

@@ -19,6 +19,7 @@
 }
 
 /* Striped background for App */
+/* Striped background for App */
 .app-container {
   background: repeating-linear-gradient(
     90deg,
@@ -29,6 +30,20 @@
   );
   min-height: 100vh;
 }
+
+/* Adjust stripe width for mobile view */
+@media (max-width: 768px) {
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 15px, 
+      #ffffff 15px,
+      #ffffff 30px
+    );
+  }
+}
+
 
 /* Navbar and Footer should have solid background */
 .navbar, .footer {

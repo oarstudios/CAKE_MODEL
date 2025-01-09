@@ -89,8 +89,7 @@
   }
   
   .remove-icon {
-    width: 20px;
-    height: 20px;
+    
     cursor: pointer;
   }
   
@@ -131,18 +130,7 @@
     text-align: right;
   }
   
-  .cotw-buy-now {
-    display: block;
-    width: 100%;
-    padding: 10px 0;
-    font-size: 1.5rem;
-    color: #fff;
-    background-color: #D5B26B;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 20px 0;
-  }
+
   
   .empty-cart {
     text-align: center;
@@ -228,9 +216,11 @@
     }
   
     .cart-product-name,
-    .cart-product-price,
-    .quantity {
+    .cart-product-price {
       font-size: 1rem;
+    }
+    .quantity{
+      font-size: 24px;
     }
   
     .summary-title,
@@ -242,4 +232,7 @@
       font-size: 1rem;
     }
   }
+  
+
+
   
