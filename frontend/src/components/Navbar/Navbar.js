@@ -12,26 +12,29 @@ const Navbar = () => {
   const cartRef = useRef(null);
 
   const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
+    setIsCartOpen((prevState) => !prevState);
   };
 
-  // Close cart when clicking outside the cart
+  // Close cart when clicking outside or hovering outside the cart
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleOutsideEvent = (event) => {
       if (cartRef.current && !cartRef.current.contains(event.target)) {
         setIsCartOpen(false);
       }
     };
 
     if (isCartOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("mousedown", handleOutsideEvent);
+      document.addEventListener("mousemove", handleOutsideEvent);
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleOutsideEvent);
+      document.removeEventListener("mousemove", handleOutsideEvent);
     }
 
     // Cleanup
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleOutsideEvent);
+      document.removeEventListener("mousemove", handleOutsideEvent);
     };
   }, [isCartOpen]);
 
@@ -82,13 +85,16 @@ const Navbar = () => {
           </button>
         </div>
         {isCartOpen && (
-  <div className="cart-overlay" onClick={toggleCart}>
-    <div className="cart-popup" ref={cartRef} onClick={(e) => e.stopPropagation()}>
-      <CartPage />
-    </div>
-  </div>
-)}
-
+          <div className="cart-overlay">
+            <div
+              className="cart-popup"
+              ref={cartRef}
+              onMouseLeave={() => setIsCartOpen(false)} // Close cart on hover outside
+            >
+              <CartPage />
+            </div>
+          </div>
+        )}
       </nav>
     </>
   );

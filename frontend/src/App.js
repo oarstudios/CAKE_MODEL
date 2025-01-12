@@ -13,6 +13,7 @@ import Banner from "./components/Banner/Banner";
 import Product from "./components/Product/Product";
 import CustomerReviews from "./components/CustomerReviews/CustomerReviews";
 import YouMayAlsoLike from "./components/YouMayAlsoLike/YouMayAlsoLike";
+import BillingPage from "./components/BillingPage/BillingPage";
 
 
 const App = () => {
@@ -29,7 +30,7 @@ const MainContent = () => {
   const location = useLocation();
 
   // Exclude `app-container` class for `/product`, `/signin`, and `/signup` routes
-  const excludedRoutes = ["/product", "/signin", "/signup"];
+  const excludedRoutes = ["/product", "/signin", "/signup", "/billing"];
   const isExcludedRoute = excludedRoutes.includes(location.pathname);
 
   return (
@@ -66,6 +67,7 @@ const MainContent = () => {
             </>
           }
         />
+          <Route path="/billing" element={<BillingPage />} />
       </Routes>
     </div>
   );

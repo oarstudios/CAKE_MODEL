@@ -1,0 +1,382 @@
+.billing-page {
+  display: flex;
+  background-color: rgba(253, 250, 245, 1);
+  font-family: "Arial", sans-serif;
+}
+
+.billing-left {
+  flex: 2;
+  padding: 2rem;
+}
+
+.billing-right {
+  flex: 1;
+  padding: 2rem;
+  background-color: rgba(238, 238, 238, 1);
+  border-left: 1px solid rgba(213, 178, 107, 1);
+}
+
+.heading-billing-h2 {
+  font-family: "Jost";
+  font-size: 36px;
+  font-weight: 600;
+  color: rgba(71, 29, 6, 1);
+}
+
+.log-in {
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+
+  text-align: right;
+  text-decoration: underline;
+  color: rgba(71, 29, 6, 1);
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+form .different input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 6px 8px;
+  border: 1px solid rgba(142, 142, 142, 1);
+  border-radius: 10px;
+
+  font-family: "Jost";
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(142, 142, 142, 1);
+  background: transparent;
+}
+
+.form-field {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 6px 8px;
+    border: 1px solid rgba(142, 142, 142, 1);
+    border-radius: 10px;
+    font-family: "Jost";
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(142, 142, 142, 1);
+    background: transparent;
+  }
+
+  
+.contact-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delivery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.delivery-grid .full-width {
+  grid-column: span 2;
+}
+
+.delivery-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+ 
+}
+
+.delivery-grid-2 .full-width {
+  grid-column: span 2;
+}
+
+.state-city-pincode {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+
+.billing-options {
+  margin: 10px 0;
+}
+
+.billing-options label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.pay-now {
+  width: 100%;
+  background-color: rgba(213, 178, 107, 1);
+  color: rgba(253, 250, 245, 1);
+  border: none;
+  padding: 8px 10px;
+
+  border-radius: 10px;
+  cursor: pointer;
+
+  font-family: "Jost";
+font-size: 24px;
+font-weight: 600;
+
+
+
+}
+
+
+
+
+
+.cart-product-info {
+  display: flex;
+  align-items: center;
+}
+
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.summary-item .shipping-heading {
+  font-family: "Jost";
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(213, 178, 107, 1);
+}
+
+.summary-item .shipping-rates {
+  font-family: "Jost";
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(71, 29, 6, 1);
+}
+
+.summary-item .shipping-total-heading {
+  font-family: "Jost";
+  font-size: 36px;
+  font-weight: 600;
+  color: rgba(213, 178, 107, 1);
+}
+
+.summary-item .shipping-total-amount {
+  font-family: "Jost";
+  font-size: 36px;
+  font-weight: 600;
+  color: rgba(71, 29, 6, 1);
+}
+
+
+
+
+.billing-options label {
+    display: block;
+    padding: 6px 8px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-family: "Jost";
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(71, 29, 6, 1);
+    cursor: pointer;
+    background-color: rgba(253, 250, 245, 1);
+  }
+  
+  .billing-options label input {
+    margin-right: 10px;
+    width: 2%;
+  }
+  
+  .radio-option.selected {
+ 
+    background-color: rgba(71, 29, 6, 1);
+    color: white;
+  }
+  
+  .billing-address-fields {
+    margin-top: 20px;
+  }
+  
+  .billing-address-fields input {
+    margin-bottom: 10px;
+  }
+
+  
+  /* Default styling for larger screens remains unchanged */
+
+/* Mobile and small tablet view */
+@media (max-width: 768px) {
+    .billing-page {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  
+    .billing-left, .billing-right {
+      flex: 1;
+      padding: 1rem;
+      width: 100%;
+    
+      border: none;
+      border-radius: 15px;
+    }
+  
+    .summary-item {
+      
+      align-items: center;
+    }
+  
+    .cart-product-info {
+    
+      align-items: flex-start;
+    }
+  
+   
+  
+    .summary-item span {
+      font-size: 18px;
+    }
+  
+    .state-city-pincode {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+  
+    .delivery-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+  
+    .delivery-grid-2 {
+      grid-template-columns: 1fr;
+    }
+  
+    .pay-now {
+      font-size: 20px;
+      padding: 10px;
+    }
+  
+    .billing-options label {
+      font-size: 18px;
+    }
+  
+    .heading-billing-h2 {
+      font-size: 28px;
+    }
+  
+    .form-field, .different input {
+      font-size: 16px;
+      padding: 8px;
+    }
+  
+    .log-in {
+      font-size: 14px;
+    }
+  
+    .summary-item .shipping-heading,
+    .summary-item .shipping-total-heading {
+      font-size: 24px;
+    }
+  
+    .summary-item .shipping-rates,
+    .summary-item .shipping-total-amount {
+      font-size: 20px;
+    }
+  
+    .billing-right {
+      margin-top: 20px;
+    }
+  }
+  
+  /* Smaller tablets and landscape phones */
+  @media (max-width: 1024px) {
+   
+  
+    .summary-item .shipping-heading,
+    .summary-item .shipping-total-heading {
+      font-size: 28px;
+    }
+  
+    .summary-item .shipping-rates,
+    .summary-item .shipping-total-amount {
+      font-size: 24px;
+    }
+  
+    .state-city-pincode {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+  
+    .cart-product-info {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .pay-now {
+      font-size: 22px;
+    }
+  }
+  
+  /* Very small phones and compact view */
+  @media (max-width: 480px) {
+    .billing-page {
+      padding: 10px;
+    }
+  
+    .billing-left, .billing-right {
+      padding: 10px;
+      border: none;
+      border-radius: 15px;
+      /* background-color: #FDFAF5; */
+    }
+  
+    .cart-product-info {
+      
+      gap: 5px;
+    }
+  
+   
+  
+    .summary-item span {
+      font-size: 16px;
+    }
+  
+    .heading-billing-h2 {
+      font-size: 24px;
+    }
+  
+    .log-in {
+      font-size: 15px;
+    }
+  
+    .form-field, .different input {
+      font-size: 14px;
+      padding: 6px;
+    }
+  
+    .pay-now {
+      font-size: 18px;
+      padding: 8px;
+    }
+
+    .billing-options label input {
+        margin-right: 10px;
+        width: 5%;
+    }
+
+    .state-city-pincode {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 0px;
+    }
+    .delivery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+    }
+  }
+  
+
+  
