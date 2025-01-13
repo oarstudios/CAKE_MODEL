@@ -18,6 +18,11 @@ const Navbar = () => {
     setIsCartOpen((prevState) => !prevState);
   };
 
+  // Navigate to My Account page
+  const handleAdminClick = () => {
+    navigate("/my-account"); // Replace '/my-account' with your actual route path
+  };
+
   // Detect screen size
   useEffect(() => {
     const updateIsMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -81,7 +86,7 @@ const Navbar = () => {
         </ul>
         <div className="navbar-icons">
           <img src={search} alt="Search Icon" />
-          <img src={admin} alt="Admin Icon" />
+          <img src={admin} alt="Admin Icon" onClick={handleAdminClick} />
           <img
             src={cart}
             alt="Cart Icon"
@@ -95,28 +100,27 @@ const Navbar = () => {
           </button>
         </div>
         {isCartOpen && (
-  <div className="cart-overlay">
-    <div
-      className="cart-popup"
-      ref={cartRef}
-      onMouseLeave={() => setIsCartOpen(false)} // Close cart on hover outside
-    >
-      {isMobile && (
-        <button
-          className="mobile-back-button"
-          onClick={() => {
-            setIsCartOpen(false);
-            navigate(0); // Navigate to the previous page
-          }}
-        >
-          Back
-        </button>
-      )}
-      <CartPage closeCart={() => setIsCartOpen(false)} />
-    </div>
-  </div>
-)}
-
+          <div className="cart-overlay">
+            <div
+              className="cart-popup"
+              ref={cartRef}
+              onMouseLeave={() => setIsCartOpen(false)} // Close cart on hover outside
+            >
+              {isMobile && (
+                <button
+                  className="mobile-back-button"
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    navigate(0); // Navigate to the previous page
+                  }}
+                >
+                  Back
+                </button>
+              )}
+              <CartPage closeCart={() => setIsCartOpen(false)} />
+            </div>
+          </div>
+        )}
       </nav>
     </>
   );
