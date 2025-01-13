@@ -143,7 +143,7 @@
 }
 
 .cart-popup {
-  background-color: #fff;
+  background-color: rgba(253, 250, 245, 1);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   width: 600px; /* Adjust as needed */
@@ -161,7 +161,7 @@
   font-size: 16px;
   font-family: "Jost";
  border: none;
-  margin: 10px;
+  margin: 15px 20px;
   cursor: pointer;
 }
 
