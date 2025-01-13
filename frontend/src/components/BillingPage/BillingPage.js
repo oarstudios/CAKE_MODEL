@@ -54,7 +54,7 @@ const BillingPage = () => {
 
           <div className="delivery-grid-2">
             <input type="text" placeholder="Address*" required />
-            <input type="text" placeholder="Landmark*" required />
+            <input type="text" placeholder="Landmark" />
           </div>
 
           <div className="state-city-pincode">
@@ -127,8 +127,8 @@ const BillingPage = () => {
       />
       <input
         type="text"
-        placeholder="Landmark*"
-        required
+        placeholder="Landmark"
+        
         className="form-field"
       />
     </div>
