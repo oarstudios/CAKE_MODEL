@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import CartPage from "../CartPage/CartPage"; // Import CartPage for the popup
 import logo from "../../images/Pink Modern Simple Bakery Logo (1) 1.png";
@@ -9,11 +9,22 @@ import cart from "../../images/Vector.png";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const cartRef = useRef(null);
+  const navigate = useNavigate();
 
+  // Toggle cart visibility
   const toggleCart = () => {
     setIsCartOpen((prevState) => !prevState);
   };
+
+  // Detect screen size
+  useEffect(() => {
+    const updateIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
 
   // Close cart when clicking outside or hovering outside the cart
   useEffect(() => {
@@ -31,7 +42,6 @@ const Navbar = () => {
       document.removeEventListener("mousemove", handleOutsideEvent);
     }
 
-    // Cleanup
     return () => {
       document.removeEventListener("mousedown", handleOutsideEvent);
       document.removeEventListener("mousemove", handleOutsideEvent);
@@ -85,16 +95,28 @@ const Navbar = () => {
           </button>
         </div>
         {isCartOpen && (
-          <div className="cart-overlay">
-            <div
-              className="cart-popup"
-              ref={cartRef}
-              onMouseLeave={() => setIsCartOpen(false)} // Close cart on hover outside
-            >
-              <CartPage />
-            </div>
-          </div>
-        )}
+  <div className="cart-overlay">
+    <div
+      className="cart-popup"
+      ref={cartRef}
+      onMouseLeave={() => setIsCartOpen(false)} // Close cart on hover outside
+    >
+      {isMobile && (
+        <button
+          className="mobile-back-button"
+          onClick={() => {
+            setIsCartOpen(false);
+            navigate(0); // Navigate to the previous page
+          }}
+        >
+          Back
+        </button>
+      )}
+      <CartPage closeCart={() => setIsCartOpen(false)} />
+    </div>
+  </div>
+)}
+
       </nav>
     </>
   );

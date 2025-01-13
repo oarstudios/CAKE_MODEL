@@ -154,6 +154,17 @@
 
 
 
+.mobile-back-button {
+  display: block;
+  background-color: transparent;
+  color: #d5b26b;
+  font-size: 16px;
+  font-family: "Jost";
+ border: none;
+  margin: 10px;
+  cursor: pointer;
+}
+
 
 
 
