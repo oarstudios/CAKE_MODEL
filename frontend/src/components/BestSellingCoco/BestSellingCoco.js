@@ -90,7 +90,7 @@ const BestSellingCoco = () => {
                   <span className="coco-price-span">from</span> Rs. {cake.price}
                 </p>
                 <div className="coco-buttons">
-                  <button className="view-button-coco">View</button>
+                  <Link to="/product"> <button className="view-button">View</button></Link>
                   <button className="add-button-coco">Add to Basket</button>
                 </div>
               </div>

@@ -15,7 +15,8 @@ import CustomerReviews from "./components/CustomerReviews/CustomerReviews";
 import YouMayAlsoLike from "./components/YouMayAlsoLike/YouMayAlsoLike";
 import BillingPage from "./components/BillingPage/BillingPage";
 import MyAccount from "./components/MyAccount/MyAccount";
-
+import OrderSection from "./components/OrderSection/OrderSection";
+import OrderDetails from "./components/OrderSection/OrderSection"; // Import OrderDetails component
 
 const App = () => {
   return (
@@ -31,8 +32,8 @@ const MainContent = () => {
   const location = useLocation();
 
   // Exclude `app-container` class for `/product`, `/signin`, and `/signup` routes
-  const excludedRoutes = ["/product", "/signin", "/signup", "/billing", "/my-account"];
-  const isExcludedRoute = excludedRoutes.includes(location.pathname);
+  const excludedRoutes = ["/product", "/signin", "/signup", "/billing", "/my-account", "/order"];
+  const isExcludedRoute = excludedRoutes.some((route) => location.pathname.startsWith(route));
 
   return (
     <div className={isExcludedRoute ? "" : "app-container"}>
@@ -68,13 +69,20 @@ const MainContent = () => {
             </>
           }
         />
-          <Route path="/billing" element={<BillingPage />} />
-          <Route path="/my-account" element={<MyAccount />} />
 
+        {/* Billing Page Route */}
+        <Route path="/billing" element={<BillingPage />} />
+
+        {/* My Account Page Route */}
+        <Route path="/my-account" element={<MyAccount />} />
+
+ 
+
+        {/* Order Details Route */}
+        <Route path="/order/:id" element={<OrderSection />} />
       </Routes>
     </div>
   );
 };
-
 
 export default App;

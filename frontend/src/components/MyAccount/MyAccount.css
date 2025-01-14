@@ -242,3 +242,11 @@ input {
         padding: 4px 10px;
     }
 }
+
+
+/* MyAccount.css or a relevant CSS file */
+.order-link {
+    text-decoration: none;
+    color: inherit; /* Ensures the text color matches its container */
+  }
+  

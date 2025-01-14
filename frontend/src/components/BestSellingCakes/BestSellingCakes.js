@@ -91,7 +91,7 @@ const BestSellingCakes = () => {
                   <span className="cake-price-span">from</span> Rs. {cake.price}
                 </p>
                 <div className="cake-buttons">
-                  <button className="view-button">View</button>
+                <Link to="/product"> <button className="view-button">View</button></Link>
                   <button className="add-button">Add to Basket</button>
                 </div>
               </div>
