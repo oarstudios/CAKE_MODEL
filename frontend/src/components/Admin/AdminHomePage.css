@@ -1,0 +1,249 @@
+.admin-home-page {
+    display: flex;
+    font-family: Arial, sans-serif;
+    background-color: rgba(253, 250, 245, 1);
+  }
+  
+  .sidebar {
+    width: 200px;
+    padding: 20px;
+    background-color: rgba(253, 250, 245, 1);
+    padding-top: calc(2rem + 58px);
+  }
+  
+  .add-product-button {
+    width: 100%;
+    height: 150px; /* Adjust the height as per your preference */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-family: "Josefin Sans";
+    font-weight: 400;
+    cursor: pointer;
+    border: 1px solid rgba(213, 178, 107, 1); /* Border for visual clarity */
+    background-color: #fdfaf5; /* Match background to your design */
+    border-radius: 15px; /* Rounded corners */
+    color: #d5b26b; /* Text color */
+    text-align: center;
+    gap: 5px;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 2rem 6rem;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 5px 0;
+    width: 20%;
+  }
+  
+  .search-icon {
+    margin-right: 8px;
+    color: #999;
+    font-size: 18px;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(142, 142, 142, 1);
+    margin-bottom: 20px;
+    padding: 5px 0;
+    width: 20%;
+    margin-left: auto; /* Push the search bar to the right */
+  }
+  
+  
+  .search-bar input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    font-family: "Josefin Sans";
+font-size: 16px;
+font-weight: 400;
+padding: 0;
+
+
+  }
+  .product-search-icon{
+    color: rgba(213, 178, 107, 1);
+    font-size: 1.4rem;
+  }
+  
+  .cakes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .cakes-card {
+    border: 0.5px solid #d5b26b;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .cakes-image {
+    position: relative;
+  }
+  
+  .cakes-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .cakes-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fdfaf5;
+    color: #d5b26b;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #d5b26b;
+  }
+  
+  .cakes-details {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .cakes-name {
+    font-size: 1.5rem;
+    color: #471d06;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    font-family: "Jost", serif;
+  }
+  
+  .cakes-price {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #471d06;
+    font-weight: 600;
+    font-family: "Jost", serif;
+  }
+  
+  .cakes-buttons {
+    display: flex;
+  }
+  
+  .cakes-view-button {
+    flex: 1;
+    padding: 0.7rem 1.5rem;
+    color: #fdfaf5;
+    background-color: #d5b26b;
+    border: none;
+    border-radius: 5px 0 0 10px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-family: "Josefin Sans";
+
+    font-weight: 400;
+  }
+  
+  .cakes-delete-button {
+    background-color: rgba(216, 67, 67, 1);
+    border: 1px solid rgba(216, 67, 67, 1);
+    flex: 2;
+    padding: 0.6rem;
+    color: #fdfaf5;
+    border-radius: 0 5px 10px 0;
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-family: "Josefin Sans";
+
+font-weight: 400;
+
+
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .cakes-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .cakes-name,
+    .cakes-price {
+      font-size: 1.3rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cakes-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  
+    .cakes-card {
+      border-radius: 8px;
+    }
+  
+    .cakes-details {
+      padding: 0.6rem;
+    }
+  
+    .cakes-name {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  
+    .cakes-price {
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+    }
+  
+    .cakes-buttons button {
+      font-size: 0.9rem;
+      padding: 0.3rem;
+    }
+  
+    .cakes-tag {
+      font-size: 0.6rem;
+      top: 5px;
+      right: 5px;
+      padding: 0.2rem 0.4rem;
+    }
+  }
+  
+
+
+  .add-product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+  .add-product-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-family: "Josefin Sans";
+    font-weight: 400;
+    cursor: pointer;
+    border: 1px solid rgba(213, 178, 107, 1);
+    background-color: #fdfaf5;
+    border-radius: 15px;
+    color: #d5b26b;
+    text-align: center;
+    gap: 5px;
+    height: 100%; /* Matches the height of the grid column */
+  }
+    

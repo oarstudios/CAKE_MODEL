@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import AdminNavbar from "./components/Admin/AdminNavbar"; // Import AdminNavbar
 import SignUpPage from "./components/LoginANDSignUp/SignUpPage";
 import SignInPage from "./components/LoginANDSignUp/SignInPage";
 import SliderComponent from "./components/Slider/SliderComponent";
@@ -16,12 +17,13 @@ import YouMayAlsoLike from "./components/YouMayAlsoLike/YouMayAlsoLike";
 import BillingPage from "./components/BillingPage/BillingPage";
 import MyAccount from "./components/MyAccount/MyAccount";
 import OrderSection from "./components/OrderSection/OrderSection";
-import OrderDetails from "./components/OrderSection/OrderSection"; // Import OrderDetails component
+import AdminHomePage from "./components/Admin/AdminHomePage";
+import AddNewProduct from "./components/Admin/AddNewProduct";
+
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
       <MainContent />
       <Footer />
     </Router>
@@ -31,58 +33,63 @@ const App = () => {
 const MainContent = () => {
   const location = useLocation();
 
-  // Exclude `app-container` class for `/product`, `/signin`, and `/signup` routes
-  const excludedRoutes = ["/product", "/signin", "/signup", "/billing", "/my-account", "/order"];
-  const isExcludedRoute = excludedRoutes.some((route) => location.pathname.startsWith(route));
+  // Check if current route is for admin pages
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
-    <div className={isExcludedRoute ? "" : "app-container"}>
-      <Routes>
-        {/* Home Page Route */}
-        <Route
-          path="/"
-          element={
-            <>
-              <SliderComponent />
-              <BestSellingCakes />
-              <CakeOfTheWeek />
-              <Banner />
-              <BestSellingCoco />
-            </>
-          }
-        />
+    <>
+      {isAdminRoute ? <AdminNavbar /> : <Navbar />}
+      <div className={isAdminRoute ? "admin-container" : "app-container"}>
+        <Routes>
+          {/* Home Page Route */}
+          <Route
+            path="/"
+            element={
+              <>
+                <SliderComponent />
+                <BestSellingCakes />
+                <CakeOfTheWeek />
+                <Banner />
+                <BestSellingCoco />
+              </>
+            }
+          />
 
-        {/* Sign Up Page Route */}
-        <Route path="/signup" element={<SignUpPage />} />
+          {/* Sign Up Page Route */}
+          <Route path="/signup" element={<SignUpPage />} />
 
-        {/* Sign In Page Route */}
-        <Route path="/signin" element={<SignInPage />} />
+          {/* Sign In Page Route */}
+          <Route path="/signin" element={<SignInPage />} />
 
-        {/* Product Page Route */}
-        <Route
-          path="/product"
-          element={
-            <>
-              <Product />
-              <CustomerReviews />
-              <YouMayAlsoLike />
-            </>
-          }
-        />
+          {/* Product Page Route */}
+          <Route
+            path="/product"
+            element={
+              <>
+                <Product />
+                <CustomerReviews />
+                <YouMayAlsoLike />
+              </>
+            }
+          />
 
-        {/* Billing Page Route */}
-        <Route path="/billing" element={<BillingPage />} />
+          {/* Billing Page Route */}
+          <Route path="/billing" element={<BillingPage />} />
 
-        {/* My Account Page Route */}
-        <Route path="/my-account" element={<MyAccount />} />
+          {/* My Account Page Route */}
+          <Route path="/my-account" element={<MyAccount />} />
 
- 
+          {/* Order Details Route */}
+          <Route path="/order/:id" element={<OrderSection />} />
 
-        {/* Order Details Route */}
-        <Route path="/order/:id" element={<OrderSection />} />
-      </Routes>
-    </div>
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminHomePage />} />
+          <Route path="/admin/add-product" element={<AddNewProduct />} />
+        </Routes>
+      </div>
+    </>
   );
 };
+
 
 export default App;
