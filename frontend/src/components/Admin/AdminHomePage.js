@@ -109,11 +109,16 @@ const AdminHomePage = () => {
 
 <div className="cakes-grid">
   {/* Add Product Button */}
+  <Link to="/admin/add-product" style={{ textDecoration: 'none' }}>
   <div className="add-product-card">
+  
     <button className="add-product-button">
       + Add New Product
     </button>
-  </div>
+  
+</div>
+</Link>
+
 
   {/* Cake Cards */}
   {cakes.map((cake) => (
@@ -130,7 +135,7 @@ const AdminHomePage = () => {
           <span className="cakes-price-span">from</span> Rs. {cake.price}
         </p>
         <div className="cakes-buttons">
-          <Link to="/product">
+        <Link to="/admin/edit-product" style={{ textDecoration: 'none' }}>
             <button className="cakes-view-button">Edit</button>
           </Link>
           <button className="cakes-delete-button">Delete Product</button>

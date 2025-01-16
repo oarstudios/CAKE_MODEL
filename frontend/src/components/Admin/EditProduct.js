@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./AddNewProduct.css"; // Make sure to include this CSS file
+import "./EditProduct.css"; // Make sure to include this CSS file
 
-const AddNewProduct = () => {
+const EditProduct = () => {
   const [images, setImages] = useState([]); // Manage multiple images
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -45,8 +45,19 @@ const AddNewProduct = () => {
 
   return (
     <div className="add-new-product-container">
-      <button className="back-button">Back</button>
+      {/* Top Buttons */}
+     
+
+      <div className="top-buttons-container">
+  <button className="back-button">Back</button>
+  <div className="top-buttons">
+    <button className="update-button">Update Product as Bestseller</button>
+    <button className="update-button">Update Product as Cake of the Week</button>
+  </div>
+</div>
+
       <div className="product-form">
+        {/* Image Upload Section */}
         <div className="image-section">
           <label htmlFor="image-upload" className="upload-placeholder">
             <span>+</span>
@@ -62,7 +73,11 @@ const AddNewProduct = () => {
           <div className="uploaded-images-container">
             {images.map((image, index) => (
               <div className="uploaded-image-wrapper" key={index}>
-                <img src={image} alt={`Uploaded ${index + 1}`} className="uploaded-image" />
+                <img
+                  src={image}
+                  alt={`Uploaded ${index + 1}`}
+                  className="uploaded-image"
+                />
                 <button
                   className="delete-image-button"
                   onClick={() => handleImageDelete(index)}
@@ -74,6 +89,7 @@ const AddNewProduct = () => {
           </div>
         </div>
 
+        {/* Product Details Section */}
         <div className="details-section">
           <input
             type="text"
@@ -112,6 +128,7 @@ const AddNewProduct = () => {
             </div>
           </div>
 
+          {/* Edit Notes */}
           <div className="edit-note-section">
             <p className="edit-note-title">Edit Note:</p>
             <textarea
@@ -121,24 +138,25 @@ const AddNewProduct = () => {
             />
           </div>
 
+          {/* Product Category Section */}
           <div className="categories-section">
             <p>Product Category:</p>
             <div className="cats">
-            {["Cake", "Chocolates", "Gifting"].map((cat) => (
-              <button
-                key={cat}
-                className={`category-button ${
-                  category === cat ? "selected" : ""
-                }`}
-                onClick={() => setCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
+              {["Cake", "Chocolates", "Gifting"].map((cat) => (
+                <button
+                  key={cat}
+                  className={`category-button ${
+                    category === cat ? "selected" : ""
+                  }`}
+                  onClick={() => setCategory(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
             </div>
-            
           </div>
 
+          {/* Publish Button */}
           <button className="publish-button" onClick={handlePublish}>
             Publish Product
           </button>
@@ -148,4 +166,4 @@ const AddNewProduct = () => {
   );
 };
 
-export default AddNewProduct;
+export default EditProduct;

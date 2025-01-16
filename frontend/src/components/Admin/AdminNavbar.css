@@ -110,6 +110,9 @@ font-weight: 600;
     .admin-navbar-icons {
       align-items: center;
     }
+    .admin-text{
+      font-size: 28px;
+    }
   }
   
   @media (max-width: 480px) {
