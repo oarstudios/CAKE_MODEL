@@ -20,6 +20,7 @@ import OrderSection from "./components/OrderSection/OrderSection";
 import AdminHomePage from "./components/Admin/AdminHomePage";
 import AddNewProduct from "./components/Admin/AddNewProduct";
 import EditProduct from "./components/Admin/EditProduct";
+import AdminOrders from "./components/Admin/AdminOrders";
 
 
 const App = () => {
@@ -87,6 +88,8 @@ const MainContent = () => {
           <Route path="/admin" element={<AdminHomePage />} />
           <Route path="/admin/add-product" element={<AddNewProduct />} />
           <Route path="/admin/edit-product" element={<EditProduct />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+
         </Routes>
       </div>
     </>
