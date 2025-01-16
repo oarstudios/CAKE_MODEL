@@ -9,6 +9,7 @@ import cart from "../../images/Vector.png";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const cartRef = useRef(null);
   const navigate = useNavigate();
@@ -16,6 +17,11 @@ const Navbar = () => {
   // Toggle cart visibility
   const toggleCart = () => {
     setIsCartOpen((prevState) => !prevState);
+  };
+
+  // Toggle mobile menu visibility
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prevState) => !prevState);
   };
 
   // Navigate to My Account page
@@ -41,15 +47,12 @@ const Navbar = () => {
 
     if (isCartOpen) {
       document.addEventListener("mousedown", handleOutsideEvent);
-      document.addEventListener("mousemove", handleOutsideEvent);
     } else {
       document.removeEventListener("mousedown", handleOutsideEvent);
-      document.removeEventListener("mousemove", handleOutsideEvent);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleOutsideEvent);
-      document.removeEventListener("mousemove", handleOutsideEvent);
     };
   }, [isCartOpen]);
 
@@ -61,7 +64,7 @@ const Navbar = () => {
             <img src={logo} alt="Keki's Bakery Logo" />
           </Link>
         </div>
-        <ul className="navbar-links">
+        <ul className={`navbar-links ${isMobileMenuOpen ? "open" : ""}`}>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -93,7 +96,7 @@ const Navbar = () => {
             className="cart-icon"
             onClick={toggleCart}
           />
-          <button className="hamburger" onClick={toggleCart}>
+          <button className="hamburger" onClick={toggleMobileMenu}>
             <span className="hamburger-line"></span>
             <span className="hamburger-line"></span>
             <span className="hamburger-line"></span>
@@ -101,11 +104,7 @@ const Navbar = () => {
         </div>
         {isCartOpen && (
           <div className="cart-overlay">
-            <div
-              className="cart-popup"
-              ref={cartRef}
-              onMouseLeave={() => setIsCartOpen(false)} // Close cart on hover outside
-            >
+            <div className="cart-popup" ref={cartRef}>
               {isMobile && (
                 <button
                   className="mobile-back-button"

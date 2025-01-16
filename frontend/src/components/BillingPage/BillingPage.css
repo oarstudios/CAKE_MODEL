@@ -211,7 +211,7 @@ font-weight: 600;
 /* Mobile and small tablet view */
 @media (max-width: 768px) {
     .billing-page {
-      flex-direction: column-reverse;
+      flex-direction: column;
       padding: 1rem;
     }
   

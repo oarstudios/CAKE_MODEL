@@ -53,6 +53,7 @@
 font-size: 16px;
 font-weight: 400;
 padding: 0;
+margin: 0;
 
 
   }
@@ -284,6 +285,7 @@ font-weight: 400;
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
+      gap: 5px;
     }
 
    
@@ -338,9 +340,7 @@ font-weight: 400;
 }
 
 @media (max-width: 768px) {
-  .cakes-grid {
-    grid-template-columns: 1fr; /* Single column layout on smaller screens */
-  }
+  
 
   .cakes-card,
   .add-product-card {
@@ -358,4 +358,30 @@ font-weight: 400;
   .add-product-card {
     height: 100%; /* Ensure full height on very small screens */
   }
+}
+
+
+
+.cakes-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures buttons stay at the bottom */
+  border: 0.5px solid #d5b26b;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.cakes-details {
+  flex-grow: 1; /* Ensures the content above the buttons expands if needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spaces the content and buttons */
+
+}
+
+.cakes-buttons {
+  display: flex;
+
+  margin-top: auto; /* Pushes buttons to the bottom */
 }
