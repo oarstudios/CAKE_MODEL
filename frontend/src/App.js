@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop"; // Import ScrollToTop
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import AdminNavbar from "./components/Admin/AdminNavbar"; // Import AdminNavbar
+import AdminNavbar from "./components/Admin/AdminNavbar";
 import SignUpPage from "./components/LoginANDSignUp/SignUpPage";
 import SignInPage from "./components/LoginANDSignUp/SignInPage";
 import SliderComponent from "./components/Slider/SliderComponent";
@@ -21,11 +22,12 @@ import AdminHomePage from "./components/Admin/AdminHomePage";
 import AddNewProduct from "./components/Admin/AddNewProduct";
 import EditProduct from "./components/Admin/EditProduct";
 import AdminOrders from "./components/Admin/AdminOrders";
-
+import CreativesPage from "./components/Admin/CreativesPage";
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop /> {/* Scroll to top on route change */}
       <MainContent />
       <Footer />
     </Router>
@@ -89,12 +91,11 @@ const MainContent = () => {
           <Route path="/admin/add-product" element={<AddNewProduct />} />
           <Route path="/admin/edit-product" element={<EditProduct />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
-
+          <Route path="/admin/creatives" element={<CreativesPage />} />
         </Routes>
       </div>
     </>
   );
 };
-
 
 export default App;

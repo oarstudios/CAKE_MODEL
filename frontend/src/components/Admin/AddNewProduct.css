@@ -1,6 +1,7 @@
 .add-new-product-container {
     font-family: Arial, sans-serif;
     padding: 2rem 6rem;
+    background-color: #FDFAF5;
   }
   
   @media (max-width: 768px) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./CartPage.css";
 import removeIcon from "../../images/remove-icon.png";
 import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
@@ -43,6 +43,7 @@ const CartPage = ({ closeCart }) => {
             <span>QUANTITY</span>
           </div>
           <div className="cart-items">
+          <Link to="/product" style={{ textDecoration: 'none' }} className="product-link">
             {cartItems.map((item) => (
               <div className="cart-item" key={item.id}>
                 <div className="cart-product-info">
@@ -69,6 +70,7 @@ const CartPage = ({ closeCart }) => {
                 </div>
               </div>
             ))}
+            </Link>
           </div>
           <div className="cart-summary">
             <div className="summary-header">

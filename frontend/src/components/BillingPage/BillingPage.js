@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./BillingPage.css";
 import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 import removeIcon from "../../images/remove-icon.png";
@@ -171,6 +172,7 @@ const BillingPage = () => {
 
       <div className="billing-right">
         <div className="cart-items">
+        <Link to="/product" style={{ textDecoration: 'none' }} className="product-link">
           {cartItems.map((item) => (
             <div className="cart-item" key={item.id}>
               <div className="cart-product-info">
@@ -197,6 +199,7 @@ const BillingPage = () => {
               </div>
             </div>
           ))}
+  </Link>
         </div>
         <div className="summary">
           <div className="summary-item">
