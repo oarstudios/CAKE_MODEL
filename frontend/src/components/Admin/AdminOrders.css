@@ -473,10 +473,13 @@ color: rgba(71, 29, 6, 1);
     .orders-navigation {
       flex-direction: column;
       align-items: center;
+      display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     }
   
     .orders-navigation button {
-      width: 90%;
+      width: 100%;
       margin: 5px 0;
       padding: 8px 10px;
     }
@@ -517,4 +520,7 @@ color: rgba(71, 29, 6, 1);
       margin: 2px;
     }
   }
+  
+
+
   

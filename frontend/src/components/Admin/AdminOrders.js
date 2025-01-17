@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AdminOrders.css";
+import AdminOrdersMobile from "./AdminOrdersMobile"; // Importing AdminOrdersMobile
 import img1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
 
 const AdminOrders = () => {
   const [activeOrder, setActiveOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const ordersPerPage = 20;
+  const [isMobile, setIsMobile] = useState(false); // State to detect mobile view
+  const ordersPerPage = 15;
 
   const orders = [
     {
       id: "#000001",
       productName: "Dutch Chocolate Truffle Cake",
-      address: "501, Elita Apartments, Sector 6, Plot 22, Kamohe, Navi Mumbai, 410209",
+      address:
+        "501, Elita Apartments, Sector 6, Plot 22, Kamohe, Navi Mumbai, 410209",
       date: "21/12/2024",
       price: "2500",
       status: "Delivered",
@@ -28,7 +31,7 @@ const AdminOrders = () => {
       ],
     },
     {
-      id: "#000002", // Unique ID
+      id: "#000002",
       productName: "Black Forest Cake",
       address: "601, Pearl Heights, Lokhandwala, Mumbai, 400053",
       date: "22/12/2024",
@@ -46,7 +49,7 @@ const AdminOrders = () => {
       ],
     },
     {
-      id: "#000003", // Unique ID
+      id: "#000003",
       productName: "Vanilla Bean Cake",
       address: "103, Ocean Breeze Apartments, Andheri West, Mumbai, 400058",
       date: "23/12/2024",
@@ -65,8 +68,6 @@ const AdminOrders = () => {
     },
   ];
 
-
-
   const totalPages = Math.ceil(orders.length / ordersPerPage);
 
   const toggleOrderDetails = (orderId) => {
@@ -83,128 +84,158 @@ const AdminOrders = () => {
     setActiveOrder(null); // Close active order when switching pages
   };
 
+  // Detect mobile view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 450); // Set breakpoint for mobile
+    };
+
+    handleResize(); // Check on initial load
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="admin-orders">
-      <div className="orders-navigation">
-        <button className="active">All Orders</button>
-        <button>Completed</button>
-        <button>Pending</button>
-        <button>Canceled</button>
-      </div>
+      {isMobile ? (
+        // Render Mobile Version
+        <AdminOrdersMobile orders={orders} />
+      ) : (
+        // Render Desktop Version
+        <>
+          <div className="orders-navigation">
+            <button className="active">All Orders</button>
+            <button>Completed</button>
+            <button>Pending</button>
+            <button>Canceled</button>
+          </div>
 
-      <div className="orders-list">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Order ID</th>
-              <th>Product Name</th>
-              <th>Address</th>
-              <th>Date</th>
-              <th>Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginateOrders(orders, currentPage, ordersPerPage).map(
-              (order, index) => (
-                <React.Fragment key={order.id}>
-                  <tr
-                    onClick={() => toggleOrderDetails(order.id)}
-                    className={`order-row ${
-                      activeOrder === order.id ? "active-order" : ""
-                    }`}
-                  >
-                    <td>{index + 1 + (currentPage - 1) * ordersPerPage}</td>
-                    <td>{order.id}</td>
-                    <td>{order.productName}</td>
-                    <td>{order.address}</td>
-                    <td>{order.date}</td>
-                    <td>{order.price}</td>
-                    <td>
-                      <span className={`status ${order.status}`}>
-                        {order.status}
-                      </span>
-                    </td>
-                  </tr>
-                  {activeOrder === order.id && (
-  <tr className={`order-details-row ${activeOrder === order.id ? "active-order-details" : ""}`}>
-    <td colSpan="7">
-      <div className="order-details">
-        <div className="customer-details">
-          <h3>Customer Details</h3>
-          <p>Name: {order.customer.name}</p>
-          <p>Customer ID: {order.customer.customerId}</p>
-          <p>Contact: {order.customer.contact}</p>
-          <p>Email: {order.customer.email}</p>
-          <p>
-            <strong>Payment Method:</strong> {order.customer.paymentMethod}
-          </p>
-        </div>
-        <div className="order-items">
-          <h3>Order Details</h3>
-          {order.orderDetails.map((item) => (
-            <div key={item.id} className="order-item">
-              <img src={item.image} alt={item.name} className="cake-image" />
-              <span>{item.name}</span>
-              <span>x{item.quantity}</span>
-            </div>
-          ))}
-        </div>
-        <div className="update-status">
-          <h3>Update Order Status</h3>
-          <button className="Pending">Pending</button>
-          <button className="Delivered">Delivered</button>
-          <button className="Canceled">Canceled</button>
-        </div>
-      </div>
-    </td>
-  </tr>
-)}
+          <div className="orders-list">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Order ID</th>
+                  <th>Product Name</th>
+                  <th>Address</th>
+                  <th>Date</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginateOrders(orders, currentPage, ordersPerPage).map(
+                  (order, index) => (
+                    <React.Fragment key={order.id}>
+                      <tr
+                        onClick={() => toggleOrderDetails(order.id)}
+                        className={`order-row ${
+                          activeOrder === order.id ? "active-order" : ""
+                        }`}
+                      >
+                        <td>{index + 1 + (currentPage - 1) * ordersPerPage}</td>
+                        <td>{order.id}</td>
+                        <td>{order.productName}</td>
+                        <td>{order.address}</td>
+                        <td>{order.date}</td>
+                        <td>{order.price}</td>
+                        <td>
+                          <span className={`status ${order.status}`}>
+                            {order.status}
+                          </span>
+                        </td>
+                      </tr>
+                      {activeOrder === order.id && (
+                        <tr
+                          className={`order-details-row ${
+                            activeOrder === order.id ? "active-order-details" : ""
+                          }`}
+                        >
+                          <td colSpan="7">
+                            <div className="order-details">
+                              <div className="customer-details">
+                                <h3>Customer Details</h3>
+                                <p>Name: {order.customer.name}</p>
+                                <p>Customer ID: {order.customer.customerId}</p>
+                                <p>Contact: {order.customer.contact}</p>
+                                <p>Email: {order.customer.email}</p>
+                                <p>
+                                  <strong>Payment Method:</strong>{" "}
+                                  {order.customer.paymentMethod}
+                                </p>
+                              </div>
+                              <div className="order-items">
+                                <h3>Order Details</h3>
+                                {order.orderDetails.map((item) => (
+                                  <div key={item.id} className="order-item">
+                                    <img
+                                      src={item.image}
+                                      alt={item.name}
+                                      className="cake-image"
+                                    />
+                                    <span>{item.name}</span>
+                                    <span>x{item.quantity}</span>
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="update-status">
+                                <h3>Update Order Status</h3>
+                                <button className="Pending">Pending</button>
+                                <button className="Delivered">Delivered</button>
+                                <button className="Canceled">Canceled</button>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
 
-                </React.Fragment>
-              )
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="pagination">
-        <span>
-          Showing {ordersPerPage * (currentPage - 1) + 1} -{" "}
-          {Math.min(ordersPerPage * currentPage, orders.length)} of{" "}
-          {orders.length} Orders
-        </span>
-        <button
-          className={`pagination-btn ${
-            currentPage === 1 ? "disabled" : ""
-          }`}
-          onClick={() => handlePageClick(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i + 1}
-            className={`pagination-btn ${
-              currentPage === i + 1 ? "active-page" : ""
-            }`}
-            onClick={() => handlePageClick(i + 1)}
-          >
-            {i + 1}
-          </button>
-        ))}
-        <button
-          className={`pagination-btn ${
-            currentPage === totalPages ? "disabled" : ""
-          }`}
-          onClick={() => handlePageClick(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+          <div className="pagination">
+            <span>
+              Showing {ordersPerPage * (currentPage - 1) + 1} -{" "}
+              {Math.min(ordersPerPage * currentPage, orders.length)} of{" "}
+              {orders.length} Orders
+            </span>
+            <button
+              className={`pagination-btn ${
+                currentPage === 1 ? "disabled" : ""
+              }`}
+              onClick={() => handlePageClick(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i + 1}
+                className={`pagination-btn ${
+                  currentPage === i + 1 ? "active-page" : ""
+                }`}
+                onClick={() => handlePageClick(i + 1)}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              className={`pagination-btn ${
+                currentPage === totalPages ? "disabled" : ""
+              }`}
+              onClick={() => handlePageClick(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
