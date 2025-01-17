@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import "./AdminHomePage.css";
-import cake1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png"
-import cake2 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1.png"
+import cake1 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"
+import cake2 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"
 
 const cakes = [
     {
@@ -28,42 +28,42 @@ const cakes = [
       tag: null,
     },
     {
-      id: 1,
+      id: 4,
       name: "Triple Chocolate Cheesecake",
       price: "2,200.00",
       image: cake1,
       tag: "Bestseller",
     },
     {
-      id: 2,
+      id: 5,
       name: "Strawberry Chocolate",
       price: "1,600.00",
       image: cake2,
       tag: null,
     },
     {
-      id: 3,
+      id: 6,
       name: "Chocolate Mousse",
       price: "1,800.00",
       image: cake1,
       tag: null,
     },
     {
-      id: 1,
+      id: 7,
       name: "Triple Chocolate Cheesecake",
       price: "2,200.00",
       image: cake1,
       tag: "Bestseller",
     },
     {
-      id: 2,
+      id: 8,
       name: "Strawberry Chocolate",
       price: "1,600.00",
       image: cake2,
       tag: null,
     },
     {
-      id: 3,
+      id: 9,
       name: "Chocolate Mousse",
       price: "1,800.00",
       image: cake1,
@@ -131,7 +131,7 @@ const AdminHomePage = () => {
       </div>
       <div className="cakes-details">
         <h3 className="cakes-name">{cake.name}</h3>
-        <p className="cakes-price">
+        <p className="admin-cakes-price">
           <span className="cakes-price-span">from</span> Rs. {cake.price}
         </p>
         <div className="cakes-buttons">

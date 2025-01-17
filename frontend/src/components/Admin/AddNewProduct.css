@@ -326,3 +326,89 @@ margin-bottom: 1rem;
     }
   }
   
+
+  .set-weight-price-section {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid rgba(142, 142, 142, 1);
+    border-radius: 10px;
+
+  }
+  
+  .set-weight-price-section p {
+    font-family: "Jost";
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(71, 29, 6, 1);
+    margin-bottom: 10px;
+  }
+  
+  .weight-price-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .weight-price-input label {
+    font-family: "Jost";
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(71, 29, 6, 1);
+    flex: 1;
+  }
+  
+  .weight-price-input input {
+    border: 1px solid rgba(142, 142, 142, 1);
+    border-radius: 10px;
+    padding: 6px 8px;
+    font-family: "Jost";
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(71, 29, 6, 1);
+    flex: 2;
+    text-align: right;
+  }
+  
+  .weight-price-input input::placeholder {
+    color: rgba(142, 142, 142, 1);
+  }
+  
+  @media (max-width: 768px) {
+    .set-weight-price-section p {
+      font-size: 20px;
+    }
+  
+    .weight-price-input label {
+      font-size: 18px;
+    }
+  
+    .weight-price-input input {
+      font-size: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .set-weight-price-section {
+      padding: 8px;
+    }
+  
+    .set-weight-price-section p {
+      font-size: 18px;
+    }
+  
+    .weight-price-input {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .weight-price-input label {
+      font-size: 16px;
+      text-align: left;
+    }
+  
+    .weight-price-input input {
+      font-size: 16px;
+    }
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CakeOfTheWeek.css";
-import cakeImage from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png"; // Replace with the correct path to your cake image
+import cakeImage from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"; // Replace with the correct path to your cake image
 
 const CakeOfTheWeek = () => {
   const [quantity, setQuantity] = useState(1);

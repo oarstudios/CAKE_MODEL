@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./OrderSection.css";
-import cake from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
+import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 import FullStar from "../../images/NoRating.png"; // Filled star image
 import EmptyStar from "../../images/Rating.png"; // Empty star image
 import UploadIcon from "../../images/Vector.svg"; // Upload icon

@@ -52,7 +52,7 @@
     font-family: "Josefin Sans";
 font-size: 16px;
 font-weight: 400;
-padding: 0;
+padding: 2px;
 margin: 0;
 
 
@@ -114,7 +114,7 @@ margin: 0;
     font-family: "Jost", serif;
   }
   
-  .cakes-price {
+  .admin-cakes-price {
     margin-bottom: 1rem;
     font-size: 1.5rem;
     color: #471d06;
@@ -196,7 +196,7 @@ font-weight: 400;
     }
   
     .cake-name,
-    .cake-price {
+    .admin-cakes-price {
       font-size: 1.3rem;
     }
   
@@ -224,7 +224,7 @@ font-weight: 400;
       margin-bottom: 0.5rem;
     }
   
-    .cakes-price {
+    .admin-cakes-price{
       font-size: 1rem;
       margin-bottom: 0.5rem;
     }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./EditProduct.css"; // Make sure to include this CSS file
 
 const EditProduct = () => {
@@ -8,6 +9,11 @@ const EditProduct = () => {
   const [description, setDescription] = useState("");
   const [selectedWeights, setSelectedWeights] = useState([]);
   const [category, setCategory] = useState("");
+  const [weightPrices, setWeightPrices] = useState({
+    "1/2 KG": "",
+    "1 KG": "",
+    "2 KG": "",
+  });
 
   const handleImageUpload = (e) => {
     const uploadedFiles = Array.from(e.target.files);
@@ -31,12 +37,20 @@ const EditProduct = () => {
     );
   };
 
+  const handleWeightPriceChange = (weight, value) => {
+    setWeightPrices((prevPrices) => ({
+      ...prevPrices,
+      [weight]: value,
+    }));
+  };
+
   const handlePublish = () => {
     console.log({
       title,
       price,
       description,
       selectedWeights,
+      weightPrices,
       category,
       images,
     });
@@ -46,15 +60,15 @@ const EditProduct = () => {
   return (
     <div className="add-new-product-container">
       {/* Top Buttons */}
-     
-
       <div className="top-buttons-container">
-  <button className="back-button">Back</button>
-  <div className="top-buttons">
-    <button className="update-button">Update Product as Bestseller</button>
-    <button className="update-button">Update Product as Cake of the Week</button>
-  </div>
-</div>
+        <Link to="/admin" className="admin-navbar-logo-link">
+          <button className="back-button">Back</button>
+        </Link>
+        <div className="top-buttons">
+          <button className="update-button">Update Product as Bestseller</button>
+          <button className="update-button">Update Product as Cake of the Week</button>
+        </div>
+      </div>
 
       <div className="product-form">
         {/* Image Upload Section */}
@@ -100,7 +114,7 @@ const EditProduct = () => {
           />
           <input
             type="number"
-            placeholder="Price"
+            placeholder="₹"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             className="input-price"
@@ -111,6 +125,7 @@ const EditProduct = () => {
             onChange={(e) => setDescription(e.target.value)}
             className="input-description"
           />
+
           <div className="weights-section">
             <p>Select all the weights in which the cake will be available, leave blank for other products</p>
             <div className="weights-buttons">
@@ -126,6 +141,22 @@ const EditProduct = () => {
                 </button>
               ))}
             </div>
+            <div className="set-weight-price-section">
+              <p>Set Weight Price:</p>
+              {["1/2 KG", "1 KG", "2 KG"].map((weight) => (
+                <div key={weight} className="weight-price-input">
+                  <label>{weight}</label>
+                  <input
+                    type="number"
+                    placeholder={`Price for ${weight}`}
+                    value={weightPrices[weight] || ""}
+                    onChange={(e) =>
+                      handleWeightPriceChange(weight, e.target.value)
+                    }
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Edit Notes */}
@@ -134,7 +165,9 @@ const EditProduct = () => {
             <textarea
               className="edit-note"
               readOnly
-              value={`- Deliveries will take place between 11 AM and 7 PM on the chosen date. Same-day orders will be delivered via Uber, additional charges will apply.\n- Short messages will be inscribed on a plaque, while longer messages will be included on a card.`}
+              value={
+                "- Deliveries will take place between 11 AM and 7 PM on the chosen date. Same-day orders will be delivered via Uber, additional charges will apply.\n- Short messages will be inscribed on a plaque, while longer messages will be included on a card."
+              }
             />
           </div>
 

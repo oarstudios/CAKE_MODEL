@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./BillingPage.css";
-import cake from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
+import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 import removeIcon from "../../images/remove-icon.png";
 
 const BillingPage = () => {

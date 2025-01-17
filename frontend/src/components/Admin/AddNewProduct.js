@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./AddNewProduct.css"; // Make sure to include this CSS file
 
 const AddNewProduct = () => {
@@ -8,6 +9,12 @@ const AddNewProduct = () => {
   const [description, setDescription] = useState("");
   const [selectedWeights, setSelectedWeights] = useState([]);
   const [category, setCategory] = useState("");
+  const [defaultPrice, setDefaultPrice] = useState("");
+  const [weightPrices, setWeightPrices] = useState({
+    "1/2 KG": "",
+    "1 KG": "",
+    "2 KG": "",
+  });
 
   const handleImageUpload = (e) => {
     const uploadedFiles = Array.from(e.target.files);
@@ -31,12 +38,20 @@ const AddNewProduct = () => {
     );
   };
 
+  const handleWeightPriceChange = (weight, value) => {
+    setWeightPrices((prevPrices) => ({
+      ...prevPrices,
+      [weight]: value,
+    }));
+  };
+
   const handlePublish = () => {
     console.log({
       title,
-      price,
+      price: defaultPrice || price,
       description,
       selectedWeights,
+      weightPrices,
       category,
       images,
     });
@@ -45,7 +60,9 @@ const AddNewProduct = () => {
 
   return (
     <div className="add-new-product-container">
-      <button className="back-button">Back</button>
+      <Link to="/admin" className="admin-navbar-logo-link">
+        <button className="back-button">Back</button>
+      </Link>
       <div className="product-form">
         <div className="image-section">
           <label htmlFor="image-upload" className="upload-placeholder">
@@ -62,7 +79,11 @@ const AddNewProduct = () => {
           <div className="uploaded-images-container">
             {images.map((image, index) => (
               <div className="uploaded-image-wrapper" key={index}>
-                <img src={image} alt={`Uploaded ${index + 1}`} className="uploaded-image" />
+                <img
+                  src={image}
+                  alt={`Uploaded ${index + 1}`}
+                  className="uploaded-image"
+                />
                 <button
                   className="delete-image-button"
                   onClick={() => handleImageDelete(index)}
@@ -82,9 +103,10 @@ const AddNewProduct = () => {
             onChange={(e) => setTitle(e.target.value)}
             className="input-title"
           />
+         
           <input
             type="number"
-            placeholder="Price"
+            placeholder="₹"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             className="input-price"
@@ -95,6 +117,7 @@ const AddNewProduct = () => {
             onChange={(e) => setDescription(e.target.value)}
             className="input-description"
           />
+
           <div className="weights-section">
             <p>Select all the weights in which the cake will be available, leave blank for other products</p>
             <div className="weights-buttons">
@@ -108,6 +131,22 @@ const AddNewProduct = () => {
                 >
                   {weight}
                 </button>
+              ))}
+            </div>
+            <div className="set-weight-price-section">
+              <p>Set Weight Price:</p>
+              {["1/2 KG", "1 KG", "2 KG"].map((weight) => (
+                <div key={weight} className="weight-price-input">
+                  <label>{weight}</label>
+                  <input
+                    type="number"
+                    placeholder={`Price for ${weight}`}
+                    value={weightPrices[weight] || ""}
+                    onChange={(e) =>
+                      handleWeightPriceChange(weight, e.target.value)
+                    }
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -124,19 +163,18 @@ const AddNewProduct = () => {
           <div className="categories-section">
             <p>Product Category:</p>
             <div className="cats">
-            {["Cake", "Chocolates", "Gifting"].map((cat) => (
-              <button
-                key={cat}
-                className={`category-button ${
-                  category === cat ? "selected" : ""
-                }`}
-                onClick={() => setCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
+              {["Cake", "Chocolates", "Gifting"].map((cat) => (
+                <button
+                  key={cat}
+                  className={`category-button ${
+                    category === cat ? "selected" : ""
+                  }`}
+                  onClick={() => setCategory(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
             </div>
-            
           </div>
 
           <button className="publish-button" onClick={handlePublish}>

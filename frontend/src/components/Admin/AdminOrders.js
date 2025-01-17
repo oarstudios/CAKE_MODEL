@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AdminOrders.css";
 import AdminOrdersMobile from "./AdminOrdersMobile"; // Importing AdminOrdersMobile
-import img1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
+import img1 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 
 const AdminOrders = () => {
   const [activeOrder, setActiveOrder] = useState(null);

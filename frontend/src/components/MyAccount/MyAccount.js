@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link
 import "./MyAccount.css";
-import cake from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
+import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 
 const MyAccount = () => {
   const [userDetails, setUserDetails] = useState({
@@ -139,15 +139,15 @@ const MyAccount = () => {
       <div className="account-right">
         <h2 className="heading">Orders</h2>
         {orders.map((order) => (
-          <Link to={`/order/${order.id}`} key={order.id} className="order-link">
-          <div className="order-item">
-            <img src={order.image} alt="Order" className="order-image" />
-            <div className="order-details">
-              <p className="order-date">{order.date}</p>
-              <p className={`order-status ${order.status.toLowerCase()}`}>
+          <Link to={`/order/${order.id}`} key={order.id} className="orders-link">
+          <div className="orders-item">
+            <img src={order.image} alt="Order" className="orders-image" />
+            <div className="orders-details">
+              <p className="orders-date">{order.date}</p>
+              <p className={`orders-status ${order.status.toLowerCase()}`}>
                 {order.status}
               </p>
-              <p className="order-items">{order.items}</p>
+              <p className="orders-items">{order.items}</p>
             </div>
           </div>
         </Link>
