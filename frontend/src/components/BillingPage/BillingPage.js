@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./BillingPage.css";
-import cake from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
+import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 import removeIcon from "../../images/remove-icon.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
@@ -47,13 +47,13 @@ const BillingPage = () => {
       const json = await response.json();
       if (response.ok) {
         setAdtItems(json?.cart);
-        setFirstName(json?.firstName);
-        setLastName(json?.lastName);
-        setAddress(json?.address);
-        setLandmark(json?.landmark);
-        setState(json?.state);
-        setCity(json?.city);
-        setPincode(json?.pincode);
+        setFirstName(json?.address?.firstName);
+        setLastName(json?.address?.lastName);
+        setAddress(json?.address?.address);
+        setLandmark(json?.address?.landmark);
+        setState(json?.address?.state);
+        setCity(json?.address?.city);
+        setPincode(json?.address?.pincode);
         setPhoneNo(json?.phoneNo);
         setEmail(json?.email);
       }
@@ -174,58 +174,59 @@ const BillingPage = () => {
     try {
       const formData = {
         email,
-        "productIds":cartItems,
-        firstName,
-        lastName,
-        address,
-        landmark,
-        state,
-        city,
-        pincode,
-        phoneNo,
+        productIds: cartItems,
+        shippingAddress: {
+          firstName,
+          lastName,
+          address,
+          landmark,
+          state,
+          city,
+          pincode,
+          phoneNo
+        },
+        billingAddress: {
+          firstName2: firstName2,
+          lastName2: lastName2,
+          address2: address2,
+          landmark2: landmark2,
+          state2: state2,
+          city2: city2,
+          pincode2: pincode2,
+          phoneNo2: phoneNo2
+        },
       };
-      
-      if (differentBillingAddress) {
-        formData["firstName2"] = firstName2;
-        formData["lastName2"] = lastName2;
-        formData["address2"] = address2;
-        formData["landmark2"] = landmark2;
-        formData["state2"] = state2;
-        formData["city2"] = city2;
-        formData["pincode2"] = pincode2;
-        formData["phoneNo2"] = phoneNo2;
-      } else {
-        formData["firstName2"] = firstName;
-        formData["lastName2"] = lastName;
-        formData["address2"] = address;
-        formData["landmark2"] = landmark;
-        formData["state2"] = state;
-        formData["city2"] = city;
-        formData["pincode2"] = pincode;
-        formData["phoneNo2"] = phoneNo;
-      }
-
-      const response = await fetch(`http://localhost:3001/billing/${user?._id}`,{
+  
+      // If the billing address is the same as the shipping address, copy the shipping address to billing address
+      // if (!differentBillingAddress) {
+      //   formData.billingAddress = { ...formData.shippingAddress }; // Ensure billing address is the same as shipping
+      // }
+  
+      const response = await fetch(`http://localhost:3001/billing/${user?._id}`, {
         method: "POST",
-        headers:{
+        headers: {
           'Authorization': `Bearer ${user.token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
-      })
-
+      });
+  
       const json = await response.json();
-
-      if(response.ok)
-      {
-        console.log(json)
+  
+      if (response.ok) {
+        console.log(json);
+        notify('Order successfully placed', "success");
+        setTimeout(() => {
+          navigate('/my-account');
+        }, 1000);
       }
-      
+  
       console.log("formData", formData);
     } catch (error) {
       console.log(error);
     }
   };
+  
   const [pay, setPay] = useState();
   const {notify} = useNotify();
   
@@ -445,7 +446,7 @@ const BillingPage = () => {
                 type="radio"
                 name="billingAddress"
                 checked={!differentBillingAddress}
-                onChange={() => setDifferentBillingAddress(false)}
+                onChange={() => setDifferentBillingAddress(!differentBillingAddress)}
               />
               Same as shipping Address
             </label>

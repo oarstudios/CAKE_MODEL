@@ -12,7 +12,7 @@ const UserModel = mongoose.Schema({
         type: String,
         required: true
     },
-    phoneNumber: {
+    phoneNo: {
         type: Number,
     },
     password: {
@@ -20,6 +20,12 @@ const UserModel = mongoose.Schema({
         // required: true
     },
     address: {
+        firstName:{
+            type: String,
+        },
+        lastName: {
+            type: String
+        },
         address:{
             type: String,
         },

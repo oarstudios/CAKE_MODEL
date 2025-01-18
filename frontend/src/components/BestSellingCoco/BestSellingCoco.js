@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./BestSellingCoco.css";
-import cake1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
-import cake2 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1.png";
+import cake1 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
+import cake2 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 
 const cakes = [
   {
@@ -90,7 +90,7 @@ const BestSellingCoco = () => {
                   <span className="coco-price-span">from</span> Rs. {cake.price}
                 </p>
                 <div className="coco-buttons">
-                  <button className="view-button-coco">View</button>
+                  <Link to="/product"> <button className="view-button">View</button></Link>
                   <button className="add-button-coco">Add to Basket</button>
                 </div>
               </div>

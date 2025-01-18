@@ -5,7 +5,7 @@ import './CustomerReviews.css';
 import FullStar from '../../images/NoRating.png';
 import EmptyStar from '../../images/Rating.png';
 import UserIcon from '../../images/user.png'; // Generic user icon
-import img1 from '../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png';
+import img1 from '../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg';
 
 const reviews = [
   {

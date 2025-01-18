@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./CartPage.css";
 import removeIcon from "../../images/remove-icon.png";
-import cake from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png";
+import cake from "../../images/cake1.jpg";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const CartPage = () => {
@@ -158,19 +158,14 @@ const handleRemove = async(id) => {
 
   return (
     <>
-      <div
-        className="cart-container"
-      >
+      <div className="cart-container">
         {/* Show 'Go Back' button on mobile */}
         {isMobile && (
-          <button
-            className="go-back-button"
-            onClick={() => navigate(-1)} // Go back to the previous page
-          >
+          <button className="go-back-button" onClick={() => navigate(-1)}>
             &larr;
           </button>
         )}
-
+  
         <h1 className="cart-title">Cart</h1>
         {cartItems.length > 0 ? (
           <>
@@ -188,8 +183,12 @@ const handleRemove = async(id) => {
                       className="cart-product-image"
                     />
                     <div className="cart-product-details">
-                      <p className="cart-product-name">{item?.productDetails?.product?.title}</p>
-                      <p className="cart-product-price">Rs {item?.productDetails?.product?.price}</p>
+                      <p className="cart-product-name">
+                        {item?.productDetails?.product?.title}
+                      </p>
+                      <p className="cart-product-price">
+                        Rs {item?.productDetails?.product?.price}
+                      </p>
                     </div>
                   </div>
                   <div className="quantity-info">
@@ -200,7 +199,9 @@ const handleRemove = async(id) => {
                       src={removeIcon}
                       alt="Remove"
                       className="remove-icon"
-                      onClick={() => handleRemove(item?.productDetails?.product?._id)}
+                      onClick={() =>
+                        handleRemove(item?.productDetails?.product?._id)
+                      }
                     />
                   </div>
                 </div>
@@ -220,7 +221,10 @@ const handleRemove = async(id) => {
             </div>
             <button
               className="cotw-buy-now"
-              onClick={() => navigate("/billing")}
+              onClick={() => {
+                // closeCart();
+                navigate("/billing");
+              }}
             >
               Proceed to Checkout
             </button>
@@ -228,13 +232,20 @@ const handleRemove = async(id) => {
         ) : (
           <div className="empty-cart">
             <h2>Your cart is empty!</h2>
-            {user ? <p>Add items to your cart to view them here.</p> : 
-            <p>Please <Link to={'/signin'}>Log in</Link> to add products.</p>}
+            {user ? (
+              <p>Add items to your cart to view them here.</p>
+            ) : (
+              <p>
+                Please <Link to={"/signin"}>Log in</Link> to add products.
+              </p>
+            )}
           </div>
         )}
       </div>
     </>
   );
+  
 };
+
 
 export default CartPage;

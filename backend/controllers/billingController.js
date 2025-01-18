@@ -3,73 +3,51 @@ const Billing = require('../models/BillingModel'); // Adjust path as needed
 // Create a new billing document
 exports.createBilling = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const { productIds, email, firstName,
-            lastName,
-            address,
-            landmark,
-            state,
-            city,
-            pincode,
-            phoneNo,
-            firstName2,
-            lastName2,
-            address2,
-            landmark2,
-            state2,
-            city2,
-            pincode2,
-            phoneNo2, } = req.body;
-
-        // Ensure that productIds array contains the necessary fields
-        const formattedProductIds = productIds.map(item => ({
-            product: item?.product,
-            quantity: item?.quantity,
-            weight: item?.weight,
-        }));
-
-        // Create the new Billing document with formatted productIds
-        const billingData = {
-            userId,
-            productIds: formattedProductIds,
-            email,
-            firstName,
-            lastName,
-            address,
-            landmark,
-            state,
-            city,
-            pincode,
-            phoneNo,
-            firstName2,
-            lastName2,
-            address2,
-            landmark2,  
-            state2,
-            city2,
-            pincode2,
-            phoneNo2,
-        };
-
-        const newBilling = new Billing(billingData);
-
-        // Save the Billing document
-        const savedBilling = await newBilling.save();
-
-
-        res.status(201).json({
-            success: true,
-            message: 'Billing created successfully',
-            data: savedBilling, // Return the populated billing data with product details
-        });
+      const { userId } = req.params;
+      const { 
+        productIds, 
+        email, 
+        shippingAddress,
+        billingAddress,
+        status 
+      } = req.body;
+  
+      // Ensure that productIds array contains the necessary fields
+      const formattedProductIds = productIds.map(item => ({
+        product: item?.product,
+        quantity: item?.quantity,
+        weight: item?.weight,
+      }));
+  
+      // Create the new Billing document with formatted productIds
+      const billingData = {
+        userId,
+        productIds: formattedProductIds,
+        email,
+        shippingAddress, // Directly use the shippingAddress object
+        billingAddress,  // Directly use the billingAddress object
+        status
+      };
+  
+      const newBilling = new Billing(billingData);
+  
+      // Save the Billing document
+      const savedBilling = await newBilling.save();
+  
+      res.status(201).json({
+        success: true,
+        message: 'Billing created successfully',
+        data: savedBilling, // Return the populated billing data with product details
+      });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Failed to create billing',
-            error: error.message,
-        });
+      res.status(500).json({
+        success: false,
+        message: 'Failed to create billing',
+        error: error.message,
+      });
     }
-};
+  };
+  
 
 
 // Get all billing documents

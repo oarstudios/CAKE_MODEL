@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./BestSellingCakes.css";
-import cake1 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png"
-import cake2 from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1.png"
+import cake1 from "../../images/cake1.jpg"
+import cake2 from "../../images/cake1.jpg"
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNotify } from "../../hooks/useNotify";
 import { ToastContainer, toast } from 'react-toastify';
@@ -130,8 +130,11 @@ const handleAddToCart = async (product) => {
         console.log(user._id)
       }
 
+      // 678b9cd33c5c89b51736ef35
+      // 67863b19bbf3cf5b04a2d017
+
     const formData = {
-      'productId': "67863b19bbf3cf5b04a2d017",
+      'productId': "678b9cd33c5c89b51736ef35",
       'quantity': 1,
       'weight': 1
     }

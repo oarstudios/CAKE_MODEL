@@ -96,7 +96,12 @@ const BillingModel = mongoose.Schema({
             type: Number,
             // required: true,
         }
+    },
+    status: {
+        type: String,
+        default: "Pending",
+        required: true
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Billing', BillingModel)

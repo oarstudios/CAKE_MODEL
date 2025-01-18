@@ -1,0 +1,260 @@
+/* General styles */
+.my-account-page {
+    display: flex;
+    flex-direction: row; /* Default for larger screens */
+    gap: 20px;
+    background-color: rgba(253, 250, 245, 1);
+    font-family: Arial, sans-serif;
+    color: #4b2e05;
+}
+
+.sbBtn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+.account-left {
+    flex: 3;
+    border-right: 1px solid rgba(213, 178, 107, 1);
+    padding: 2rem;
+}
+
+.account-right {
+    flex: 2;
+    padding: 2rem;
+}
+
+.heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heading {
+    font-family: "Jost";
+    font-size: 36px;
+    font-weight: 600;
+    color: rgba(71, 29, 6, 1);
+}
+
+.edit-button {
+    font-family: "Jost";
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(71, 29, 6, 1);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.logout-button, .submit {
+    display: block;
+    margin-top: 20px;
+    padding: 8px 20px;
+    font-family: "Jost";
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background-color: rgba(71, 29, 6, 1);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Form styles */
+.account-form,
+.address-form {
+    display: grid;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+label {
+    margin-bottom: 5px;
+    display: block;
+    color: rgba(86, 86, 86, 1);
+    font-family: "Jost";
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+}
+
+input {
+    padding: 6px 8px;
+    border: 1px solid rgba(142, 142, 142, 1);
+    border-radius: 10px;
+    width: 100%;
+    font-family: "Jost";
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(142, 142, 142, 1);
+    background-color: transparent;
+}
+
+/* Order Section */
+.orders-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 1.2rem;
+}
+
+.orders-image {
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+}
+
+.orders-details .orders-date {
+    margin: 0;
+    font-family: "Jost";
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(213, 178, 107, 1);
+}
+
+.orders-details .orders-items {
+    font-family: "Jost";
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(71, 29, 6, 1);
+    margin-right: 10px;
+}
+
+.orders-status.pending {
+    color: rgba(227, 54, 41, 1);
+    font-family: "Jost";
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.orders-status.delivered {
+    color: rgba(49, 159, 67, 1);
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .my-account-page {
+        flex-direction: column; /* Stack sections on smaller devices */
+        gap: 15px;
+    }
+
+    .account-left,
+    .account-right {
+        padding: 1.5rem;
+    }
+
+    .heading {
+        font-size: 28px; /* Slightly smaller heading for tablets */
+    }
+
+    
+
+    .orders-details .orders-date {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .my-account-page {
+        gap: 10px;
+    }
+
+    .heading {
+        font-size: 24px;
+    }
+
+   
+        input {
+        
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 6px 8px;
+            border: 1px solid rgba(142, 142, 142, 1);
+            border-radius: 10px;
+            font-family: "Jost";
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(142, 142, 142, 1);
+            background: transparent;
+            
+        }
+   
+
+    .logout-button {
+        font-size: 14px;
+        padding: 6px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading-row {
+        
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+    }
+
+    .edit-button {
+        margin-top: 10px; /* Add spacing between heading and button */
+        font-size: 12px; /* Smaller edit button */
+    }
+
+    .heading {
+        font-size: 20px; /* Even smaller heading for mobile */
+        margin-bottom: 0.5rem;
+    }
+
+    input {
+        
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 6px 8px;
+            border: 1px solid rgba(142, 142, 142, 1);
+            border-radius: 10px;
+            font-family: "Jost";
+            font-size: 20px;
+            font-weight: 400;
+            color: rgba(142, 142, 142, 1);
+            background: transparent;
+            
+        }
+        .account-form, .address-form {
+            display: grid
+        ;
+            gap: 0px;
+        }
+
+   
+
+    .orders-details .orders-date {
+        font-size: 16px;
+    }
+
+    .orders-details .orders-items {
+        font-size: 14px;
+    }
+
+    .logout-button {
+        font-size: 16px;
+        padding: 4px 10px;
+    }
+}
+
+
+/* MyAccount.css or a relevant CSS file */
+.orders-link {
+    text-decoration: none;
+    color: inherit; /* Ensures the text color matches its container */
+  }
+  

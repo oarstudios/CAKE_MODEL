@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Product.css";
-import cakeImage from "../../images/american-heritage-chocolate-5K5Nc3AGF1w-unsplash 1 (1).png"; // Replace with your actual image path
+import cakeImage from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"; // Replace with your actual image path
 
 const Product = () => {
   const [quantity, setQuantity] = useState(1);
