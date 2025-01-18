@@ -12,15 +12,35 @@ const UserModel = mongoose.Schema({
         type: String,
         required: true
     },
-    phoneNumber: {
+    phoneNo: {
         type: Number,
     },
     password: {
         type: String,
-        required: true
+        // required: true
     },
     address: {
-        type: String,
+        firstName:{
+            type: String,
+        },
+        lastName: {
+            type: String
+        },
+        address:{
+            type: String,
+        },
+        landmark: {
+            type: String
+        },
+        state: {
+            type: String,
+        },
+        city: {
+            type: String
+        }, 
+        pincode:{
+            type: String
+        }
     },
     age: {
         type: Number,
@@ -41,7 +61,7 @@ const UserModel = mongoose.Schema({
                 min: 1
               },
               weight:{
-                type: Number
+                type: String
               }
         }
     ],
@@ -61,12 +81,12 @@ UserModel.statics.signup = async function(username, email, password, userType)
 
     if(!validator.isEmail(email))
     {
-        throw Error('Email is not valid')
+        throw Error('*Incorrect Email')
     }
 
     if(!validator.isStrongPassword(password))
     {
-        throw Error('Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character');
+        throw Error('*Password is too weak');
     }
 
     const userExists = await this.findOne({email})
@@ -100,13 +120,13 @@ UserModel.statics.login = async function(email, password)
     const user = await this.findOne({email})
     if(!user)
     {
-        throw Error('Incorrect Email')
+        throw Error('*Incorrect Email')
     }
 
     const match = await bcrypt.compare(password, user.password)
     if(!match)
     {
-        throw Error('Incorrect Password')
+        throw Error('*Incorrect Password')
     }
 
     return user;    

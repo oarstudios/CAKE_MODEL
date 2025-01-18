@@ -67,9 +67,9 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #fff;
+  background: transparent;
   color: #d5b26b;
-  border: 1px solid #d5b26b;
+  border: none;
 }
 
 .google-icon {

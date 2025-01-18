@@ -65,3 +65,22 @@
 }
 
 
+/* styles.css */
+.toast-custom{
+  background-color: #fdfaf5;
+}
+
+.toast-custom-success {
+  background-color: green !important; /* Green */
+  color: #fff !important;
+}
+
+.toast-custom-error {
+  background-color: #f44336 !important; /* Red */
+  color: #fff !important;
+}
+
+.toast-custom-warning {
+  background-color: #ff9800 !important; /* Orange */
+  color: #fff !important;
+}
