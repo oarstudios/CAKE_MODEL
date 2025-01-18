@@ -258,3 +258,13 @@ input {
     color: inherit; /* Ensures the text color matches its container */
   }
   
+
+
+  @media (min-width: 1440px){
+    .my-account-page{
+      height: 100vh;
+    }
+    .account-left, .account-right{
+        padding: 4rem;
+    }
+  }

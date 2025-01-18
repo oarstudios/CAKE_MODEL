@@ -124,9 +124,9 @@ const AdminHomePage = () => {
   {cakes.map((cake) => (
     <div className="cakes-card" key={cake.id}>
       <div className="cakes-image">
-        <Link to="/product">
+
           <img src={cake.image} alt={cake.name} />
-        </Link>
+  
         {cake.tag && <span className="cakes-tag">{cake.tag}</span>}
       </div>
       <div className="cakes-details">

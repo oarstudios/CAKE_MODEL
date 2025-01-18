@@ -212,6 +212,22 @@
 
 
 
+@media (min-width: 1440px) {
+  
+
+  .view-button {
+    flex: 2; /* 40% of the total width */
+    padding: 0.8rem 3.5rem;
+  }
+
+  .add-button {
+    flex: 3; /* 60% of the total width */
+    padding: 0.7rem 1.5rem;
+  }
+  .best-selling-cakes{
+    padding: 6rem 4rem;
+  }
+}
 
 
 

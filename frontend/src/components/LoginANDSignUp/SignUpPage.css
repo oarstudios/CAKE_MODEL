@@ -2,7 +2,7 @@
 .signup-page {
   display: flex;
   justify-content: center;
-  padding-top: 8rem;
+  padding-top: 7rem;
   position: relative;
 }
 
@@ -15,13 +15,13 @@
 .signup-page::before {
   content: "";
   position: absolute;
-  bottom: -425px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1000px;
-  height: 980px;
+  /* bottom: -450px; */
+  /* left: 50%; */
+  transform: translateY(-5%);
+  width: 95%;
+  aspect-ratio: 5/4;
   background: #ffffff;
-  border-radius: 50%;
+  border-radius: 50% 50% 0% 0%;
   z-index: 1;
 }
 
@@ -118,6 +118,9 @@
 
 /* Responsive for mobile devices */
 @media (max-width: 768px) {
+  .signup-page{
+    padding-top: 3rem;
+  }
   .signup-container {
     width: 70%;
   }
@@ -165,7 +168,7 @@
   .google-signup-button {
     font-size: 20px;
     padding: 0.8rem;
-    margin: 0 0.5rem;
+    /* margin: 0 0.5rem; */
   }
 
   .signin-link {
@@ -183,4 +186,31 @@
     height: 100vh;
   }
  
+}
+@media (min-width: 1440px){
+  .signup-page{
+    padding-top: 11rem;
+  }
+  .signup-page::before{
+    aspect-ratio: 6/4;
+  }
+  .signup-title{
+    font-size: 54px;
+    margin-bottom:3rem;
+  }
+  .signup-form{
+    gap: 2rem;
+  }
+  .signup-input{
+    font-size: 34px;
+  }
+  .error-message{
+    font-size: 26px;
+  }
+  .signup-button, .google-signin-button{
+    font-size: 34px;
+  }
+  .signin-link{
+    font-size: 34px;
+  }
 }

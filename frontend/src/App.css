@@ -41,6 +41,18 @@
       #ffffff 15px,
       #ffffff 30px
     );
+
+  }
+}
+@media (min-width: 1440px) {
+  .app-container {
+    background: repeating-linear-gradient(
+      90deg,
+      #e5e1d7,
+      #e5e1d7 40px,
+      #ffffff 40px,
+      #ffffff 80px
+    );
   }
 }
 

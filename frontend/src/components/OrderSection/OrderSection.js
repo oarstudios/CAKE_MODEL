@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import "./OrderSection.css";
 import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 import FullStar from "../../images/NoRating.png"; // Filled star image
@@ -153,6 +154,7 @@ const OrderSection = () => {
       <div className="billing-right">
         <div className="cart-items">
           {order.items.map((item) => (
+            <Link to="/product" className="orders-link">
             <div className="cart-item" key={item.id}>
               <div className="cart-product-info">
                 <img
@@ -169,6 +171,7 @@ const OrderSection = () => {
                 <p className="quantity">x {item.quantity}</p>
               </div>
             </div>
+            </Link>
           ))}
         </div>
         <div className="summary">

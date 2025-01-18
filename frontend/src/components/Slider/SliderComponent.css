@@ -4,73 +4,98 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    height: 90vh; /* Ensures full height for proper positioning */
+    padding-top: 7rem;
+    height: 100vh; /* Ensures full height for proper positioning */
     overflow: hidden; /* Prevents excess content from showing */
 }
 
 .slider-page::before {
     content: "";
     position: absolute;
-    bottom: 0; /* Align the semicircle at the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw; /* Full viewport width */
-    height: 95%; /* Maintain height proportional to width */
-    background: url(../../images/Dome.png) no-repeat center/contain; /* Use 'contain' to ensure the full image is visible */
-    background-size: contain; /* Ensures the image fits without cropping */
+    transform: translateY(-5%);
+    width: 90%;
+    aspect-ratio: 5/4;
+    border-radius: 100% 100% 0% 0%;
+    background: url(../../images/Cakes\ section\ banner.png) no-repeat top/contain;
+    background-size: contain;
     z-index: 1;
 }
 
 .slider-content {
     position: relative;
     z-index: 2;
-    padding: 1rem; /* Add padding for spacing */
+    padding: 1rem;
     text-align: center;
 }
 
-/* Media Queries for Responsiveness */
-
-/* Small Mobile Devices */
-@media only screen and (max-width: 480px) {
+/* Universal Adjustments */
+@media (max-width: 1400px) {
     .slider-page {
-        height: 42vh; /* Adjust height for smaller screens */
+        padding-top: 6rem;
+        height: 85vh;
     }
-
     .slider-page::before {
-        height: 75%; /* Adjust the dome height for smaller screens */
-    }
-
-    .slider-content {
-        padding: 0.5rem;
+        width: 95%;
     }
 }
 
-/* Tablets and Larger Mobiles */
-@media only screen and (min-width: 481px) and (max-width: 768px) {
+@media (max-width: 1200px) {
     .slider-page {
-        height: 100vh;
-    }
-
-    .slider-page::before {
-        height: 100%;
-    }
-
-    .slider-content {
-        padding: 1rem;
+        padding-top: 5rem;
+        height: 80vh;
     }
 }
 
-/* Small Screen Laptops */
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
     .slider-page {
-        height: 95vh; /* Slightly smaller height for laptops */
+        padding-top: 4rem;
+        height: 75vh;
     }
-
     .slider-page::before {
-        height: 90%; /* Scale the dome proportionally */
+        width: 95%;
     }
+}
 
-    .slider-content {
-        padding: 1.5rem;
+@media (max-width: 768px) {
+    .slider-page {
+        padding-top: 3rem;
+        height: 60vh;
+    }
+    .slider-page::before {
+        width: 100%;
+        transform: translateY(2%);
+    }
+}
+
+@media (max-width: 576px) {
+    .slider-page {
+        padding-top: 2rem;
+        height: 50vh;
+    }
+    .slider-page::before {
+        width: 110%;
+        transform: translateY(12%);
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-page {
+        padding-top: 1.5rem;
+        height: 40vh;
+    }
+    .slider-page::before {
+        width: 150%;
+        transform: translateY(0);
+    }
+}
+
+/* Larger Screens */
+@media (min-width: 1600px) {
+    .slider-page {
+        padding-top: 8rem;
+        height: 95vh;
+    }
+    .slider-page::before {
+        width: 95%;
     }
 }

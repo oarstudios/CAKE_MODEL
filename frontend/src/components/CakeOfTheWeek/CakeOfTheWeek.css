@@ -203,3 +203,41 @@
     }
 
 }
+
+
+
+@media (min-width: 1440px) {
+  
+    .cotw-image img {
+        max-width: 650px;
+    }
+
+    .cotw-name {
+        font-size: 3.0rem;
+        margin-bottom: 2rem;
+    }
+    
+    .cotw-price {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    .cotw-quantity-selector {
+        justify-content: left;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+    }
+    .cotw-description {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+    .cotw-card{
+        gap: 3rem;
+    }
+    .cotw-add-to-cart, .cotw-buy-now {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.6rem;
+    }
+    .cotw-section{
+        padding: 6rem 4rem;
+    }
+  }
