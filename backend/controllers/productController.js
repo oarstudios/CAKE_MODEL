@@ -1,7 +1,7 @@
 const Product = require('../models/ProductModel');
 
 const addProduct = async (req, res) => {
-    const { title, price, description, itemInStock, category } = req.body;
+    const { title, price, description,bestseller, itemInStock, category } = req.body;
     // If productImages is provided as a JSON array, use it; otherwise, use files uploaded via multer
     const productImages = req.body.productImages || req.files?.map(file => file.originalname);
 
@@ -10,6 +10,7 @@ const addProduct = async (req, res) => {
             title,
             price,
             description,
+            bestseller,
             itemInStock,
             category,
             productImages

@@ -1,41 +1,41 @@
-import React from 'react'
-import { useState } from 'react'
-import {useAuthContext} from './useAuthContext'
+import { useState } from 'react';
+import { useAuthContext } from './useAuthContext';
 
 export const useLogin = () => {
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
-    const {dispatch} = useAuthContext()
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { dispatch } = useAuthContext();
 
-    const login = async (email, password) =>{
-        setIsLoading(true)
-        setError(null)
+  const login = async (email, password) => {
+    setIsLoading(true);
+    setError(null);
 
-        const response = await fetch('http://localhost:3000/users/login', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password})
-        })
+    try {
+      const response = await fetch('http://localhost:3001/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-        const json = await response.json()
+      const json = await response.json();
+      if (!response.ok) {
+        throw new Error(json.error || 'Login failed');
+      }
 
-        if(!response.ok){
-            setIsLoading(false)
-            setError(json.error)
-        }
+      // Save the user to local storage
+      localStorage.setItem('user', JSON.stringify(json));
 
-        if(response.ok){
-            // save the user to local storare
-            localStorage.setItem('user', JSON.stringify(json))
-
-            //update the auth context
-            dispatch({type: 'LOGIN', payload: json})
-            setError(false)
-            setIsLoading(false)
-        }
-
+      // Update the auth context
+      dispatch({ type: 'LOGIN', payload: json });
+      setError(false);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
-    return {login, isLoading, error}
-}
+  };
 
-export default useLogin
+  return { login, isLoading, error };
+};
+
+export default useLogin;

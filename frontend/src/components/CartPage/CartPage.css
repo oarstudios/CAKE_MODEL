@@ -138,12 +138,20 @@
   
   .empty-cart h2 {
     font-size: 1.5rem;
+    color: #471D06;
     font-weight: bold;
+    font-family: "Josefin Sans", serif;
   }
   
   .empty-cart p {
     margin-top: 10px;
     color: #777;
+    font-family: "Josefin Sans", serif;
+  }
+
+
+  .empty-cart a{
+    color: #D5B26B;
   }
   
   /* --- Responsive Design --- */
