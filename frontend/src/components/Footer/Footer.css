@@ -150,3 +150,26 @@
       font-size: 14px;
   }
 }
+
+@media (min-width: 1440px){
+  .logo {
+    width: 30rem;
+    max-width: 150%;
+}
+.footer-column h3{
+  font-size: 30px;
+}
+.footer-top{
+  max-width: 1500px;
+}
+.footer-column ul li a{
+  font-size: 28px;
+}
+.footer-social img{
+  width: 38px;
+  height: 38px;
+}
+.footer-copyright{
+  font-size: 26px;
+}
+}

@@ -63,7 +63,7 @@
     }
     .slider-page::before {
         width: 100%;
-        transform: translateY(-3%);
+        transform: translateY(2%);
     }
 }
 
@@ -74,7 +74,7 @@
     }
     .slider-page::before {
         width: 110%;
-        transform: translateY(-2%);
+        transform: translateY(12%);
     }
 }
 
@@ -84,7 +84,7 @@
         height: 40vh;
     }
     .slider-page::before {
-        width: 120%;
+        width: 150%;
         transform: translateY(0);
     }
 }

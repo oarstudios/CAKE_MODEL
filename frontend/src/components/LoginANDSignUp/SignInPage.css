@@ -27,6 +27,7 @@
   background: #ffffff;
   border-radius: 100% 100% 0% 0%;
   z-index: 1;
+  
 }
 
 .signin-title {
@@ -202,4 +203,33 @@
     height: 100vh;
   }
   
+}
+
+
+@media (min-width: 1440px){
+  .signin-page{
+    padding-top: 11rem;
+  }
+  .signin-page::before{
+    aspect-ratio: 6/4;
+  }
+  .signin-title{
+    font-size: 54px;
+    margin-bottom:3rem;
+  }
+  .signin-form{
+    gap: 2rem;
+  }
+  .signin-input{
+    font-size: 34px;
+  }
+  .error-message{
+    font-size: 26px;
+  }
+  .signin-button, .google-signin-button{
+    font-size: 34px;
+  }
+  .signup-link{
+    font-size: 34px;
+  }
 }

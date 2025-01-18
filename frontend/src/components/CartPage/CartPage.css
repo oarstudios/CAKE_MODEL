@@ -252,3 +252,11 @@
     display: none; /* Hide the button on larger screens */
   }
 }
+@media (min-width: 1440px){
+  .cart-product-image{
+    margin-right: 15px;
+  }
+  .cart-container{
+    padding: 3rem;
+  }
+}

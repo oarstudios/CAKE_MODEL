@@ -206,3 +206,9 @@
     display: none;
   }
 }
+
+@media (min-width: 1440px){
+  .best-selling-coco{
+    padding: 6rem 4rem;
+  }
+}

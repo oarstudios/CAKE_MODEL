@@ -187,3 +187,30 @@
   }
  
 }
+@media (min-width: 1440px){
+  .signup-page{
+    padding-top: 11rem;
+  }
+  .signup-page::before{
+    aspect-ratio: 6/4;
+  }
+  .signup-title{
+    font-size: 54px;
+    margin-bottom:3rem;
+  }
+  .signup-form{
+    gap: 2rem;
+  }
+  .signup-input{
+    font-size: 34px;
+  }
+  .error-message{
+    font-size: 26px;
+  }
+  .signup-button, .google-signin-button{
+    font-size: 34px;
+  }
+  .signin-link{
+    font-size: 34px;
+  }
+}

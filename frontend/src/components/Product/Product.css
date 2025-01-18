@@ -342,3 +342,12 @@
     font-size: 16px;
   }
 }
+@media (min-width: 1440px){
+  .main-image{
+    width: 95%;
+  }
+  .thumbnail{
+    width: 130px;
+    height: 130px;
+  }
+}
