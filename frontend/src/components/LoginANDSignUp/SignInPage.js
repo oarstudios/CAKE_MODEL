@@ -14,7 +14,7 @@ const SignInPage = () => {
             placeholder="Email/ Phone no."
             className="signin-input"
           />
-          <span className="error-message">*Incorrect Email</span>
+          {/* <span className="error-message">*Incorrect Email</span> */}
           <input
             type="password"
             placeholder="Password"

@@ -43,7 +43,7 @@ useEffect(()=>{
             className="signup-input"
             onChange={(e)=>setEmail(e.target.value)}
           />
-          <span className="error-message">*Incorrect Email</span>
+          {/* <span className="error-message">*Incorrect Email</span> */}
           <input
             type="password"
             placeholder="Password"
