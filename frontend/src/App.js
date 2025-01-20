@@ -40,6 +40,17 @@ const MainContent = () => {
   // Check if current route is for admin pages
   const isAdminRoute = location.pathname.startsWith("/admin");
 
+  // Function to open the cart (passed as prop to Product)
+  const openCart = () => {
+    const navbarElement = document.querySelector(".navbar");
+    if (navbarElement) {
+      const cartButton = navbarElement.querySelector(".cart-icon");
+      if (cartButton) {
+        cartButton.click(); // Simulates opening the cart from Navbar
+      }
+    }
+  };
+
   return (
     <>
       {isAdminRoute ? <AdminNavbar /> : <Navbar />}
@@ -51,8 +62,8 @@ const MainContent = () => {
             element={
               <>
                 <SliderComponent />
-                <BestSellingCakes />
-                <CakeOfTheWeek />
+                <BestSellingCakes toggleCart={openCart}/>
+                <CakeOfTheWeek toggleCart={openCart}/>
                 <Banner />
                 <BestSellingCoco />
               </>
@@ -65,12 +76,12 @@ const MainContent = () => {
           {/* Sign In Page Route */}
           <Route path="/signin" element={<SignInPage />} />
 
-          {/* Product Page Route */}
+          {/* Product Page Route with toggleCart passed */}
           <Route
             path="/product"
             element={
               <>
-                <Product />
+                <Product toggleCart={openCart} />
                 <CustomerReviews />
                 <YouMayAlsoLike />
               </>
@@ -97,5 +108,6 @@ const MainContent = () => {
     </>
   );
 };
+
 
 export default App;

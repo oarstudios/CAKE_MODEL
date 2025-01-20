@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import CartPage from "../CartPage/CartPage"; // Import CartPage for the popup
+import CartPage from "../CartPage/CartPage"; // Import the CartPage component
 import logo from "../../images/Pink Modern Simple Bakery Logo (1) 1.png";
 import search from "../../images/Group.png";
 import admin from "../../images/Group (1).png";
@@ -15,9 +15,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   // Toggle cart visibility
-  const toggleCart = () => {
-    setIsCartOpen((prevState) => !prevState);
-  };
+  const toggleCart = () => setIsCartOpen((prevState) => !prevState);
+
+  // Open the cart explicitly (for Add to Cart functionality)
+  const openCart = () => setIsCartOpen(true);
 
   // Toggle mobile menu visibility
   const toggleMobileMenu = () => {
@@ -26,7 +27,7 @@ const Navbar = () => {
 
   // Navigate to My Account page
   const handleAdminClick = () => {
-    navigate("/my-account"); // Replace '/my-account' with your actual route path
+    navigate("/my-account");
   };
 
   // Detect screen size
@@ -37,7 +38,7 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", updateIsMobile);
   }, []);
 
-  // Close cart when clicking outside or hovering outside the cart
+  // Close cart when clicking outside
   useEffect(() => {
     const handleOutsideEvent = (event) => {
       if (cartRef.current && !cartRef.current.contains(event.target)) {
@@ -108,10 +109,7 @@ const Navbar = () => {
               {isMobile && (
                 <button
                   className="mobile-back-button"
-                  onClick={() => {
-                    setIsCartOpen(false);
-                    navigate(0); // Navigate to the previous page
-                  }}
+                  onClick={() => setIsCartOpen(false)}
                 >
                   Back
                 </button>

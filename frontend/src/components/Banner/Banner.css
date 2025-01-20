@@ -4,3 +4,27 @@
     width: 100%;
    
 }
+.banner {
+    position: relative;
+    width: 100%;
+  }
+  
+  .banner-image {
+    width: 100%;
+    display: block;
+  }
+  
+  /* Tablet View */
+  @media (max-width: 1024px) {
+    .banner-image {
+      content: url('../../images/bannermobile.jpg'); /* Path to the tablet-specific image */
+    }
+  }
+  
+  /* Mobile View */
+  @media (max-width: 768px) {
+    .banner-image {
+      content: url('../../images/bannermobile.jpg'); /* Path to the mobile-specific image */
+    }
+  }
+  

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./CreativesPage.css";
 
 const CreativesPage = () => {
   const [desktopImages, setDesktopImages] = useState([]);
@@ -7,7 +7,7 @@ const CreativesPage = () => {
 
   const handleFileUpload = (event, type) => {
     const files = Array.from(event.target.files);
-    const previewImages = files.map(file => ({
+    const previewImages = files.map((file) => ({
       file,
       preview: URL.createObjectURL(file),
     }));
@@ -23,7 +23,7 @@ const CreativesPage = () => {
     <>
       <div className="creatives-page">
         <h1 className="creatives-page-title">Edit Home Page Carousel Images</h1>
-        
+
         <div className="creative-section">
           <h2 className="creative-section-title">Desktop/Tablet</h2>
           <div className="image-grid">
@@ -37,7 +37,7 @@ const CreativesPage = () => {
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={e => handleFileUpload(e, "desktop")}
+                onChange={(e) => handleFileUpload(e, "desktop")}
               />
               <div className="upload-icon">+</div>
             </label>
@@ -57,7 +57,7 @@ const CreativesPage = () => {
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={e => handleFileUpload(e, "mobile")}
+                onChange={(e) => handleFileUpload(e, "mobile")}
               />
               <div className="upload-icon">+</div>
             </label>
@@ -67,7 +67,7 @@ const CreativesPage = () => {
 
       <div className="creatives-page">
         <h1 className="creatives-page-title">Edit Home Page Banner Image</h1>
-        
+
         <div className="creative-section">
           <h2 className="creative-section-title">Desktop/Tablet</h2>
           <div className="image-grid">
@@ -81,7 +81,7 @@ const CreativesPage = () => {
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={e => handleFileUpload(e, "desktop")}
+                onChange={(e) => handleFileUpload(e, "desktop")}
               />
               <div className="upload-icon">+</div>
             </label>
@@ -101,7 +101,7 @@ const CreativesPage = () => {
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={e => handleFileUpload(e, "mobile")}
+                onChange={(e) => handleFileUpload(e, "mobile")}
               />
               <div className="upload-icon">+</div>
             </label>

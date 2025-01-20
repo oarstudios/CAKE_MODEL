@@ -1,0 +1,142 @@
+.creatives-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .creatives-page-title {
+    margin-bottom: 20px;
+    font-family: Jost;
+    font-size: 36px;
+    font-weight: 500;
+    color: rgba(71, 29, 6, 1);
+
+  }
+  
+  .creative-section {
+    margin-bottom: 30px;
+  }
+  
+  .creative-section-title {
+    font-family: Jost;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: rgba(71, 29, 6, 1);
+    text-align: left; /* Default alignment */
+  }
+  
+  .image-grid {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align items to the left by default */
+    align-items: center;
+  }
+  
+  .image-preview {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .upload-box {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .upload-box input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+  }
+  
+  .upload-icon {
+    font-size: 2rem;
+    color: #aaa;
+  }
+  
+  @media (max-width: 1024px) {
+    .creative-section-title {
+      font-size: 22px; /* Slightly smaller font size for tablets */
+     
+    }
+  
+
+  
+    .image-preview, .upload-box {
+      width: 100px; /* Slightly smaller image previews */
+      height: 100px;
+    }
+  
+    .upload-icon {
+      font-size: 1.8rem; /* Smaller upload icon */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .creatives-page {
+      padding: 10px;
+    }
+  
+    .creatives-page-title {
+      font-size: 28px; /* Smaller title size for mobile */
+    }
+  
+    .creative-section-title {
+      font-size: 20px;
+    
+    }
+  
+    .image-grid {
+      gap: 10px; /* Reduce gap between images for smaller screens */
+    }
+  
+    .image-preview, .upload-box {
+      width: 90px; /* Smaller image previews for mobile */
+      height: 90px;
+    }
+  
+    .upload-icon {
+      font-size: 1.6rem; /* Adjust upload icon size */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .creatives-page-title {
+      font-size: 24px; /* Further reduce title size for very small screens */
+    }
+  
+    .creative-section-title {
+      font-size: 18px; /* Further reduce section title size */
+    }
+  
+    .image-preview, .upload-box {
+      width: 80px; /* Compact previews for small devices */
+      height: 80px;
+    }
+  
+    .upload-icon {
+      font-size: 1.4rem; /* Compact upload icon size */
+    }
+  }
+  
