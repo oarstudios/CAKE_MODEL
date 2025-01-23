@@ -8,6 +8,13 @@
     color: #4b2e05;
 }
 
+.sbBtn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
 .account-left {
     flex: 3;
     border-right: 1px solid rgba(213, 178, 107, 1);
@@ -43,7 +50,7 @@
     text-decoration: underline;
 }
 
-.logout-button {
+.logout-button, .submit {
     display: block;
     margin-top: 20px;
     padding: 8px 20px;
@@ -142,6 +149,7 @@ select {
     font-size: 16px;
     font-weight: 400;
     color: rgba(71, 29, 6, 1);
+    margin-right: 10px;
 }
 
 .orders-status.pending {

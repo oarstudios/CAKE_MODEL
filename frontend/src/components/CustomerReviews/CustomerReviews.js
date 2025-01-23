@@ -1,70 +1,79 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CustomerReviews.css';
 
 // Import the images
 import FullStar from '../../images/NoRating.png';
 import EmptyStar from '../../images/Rating.png';
 import UserIcon from '../../images/user.png'; // Generic user icon
-import img1 from '../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg';
-
-const reviews = [
-  {
-    id: 1,
-    name: 'Akshat Agrawal',
-    rating: 5,
-    title: 'Triple Chocolate Cheesecake - Eggless',
-    review: 'Absolutely heavenly! The chocolate fudge cake was moist, rich, and packed with flavor. It was a hit at our family gathering, and everyone asked for seconds. Definitely ordering again!',
-    images: [img1, img1],
-  },
-  {
-    id: 2,
-    name: 'Omkar Garate',
-    rating: 4,
-    title: 'Triple Chocolate Cheesecake - Eggless',
-    review: 'Sometimes simple is best, and this vanilla bean cake proved it! Light, fluffy, and with an incredible depth of vanilla flavor. It was perfect for my daughter’s birthday, and everyone loved it.',
-    images: [img1, img1],
-  },
-  {
-    id: 3,
-    name: 'Omkar Garate',
-    rating: 4,
-    title: 'Triple Chocolate Cheesecake - Eggless',
-    review: 'Sometimes simple is best, and this vanilla bean cake proved it! Light, fluffy, and with an incredible depth of vanilla flavor. It was perfect for my daughter’s birthday, and everyone loved it.',
-  },
-  {
-    id: 4,
-    name: 'Omkar Garate',
-    rating: 4,
-    title: 'Triple Chocolate Cheesecake - Eggless',
-    review: 'Sometimes simple is best, and this vanilla bean cake proved it! Light, fluffy, and with an incredible depth of vanilla flavor. It was perfect for my daughter’s birthday, and everyone loved it.',
-    images: [img1, img1],
-  },
-  {
-    id: 5,
-    name: 'Jane Doe',
-    rating: 3,
-    title: 'Chocolate Cake',
-    review: 'The cake was good, but it was a bit too sweet for my taste. The texture, however, was perfect!',
-    images: [],
-  },
-  {
-    id: 6,
-    name: 'John Smith',
-    rating: 5,
-    title: 'Amazing Cheesecake!',
-    review: 'One of the best cheesecakes I’ve had in years! Highly recommend it to anyone who loves desserts.',
-    images: [img1],
-  },
-];
+import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const CustomerReviews = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 5; // Display 5 reviews per page
+  const { id } = useParams();
+  const [reviews, setReviews] = useState([]); // Initialize reviews as an empty array
+  const [averageRating, setAverageRating] = useState(0); 
 
-  // Calculate the current reviews to display
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/reviews/getproductreview/${id}`);
+      const json = await response.json();
+
+      console.log(json); // Log the structure of the response to confirm
+
+      // Ensure that 'reviews' is an array before setting the state
+      if (Array.isArray(json?.reviews?.reviews)) {
+        setReviews(json.reviews);
+        calculateAverageRating(json?.reviews?.reviews);
+      } else {
+        console.error("Reviews data is not an array:", json.reviews);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const [product, setProduct] = useState('')
+
+  const fetchProduct = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/products/getproductbyid/${id}`);
+      const json = await response.json();
+
+      console.log(json); // Log the structure of the response to confirm
+      setProduct(json)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const calculateAverageRating = (reviews) => {
+    if (reviews?.reviews?.length === 0) return 0;
+    const totalRating = reviews?.reviews?.reduce((sum, review) => sum + review.rating, 0);
+    return (totalRating / reviews?.reviews?.length).toFixed(0); // Return 1 decimal place
+  };
+
+  useEffect(() => {
+    fetchReviews();
+    fetchProduct();
+  }, [id]);
+
+  useEffect(() => {
+    setAverageRating(calculateAverageRating(reviews));
+  }, [reviews]);
+
+  // Calculate the current reviews to display based on the current page
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
+  const currentReviews = reviews?.reviews?.slice(indexOfFirstReview, indexOfLastReview);
+
+  // Fetch reviews on component mount or when `id` changes
+  useEffect(() => {
+    fetchReviews();
+    fetchProduct();
+  }, [id]); // Dependency on `id` so it fetches when `id` changes
 
   const renderStars = (rating) => {
     const stars = [];
@@ -87,7 +96,7 @@ const CustomerReviews = () => {
 
   const renderPagination = () => {
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(reviews.length / reviewsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(reviews?.reviews?.length / reviewsPerPage); i++) {
       pageNumbers.push(i);
     }
 
@@ -106,37 +115,48 @@ const CustomerReviews = () => {
     );
   };
 
+  
+
   return (
     <section className="customer-reviews">
       <h2>Customer Reviews ({reviews.length})</h2>
       <div className="rating-summary">
-        <div className="stars">{renderStars(4)}</div>
-        <p>4.0 out of 5</p>
+      <div className="stars">{renderStars(Math.round(averageRating))}</div>
+        <p>{averageRating > 0 ? averageRating : 0}  out of 5</p>
       </div>
-      {currentReviews.map((review) => (
-        <div key={review.id} className="review-card">
-          <div className="review-header">
-            <div className="review-author">
-              <img src={UserIcon} alt="User Icon" className="user-icon" />
-              <h4>{review.name}</h4>
-              <div className="stars">{renderStars(review.rating)}</div>
+
+      {/* Conditional rendering: Only display reviews if they are available */}
+      {reviews?.reviews?.length > 0 ? (
+        currentReviews.map((review) => (
+          <div key={review.id} className="review-card">
+            <div className="review-header">
+              <div className="review-author">
+                <img src={UserIcon} alt="User Icon" className="user-icon" />
+                <h4>{review.username}</h4>
+                <div className="stars">{renderStars(review.rating)}</div>
+              </div>
             </div>
+            <h3>{product?.product?.title}</h3>
+            <p>{review.review}</p>
+            {/* Only render images if the review has them */}
+            {review?.media && review?.media?.length > 0 && (
+              <div className="review-images">
+                {console.log(review?.media)}
+                {review?.media?.map((img, index) => (
+                  <img key={index} src={`http://localhost:3001/${img}`} alt={`Review ${index + 1}`} />
+                ))}
+              </div>
+            )}
+            <hr className="review-divider" />
           </div>
-          <h3>{review.title}</h3>
-          <p>{review.review}</p>
-          {/* Only render images if the review has them */}
-          {review.images && review.images.length > 0 && (
-            <div className="review-images">
-              {review.images.map((img, index) => (
-                <img key={index} src={img} alt={`Review ${index + 1}`} />
-              ))}
-            </div>
-          )}
-          <hr className="review-divider" />
-        </div>
-      ))}
+        ))
+      ) : (
+        <p>No reviews</p>
+      )}
+
       {/* Render Pagination */}
       {renderPagination()}
+      <ToastContainer/>
     </section>
   );
 };

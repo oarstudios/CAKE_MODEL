@@ -37,7 +37,7 @@ const loginUser = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const users = await User.find({}).sort({ createdAt: -1 });
-    res.status(200).json({ users });
+    res.status(200).json(users);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -91,7 +91,7 @@ const updateUser = async (req, res) => {
 
 // Add to Cart
 const addToCart = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   const { productId, quantity, weight } = req.body;
 
   try {
@@ -101,7 +101,7 @@ const addToCart = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -128,11 +128,11 @@ const addToCart = async (req, res) => {
 
 // Remove from Cart
 const removeFromCart = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   const { productId } = req.body;
 
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -156,7 +156,7 @@ const removeFromCart = async (req, res) => {
 };
 
 const updateCart = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   const { productId, quantity, weight } = req.body;
 
   try {
@@ -166,7 +166,7 @@ const updateCart = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

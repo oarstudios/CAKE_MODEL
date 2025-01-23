@@ -216,7 +216,7 @@
   
 
   .view-button {
-    flex: 2; /* 40% of the total width */
+    /* flex: 2;  */
     padding: 0.8rem 3.5rem;
   }
 
