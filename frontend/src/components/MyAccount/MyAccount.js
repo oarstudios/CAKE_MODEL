@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import "./MyAccount.css";
 import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 
 const MyAccount = () => {
   const [userDetails, setUserDetails] = useState({
     name: "Omkar Garate",
-    email: "omkargarate116677@gmail.com",
+    email: "omkargarate@gmail.com",
     phone: "+91 99111 88822",
     age: 23,
     gender: "Male",
@@ -35,6 +35,45 @@ const MyAccount = () => {
       image: cake,
     },
   ]);
+
+  const indianStates = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Jammu and Kashmir",
+    "Ladakh",
+    "Lakshadweep",
+    "Puducherry",
+  ];
 
   return (
     <div className="my-account-page">
@@ -74,8 +113,12 @@ const MyAccount = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="********" />
+              <label htmlFor="password">Set New Password</label>
+              <input
+                type="text"
+                id="password"
+                placeholder="Enter new password"
+              />
             </div>
           </div>
 
@@ -122,7 +165,14 @@ const MyAccount = () => {
               <input type="text" placeholder="Landmark" />
             </div>
             <div className="state-city-pincode">
-              <input type="text" placeholder="State*" required />
+              <select required className="state-input">
+                <option value="">Select State*</option>
+                {indianStates.map((state, index) => (
+                  <option key={index} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
               <input type="text" placeholder="City*" required />
               <input type="text" placeholder="PIN Code*" required />
             </div>
@@ -140,18 +190,17 @@ const MyAccount = () => {
         <h2 className="heading">Orders</h2>
         {orders.map((order) => (
           <Link to={`/order/${order.id}`} key={order.id} className="orders-link">
-          <div className="orders-item">
-            <img src={order.image} alt="Order" className="orders-image" />
-            <div className="orders-details">
-              <p className="orders-date">{order.date}</p>
-              <p className={`orders-status ${order.status.toLowerCase()}`}>
-                {order.status}
-              </p>
-              <p className="orders-items">{order.items}</p>
+            <div className="orders-item">
+              <img src={order.image} alt="Order" className="orders-image" />
+              <div className="orders-details">
+                <p className="orders-date">{order.date}</p>
+                <p className={`orders-status ${order.status.toLowerCase()}`}>
+                  {order.status}
+                </p>
+                <p className="orders-items">{order.items}</p>
+              </div>
             </div>
-          </div>
-        </Link>
-        
+          </Link>
         ))}
       </div>
     </div>

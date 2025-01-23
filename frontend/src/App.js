@@ -23,6 +23,7 @@ import AddNewProduct from "./components/Admin/AddNewProduct";
 import EditProduct from "./components/Admin/EditProduct";
 import AdminOrders from "./components/Admin/AdminOrders";
 import CreativesPage from "./components/Admin/CreativesPage";
+import AdminCustomersDetails from "./components/Admin/AdminCustomersDetails";
 
 const App = () => {
   return (
@@ -103,6 +104,7 @@ const MainContent = () => {
           <Route path="/admin/edit-product" element={<EditProduct />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/creatives" element={<CreativesPage />} />
+          <Route path="/admin/customers" element={<AdminCustomersDetails />} />
         </Routes>
       </div>
     </>
