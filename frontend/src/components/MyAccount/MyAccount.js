@@ -214,7 +214,7 @@ const MyAccount = () => {
     useEffect(() => {
       if (user) {
         fetchOrders();
-        console.log("ord", orders)
+        console.log("ord", user?.password === "")
       }
     }, [user]);
     
@@ -259,10 +259,20 @@ const MyAccount = () => {
                 readOnly
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="********" value={password} onChange={(e)=>{setPassword(e.target.value)}} readOnly= {!edit1}/>
-            </div>
+            {user?.password?.length > 0 && (
+  <div className="form-group">
+    <label htmlFor="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      placeholder="********"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      readOnly={!edit1}
+    />
+  </div>
+)}
+
           </div>
 
           {/* Age and Gender */}
@@ -337,7 +347,7 @@ const MyAccount = () => {
 <div className="account-right">
   <h2 className="heading">Orders</h2>
   {orders.map((order) => (
-    <Link to={`/order/${order.id}`} key={order.id} className="orders-link">
+    <Link to={`/order/${order._id}`} key={order._id} className="orders-link">
       <div className="orders-item">
         <img src={cake} alt="Order" className="orders-image" />
         <div className="orders-details">

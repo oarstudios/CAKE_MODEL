@@ -130,11 +130,8 @@ const handleAddToCart = async (product) => {
         console.log(user._id)
       }
 
-      // 678b9cd33c5c89b51736ef35
-      // 67863b19bbf3cf5b04a2d017
-
     const formData = {
-      'productId': "678b9cd33c5c89b51736ef35",
+      'productId': "6790feef14a7c655bdab781d",
       'quantity': 1,
       'weight': 1
     }
@@ -173,7 +170,7 @@ const handleAddToCart = async (product) => {
           {cakes.map((cake) => (
             <div className="cake-card" key={cake.id}>
               <div className="cake-image">
-                <Link to="/product">
+                <Link to={`/product/678b9cd33c5c89b51736ef35`}>
                   <img src={cake.image} alt={cake.name} />
                 </Link>
                 {cake.tag && <span className="cake-tag">{cake.tag}</span>}

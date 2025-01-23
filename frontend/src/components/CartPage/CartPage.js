@@ -183,9 +183,9 @@ const handleRemove = async(id) => {
                       className="cart-product-image"
                     />
                     <div className="cart-product-details">
-                      <p className="cart-product-name">
+                      <Link to={`/product/${item?.productDetails?.product?._id}`} className="cart-product-name">
                         {item?.productDetails?.product?.title}
-                      </p>
+                      </Link>
                       <p className="cart-product-price">
                         Rs {item?.productDetails?.product?.price}
                       </p>
