@@ -23,8 +23,13 @@ import AddNewProduct from "./components/Admin/AddNewProduct";
 import EditProduct from "./components/Admin/EditProduct";
 import AdminOrders from "./components/Admin/AdminOrders";
 import CreativesPage from "./components/Admin/CreativesPage";
+import BillingForSingle from "./components/BillingPage/BillingForSingle";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 const App = () => {
+
+
+
   return (
     <Router>
       <ScrollToTop /> {/* Scroll to top on route change */}
@@ -36,14 +41,16 @@ const App = () => {
 
 const MainContent = () => {
   const location = useLocation();
+  const {user} = useAuthContext();
+  console.log(user)
 
   // Check if current route is for admin pages
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <>
-      {isAdminRoute ? <AdminNavbar /> : <Navbar />}
-      <div className={isAdminRoute ? "admin-container" : "app-container"}>
+      {user?.userType === "Admin" ? <AdminNavbar /> : <Navbar />}
+      <div className={user?.userType === "Admin" ? "admin-container" : "app-container"}>
         <Routes>
           {/* Home Page Route */}
           <Route
@@ -67,7 +74,7 @@ const MainContent = () => {
 
           {/* Product Page Route */}
           <Route
-            path="/product"
+            path="/product/:id"
             element={
               <>
                 <Product />
@@ -79,6 +86,7 @@ const MainContent = () => {
 
           {/* Billing Page Route */}
           <Route path="/billing" element={<BillingPage />} />
+          <Route path="/billing/:quantity/:weight/:id" element={<BillingForSingle />} />
 
           {/* My Account Page Route */}
           <Route path="/my-account" element={<MyAccount />} />

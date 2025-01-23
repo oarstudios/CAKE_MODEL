@@ -17,6 +17,7 @@ const UserModel = mongoose.Schema({
     },
     password: {
         type: String,
+        default: ""
         // required: true
     },
     address: {

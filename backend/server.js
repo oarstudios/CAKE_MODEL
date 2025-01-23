@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoutes')
 const productRoutes = require('./routes/productRoutes')
 const ctwRoutes = require('./routes/ctwRoutes')
 const billingRoutes = require('./routes/billingRoutes')
+const reviewRoutes = require('./routes/reviewsRoutes')
 const bodyParser = require('body-parser')
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client('581379327416-6t7bsonglpbktsnbvsq0jq1fskctfgb3.apps.googleusercontent.com');
@@ -17,14 +18,22 @@ const app = express();
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
+app.use('/media', express.static('media'));
 app.use('/users', userRoutes)
 app.use('/products', productRoutes)
 app.use('/ctw', ctwRoutes)
 app.use('/billing', billingRoutes)
+app.use('/reviews', reviewRoutes)
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ error: 'Something went wrong!' });
+});
+
 
 const PORT = process.env.PORT;
 

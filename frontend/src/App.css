@@ -84,3 +84,14 @@
   background-color: #ff9800 !important; /* Orange */
   color: #fff !important;
 }
+
+.blur{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 80px);
+  position: fixed;
+  background-color: #e5e1d75f;
+  backdrop-filter: blur(3px);
+}

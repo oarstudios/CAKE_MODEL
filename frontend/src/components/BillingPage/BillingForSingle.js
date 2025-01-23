@@ -3,14 +3,16 @@ import "./BillingPage.css";
 import cake from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 import removeIcon from "../../images/remove-icon.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Razorpay from 'razorpay'
 import { useNotify } from "../../hooks/useNotify";
 
-const BillingPage = () => {
+const BillingForSingle = () => {
   const { user } = useAuthContext();
-  const [adtItems, setAdtItems] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  const {quantity, weight, id} = useParams();
+  // console.log(quantity)
+  const [adtItems, setAdtItems] = useState('');
+  const [cartItems, setCartItems] = useState();
   const [email, setEmail] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -30,9 +32,9 @@ const BillingPage = () => {
   const [pincode2, setPincode2] = useState();
   const [phoneNo2, setPhoneNo2] = useState();
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log("cart", user?.cart);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log("cart", user?.cart);
+  // }, [user]);
 
   const fetchData = async () => {
     if (user) {
@@ -46,7 +48,8 @@ const BillingPage = () => {
       );
       const json = await response.json();
       if (response.ok) {
-        setAdtItems(json?.cart);
+        // setAdtItems(json?.cart);
+        // console.log(json)
         setFirstName(json?.address?.firstName);
         setLastName(json?.address?.lastName);
         setAddress(json?.address?.address);
@@ -61,48 +64,59 @@ const BillingPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if(user)
+    {
+
+      fetchData();
+    }
   }, [user]);
+
+ 
 
   // Use another useEffect to monitor cartItems changes
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productPromises = adtItems.map((item) =>
-          fetch(
-            `http://localhost:3001/products/getproductbyid/${item.product}`,
+        
+          const response = await fetch(
+            `http://localhost:3001/products/getproductbyid/${id}`,
             {
               headers: {
                 Authorization: `Bearer ${user.token}`,
               },
             }
-          ).then((response) => response.json())
-        );
+          )
 
-        const products = await Promise.all(productPromises);
+          const json = await response.json();
+       
+          if(response.ok)
+          {
+            console.log(json)
+            setAdtItems(json)
+          } 
 
-        // setCartItems(products)
-
-        // Assuming you want to set the fetched products in the cart items
-        const updatedCartItems = products.map((product, index) => ({
-          ...adtItems[index],
-          productDetails: product, // Adding product details to each cart item
-        }));
-
-        setCartItems(updatedCartItems);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
     };
 
+  
+
     // console.log('products', cartItems)
+    if(user)
+      {
+        fetchData();
+       
+  
+      }
 
-    if (adtItems && adtItems.length > -1) {
-      fetchData();
-      console.log("adtItems", cartItems);
-    }
-  }, [adtItems, user]);
+  }, [user]);
 
+  useEffect(()=>{
+    console.log(adtItems)
+  },[adtItems])
+
+  
   const handleRemove = async (id) => {
     // const updatedCartItems = cartItems.filter((item) => item.id !== id);
     // setCartItems(updatedCartItems);
@@ -142,10 +156,7 @@ const BillingPage = () => {
     }
   };
 
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item?.productDetails?.product?.price * item?.quantity,
-    0
-  );
+  const subtotal = adtItems?.product?.price * quantity;
 
   // const [cartItems, setCartItems] = useState([
   //   {
@@ -174,7 +185,11 @@ const BillingPage = () => {
     try {
       const formData = {
         email,
-        productIds: cartItems,
+        productIds: [{
+          product: id,
+          quantity,
+          weight
+        }],
         shippingAddress: {
           firstName,
           lastName,
@@ -239,19 +254,19 @@ const BillingPage = () => {
 
     
 
-    const productDataArray = cartItems.map(item => ({
-      product: item.productDetails.product._id,
-      quantity: item.quantity // Include the quantity for each product
-    }));
+    // const productDataArray = cartItems.map(item => ({
+    //   product: item.productDetails.product._id,
+    //   quantity: item.quantity // Include the quantity for each product
+    // }));
 
-      if (productDataArray.length === 0) {
-        // notify('No product data to submit.',"info");
-        console.log("No product data to submit.")
+    //   if (productDataArray.length === 0) {
+    //     // notify('No product data to submit.',"info");
+    //     console.log("No product data to submit.")
 
-        return;
-      }
+    //     return;
+    //   }
     const data = {
-      productIds: productDataArray, // Changed from productIds to productData
+      productIds: id, // Changed from productIds to productData
       firstName: firstName,
       lastName: lastName,
       country: 'INDIA',
@@ -555,45 +570,45 @@ const BillingPage = () => {
 
       <div className="billing-right">
         <div className="cart-items">
-          {cartItems?.length > 0 && (
-            <>
+          {/* {cartItems.length > 0 && ( */}
+            {/* <> */}
               <div className="cart-header">
                 <span>PRODUCT</span>
                 <span>QUANTITY</span>
               </div>
               <div className="cart-items">
-                {cartItems?.map((item) => (
-                  <div className="cart-item" key={item.product}>
+                {/* {cartItems.map((item) => ( */}
+                  <div className="cart-item" key={adtItems?.product?._id}>
                     <div className="cart-product-info">
                       <img
-                        src={item.image}
-                        alt={item.name}
+                        src={adtItems?.image}
+                        alt={adtItems?.name}
                         className="cart-product-image"
                       />
                       <div className="cart-product-details">
                         <p className="cart-product-name">
-                          {item?.productDetails?.product?.title}
+                          {adtItems?.product?.title}
                         </p>
                         <p className="cart-product-price">
-                          Rs {item?.productDetails?.product?.price}
+                          Rs {adtItems?.product?.price}
                         </p>
                       </div>
                     </div>
                     <div className="quantity-info">
-                      <p className="quantity">x {item?.quantity}</p>
+                      <p className="quantity">x {quantity}</p>
                     </div>
-                    <div className="remove-item">
+                    {/* <div className="remove-item">
                       <img
                         src={removeIcon}
                         alt="Remove"
                         className="remove-icon"
                         onClick={() =>
-                          handleRemove(item?.productDetails?.product?._id)
+                          handleRemove(adtItems?.productDetails?.product?._id)
                         }
                       />
-                    </div>
+                    </div> */}
                   </div>
-                ))}
+                {/* // ))} */}
               </div>
               <div className="cart-summary">
                 <div className="summary-header">
@@ -613,8 +628,8 @@ const BillingPage = () => {
               >
                 Proceed to Checkout
               </button>
-            </>
-          )}
+            {/* </> */}
+          {/* // )} */}
         </div>
         <div className="summary">
           <div className="summary-item">
@@ -631,4 +646,4 @@ const BillingPage = () => {
   );
 };
 
-export default BillingPage;
+export default BillingForSingle;

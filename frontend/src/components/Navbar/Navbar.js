@@ -6,6 +6,7 @@ import logo from "../../images/Pink Modern Simple Bakery Logo (1) 1.png";
 import search from "../../images/Group.png";
 import admin from "../../images/Group (1).png";
 import cart from "../../images/Vector.png";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -13,6 +14,7 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const cartRef = useRef(null);
   const navigate = useNavigate();
+  const {user} = useAuthContext();
 
   // Toggle cart visibility
   const toggleCart = () => {
@@ -26,7 +28,12 @@ const Navbar = () => {
 
   // Navigate to My Account page
   const handleAdminClick = () => {
-    navigate("/my-account"); // Replace '/my-account' with your actual route path
+    if(user)
+    {
+      navigate("/my-account"); // Replace '/my-account' with your actual route path
+    }else{
+      navigate("/signin")
+    }
   };
 
   // Detect screen size
