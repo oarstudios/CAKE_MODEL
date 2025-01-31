@@ -63,6 +63,9 @@ const UserModel = mongoose.Schema({
               },
               weight:{
                 type: String
+              },
+              price: {
+                type: String
               }
         }
     ],

@@ -12,17 +12,35 @@ const createCTW = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
+        // Check if a Cake of the Week entry already exists
+        const existingCTW = await CTW.findOne();
+
+        if (existingCTW) {
+            // Update the existing entry instead of creating a new one
+            existingCTW.product = product;
+            await existingCTW.save();
+            return res.status(200).json({ message: "Updated Cake of the Week", data: existingCTW });
+        }
+
+        // If no previous entry exists, create a new one
         const newCTW = await CTW.create({ product });
-        res.status(201).json(newCTW);
+        res.status(201).json({ message: "New Cake of the Week created", data: newCTW });
     } catch (error) {
-        res.status(500).json({ message: 'Error creating CTW', error: error.message });
+        res.status(500).json({ message: 'Error updating CTW', error: error.message });
     }
 };
 
 // Get all CTW entries
 const getAllCTWs = async (req, res) => {
     try {
-        const ctwEntries = await CTW.find().populate('product'); // Populating product details
+        // Fetching all CTW entries, populating the 'product' field, and sorting by 'createdAt' in descending order
+        const ctwEntries = await CTW.find()
+            .sort({ createdAt: -1 }); // Sorting by 'createdAt' in descending order to get latest first
+
+        if (!ctwEntries.length) {
+            return res.status(404).json({ message: 'No CTW entries found' });
+        }
+
         res.status(200).json(ctwEntries);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching CTW entries', error: error.message });
@@ -78,19 +96,21 @@ const updateCTW = async (req, res) => {
 // Delete a CTW entry
 const deleteCTW = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { product } = req.body;
 
-        const deletedCTW = await CTW.findByIdAndDelete(id);
+        // Find and delete the CTW entry by the product's ID
+        const deletedCTW = await CTW.findOneAndDelete({ product: product });
 
         if (!deletedCTW) {
-            return res.status(404).json({ message: 'CTW entry not found' });
+            return res.status(404).json({ message: 'CTW entry not found for the given product' });
         }
 
-        res.status(200).json({ message: 'CTW entry deleted successfully' });
+        res.status(200).json({ message: 'CTW entry deleted successfully for the product' });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting CTW entry', error: error.message });
     }
 };
+
 
 module.exports = {
     createCTW,

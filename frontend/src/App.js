@@ -98,7 +98,7 @@ const MainContent = () => {
 
           {/* Billing Page Route */}
           <Route path="/billing" element={<BillingPage />} />
-          <Route path="/billing/:quantity/:weight/:id" element={<BillingForSingle />} />
+          <Route path="/billing/:quantity/:weight/:price/:id" element={<BillingForSingle />} />
 
           {/* My Account Page Route */}
           <Route path="/my-account" element={<MyAccount />} />
@@ -109,7 +109,7 @@ const MainContent = () => {
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminHomePage />} />
           <Route path="/admin/add-product" element={<AddNewProduct />} />
-          <Route path="/admin/edit-product" element={<EditProduct />} />
+          <Route path="/admin/edit-product/:id" element={<EditProduct />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/creatives" element={<CreativesPage />} />
           <Route path="/admin/customers" element={<AdminCustomersDetails />} />

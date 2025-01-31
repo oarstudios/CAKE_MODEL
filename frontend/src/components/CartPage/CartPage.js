@@ -31,8 +31,8 @@ const CartPage = () => {
 
 useEffect(() => {
   
-
   fetchData();
+  console.log(adtItems)
 }, [user]);
 
 // Use another useEffect to monitor cartItems changes
@@ -51,12 +51,13 @@ useEffect(() => {
      
       // setCartItems(products)
       
-
       // Assuming you want to set the fetched products in the cart items
       const updatedCartItems = products.map((product, index) => ({
         ...adtItems[index],
         productDetails: product // Adding product details to each cart item
       }));
+
+
 
       setCartItems(updatedCartItems);
       
@@ -129,7 +130,7 @@ const handleRemove = async(id) => {
   // const navigate = useNavigate();
 
   const subtotal = cartItems.reduce(
-    (acc, item) => acc + item?.productDetails?.product?.price * item?.quantity, 0
+    (acc, item) => acc + item?.price * item?.quantity, 0
   );
   useEffect(() => {
     // Check if the device is mobile
@@ -176,9 +177,10 @@ const handleRemove = async(id) => {
             <div className="cart-items">
               {cartItems.map((item) => (
                 <div className="cart-item" key={item.product}>
+                  {console.log(cartItems)}
                   <div className="cart-product-info">
                     <img
-                      src={item.image}
+                      src={`http://localhost:3001/uploads/${item?.productDetails?.product?.productImages[0]}`}
                       alt={item.name}
                       className="cart-product-image"
                     />
@@ -187,7 +189,7 @@ const handleRemove = async(id) => {
                         {item?.productDetails?.product?.title}
                       </Link>
                       <p className="cart-product-price">
-                        Rs {item?.productDetails?.product?.price}
+                        Rs {item?.price}
                       </p>
                     </div>
                   </div>

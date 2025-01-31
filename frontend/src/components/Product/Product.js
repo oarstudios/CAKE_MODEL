@@ -8,14 +8,17 @@ import { ToastContainer } from "react-toastify";
 
 const Product = ({ toggleCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const [selectedWeight, setSelectedWeight] = useState("1 KG");
+  const [selectedWeight, setSelectedWeight] = useState('');
+  const [selectedPrice, setSelectedPrice] = useState(0);
   const [product, setProduct] = useState('')
 
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-  const handleWeightChange = (weight) => setSelectedWeight(weight);
+ 
 
   const {id} = useParams();
+
+  const [mainImage, setMainImage] = useState();
 
   const fetchProduct = async()=>{    
     try{
@@ -24,6 +27,8 @@ const Product = ({ toggleCart }) => {
       if(response.ok)
       {
         setProduct(json)
+        setMainImage(json?.product?.productImages[0])
+        setSelectedWeight(json?.product?.prices[0]?.weight)
         console.log(json);
       }
     }catch(error){
@@ -93,7 +98,8 @@ const handleAddToCart = async (e) => {
     const formData = {
       'productId': id,
       'quantity': quantity,
-      'weight': selectedWeight
+      'weight': selectedWeight,
+      'price': selectedPrice
     }
     console.log(formData) 
     
@@ -121,27 +127,60 @@ const handleAddToCart = async (e) => {
     console.log('Error:', error);
   }
 };
+const weight = selectedWeight;
+const price = selectedPrice;
 
-const handleBilling = (id) =>{
-  navigate(`/billing/${quantity}/${selectedWeight}/${id}`)
-}
+console.log(weight, price)
 
+const handleBilling = (id) => {
+  navigate(`/billing/${quantity}/${encodeURIComponent(weight)}/${price}/${id}`);
+};
+
+
+const handleWeightChange = (weight) => {
+  setSelectedWeight(weight);
+
+  // Find the price for the selected weight
+  const matchingPrice = product?.product?.prices.find(
+    (price) => price.weight === weight
+  );
+  
+  setSelectedPrice(matchingPrice ? matchingPrice.price : 0);
+};
+
+useEffect(() => {
+  if (product?.product?.prices?.length) {
+    // Set initial weight and price
+    setSelectedWeight(product.product.prices[0]?.weight);
+    setSelectedPrice(product.product.prices[0]?.price);
+  }
+}, [product]);
+
+  // console.log(mainImage)
   return (
     <>
     <div className="forcolor">
     <div className="product-container">
       <div className="product-image-section">
-        <img src={cakeImage} alt="Triple Chocolate Cheesecake" className="main-image" />
-        <div className="thumbnail-container">
-          <img src={cakeImage} alt="Thumbnail 1" className="thumbnail" />
-          <img src={cakeImage} alt="Thumbnail 2" className="thumbnail" />
-          <img src={cakeImage} alt="Thumbnail 3" className="thumbnail" />
+      <img src={`http://localhost:3001/uploads/${mainImage}`} alt="Main Product" className="main-image" />
+              <div className="thumbnail-container">
+          {product?.product?.productImages.map((image, index)=>(
+
+          <img
+          key={index}
+          src={`http://localhost:3001/uploads/${image}`}
+          alt={`Thumbnail ${index + 1}`}
+          className="thumbnail"
+          onClick={() => setMainImage(image)}
+          style={{ cursor: "pointer", border: mainImage === image ? "2px solid #D5B26B" : "none" }} // Highlight selected image
+          />
+          ))}
         </div>
       </div>
 
       <div className="product-details-section">
         <h1 className="product-name">{product?.product?.title}</h1>
-        <p className="product-price">Rs. {product?.product?.price}</p>
+        <p className="product-price">Rs.  {selectedPrice}</p>
         <p className="product-description">
         {product?.product?.description}
         </p>
@@ -157,18 +196,21 @@ const handleBilling = (id) =>{
           <div className="weight-selector">
             <span className="smallHeadings">Weight</span>
             <button
+            type="button"
               className={`weight-option ${selectedWeight === "1/2 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("1/2 KG")}
             >
               1/2 KG
             </button>
             <button
+            type="button"
               className={`weight-option ${selectedWeight === "1 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("1 KG")}
             >
               1 KG
             </button>
             <button
+            type="button"
               className={`weight-option ${selectedWeight === "2 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("2 KG")}
             >
@@ -187,9 +229,11 @@ const handleBilling = (id) =>{
 
           
         </div>
-      </div>
-      <hr className="cotw-divider" />
+      </div>  
+      
     </div>
+    <hr className="cotw-divider" />
+    {/* </div> */}
     {/* <hr className="cotw-divider" /> */}
     
     <ToastContainer/>

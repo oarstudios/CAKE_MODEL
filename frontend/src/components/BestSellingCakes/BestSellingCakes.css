@@ -96,7 +96,7 @@
 
 .view-button {
   flex: 1;
-  padding: 0.7rem 1.5rem;
+  /* padding: 0.7rem 1.5rem; */
   color: #FDFAF5;
   background-color: #D5B26B;
   border: none;
@@ -216,8 +216,8 @@
   
 
   .view-button {
-    /* flex: 2;  */
-    padding: 0.8rem 3.5rem;
+    flex: 2; /* 40% of the total width */
+    /* padding: 0.8rem 3.5rem; */
   }
 
   .add-button {

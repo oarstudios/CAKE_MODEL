@@ -9,9 +9,10 @@ let storage = multer.diskStorage({
 });
 
 // Init upload
-const upload = multer({
+const uploadProduct = multer({
   storage: storage,
-}).array('media', 10);
+}).array('productImages', 3);
+
+module.exports = uploadProduct;
 
 
-module.exports = upload;

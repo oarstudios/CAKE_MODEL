@@ -11,6 +11,6 @@ router.post('/createctw', createCTW)
 router.get('/getallctw', getAllCTWs)
 router.get('/getctwbyid/:id', getCTWById)
 router.patch('/updatectw/:id', updateCTW)
-router.delete('/deletectw/:id', deleteCTW)
+router.delete('/deletectw', deleteCTW)
 
 module.exports = router

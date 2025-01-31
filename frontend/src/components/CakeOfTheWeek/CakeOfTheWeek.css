@@ -26,7 +26,8 @@
 
 .cotw-image img {
     max-width: 100%;
-    height: auto;
+    /* height: auto; */
+    aspect-ratio: 2/2;
     border-radius: 20px;
 }
 
@@ -193,7 +194,7 @@
     }
 
     .cotw-image img {
-        max-width: 500px;
+        min-width: 500px;
     }
 
 

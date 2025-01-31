@@ -9,7 +9,7 @@ import { useNotify } from "../../hooks/useNotify";
 
 const BillingForSingle = () => {
   const { user } = useAuthContext();
-  const {quantity, weight, id} = useParams();
+  const {quantity, weight, price, id} = useParams();
   // console.log(quantity)
   const [adtItems, setAdtItems] = useState('');
   const [cartItems, setCartItems] = useState();
@@ -156,7 +156,7 @@ const BillingForSingle = () => {
     }
   };
 
-  const subtotal = adtItems?.product?.price * quantity;
+  const subtotal =  price * quantity;
 
   // const [cartItems, setCartItems] = useState([
   //   {
@@ -181,9 +181,41 @@ const BillingForSingle = () => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
+  const [randomString, setRandomString] = useState("");
+
+  const generateRandomString = (length = 6) => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    let result = "#";  // Start with '#'
+    
+    // Add two numbers at random positions
+    let numCount = 0;
+    while (numCount < 2) {
+      const randomChar = numbers.charAt(Math.floor(Math.random() * numbers.length));
+      if (!result.includes(randomChar)) {  // Ensure the number is not repeated
+        result += randomChar;
+        numCount++;
+      }
+    }
+  
+    // Add random letters until the string reaches the desired length
+    while (result.length < length) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+  
+    // Ensure the result has exactly the desired length
+    setRandomString(result.slice(0, length));
+  };
+  
+
+    useEffect(()=>{
+      generateRandomString();
+    },[user])
+
   const handleBillSubmit = async () => {
     try {
       const formData = {
+        billId: randomString,
         email,
         productIds: [{
           product: id,
@@ -210,6 +242,7 @@ const BillingForSingle = () => {
           pincode2: pincode2,
           phoneNo2: phoneNo2
         },
+        billPrice: subtotal
       };
   
       // If the billing address is the same as the shipping address, copy the shipping address to billing address
@@ -581,7 +614,7 @@ const BillingForSingle = () => {
                   <div className="cart-item" key={adtItems?.product?._id}>
                     <div className="cart-product-info">
                       <img
-                        src={adtItems?.image}
+                        src={`http://localhost:3001/uploads/${adtItems?.product?.productImages[0]}`}
                         alt={adtItems?.name}
                         className="cart-product-image"
                       />
@@ -590,7 +623,7 @@ const BillingForSingle = () => {
                           {adtItems?.product?.title}
                         </p>
                         <p className="cart-product-price">
-                          Rs {adtItems?.product?.price}
+                          Rs {price}
                         </p>
                       </div>
                     </div>
@@ -622,12 +655,12 @@ const BillingForSingle = () => {
                   <p className="subtotal-amount">Rs {subtotal}</p>
                 </div>
               </div>
-              <button
+              {/* <button
                 className="cotw-buy-now"
                 onClick={() => navigate("/billing")}
               >
                 Proceed to Checkout
-              </button>
+              </button> */}
             {/* </> */}
           {/* // )} */}
         </div>
