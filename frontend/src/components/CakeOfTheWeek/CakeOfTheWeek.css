@@ -172,6 +172,8 @@
     .cotw-add-to-cart, .cotw-buy-now {
         padding: 0.8rem 1.5rem;
         font-size: 1.2rem;
+        text-align: center;
+        text-decoration: none;
     }
     .cotw-quantity-selector{
         justify-content: center;

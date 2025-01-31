@@ -78,6 +78,44 @@ const MyAccount = () => {
     },
   ]);
 
+  const indianStates = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Jammu and Kashmir",
+    "Ladakh",
+    "Lakshadweep",
+    "Puducherry",
+  ];
     const handleSubmit = async(e)=>{
       e.preventDefault();
       try{
@@ -325,7 +363,17 @@ const MyAccount = () => {
               <input type="text" placeholder="Landmark" value={landmark} onChange={(e)=>{setLandmark(e.target.value)}} readOnly={!edit2}/>
             </div>
             <div className="state-city-pincode">
-              <input type="text" placeholder="State*" value={state} onChange={(e)=>{setState(e.target.value)}} required readOnly={!edit2}/>
+              <select required className="state-input">
+                <option value="">Select State*</option>
+                {indianStates.map((state, index) => (
+                  <option key={index} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+              {/* <input type="text" placeholder="City*" required /> */}
+              {/* <input type="text" placeholder="PIN Code*" required /> */}
+              {/* <input type="text" placeholder="State*" value={state} onChange={(e)=>{setState(e.target.value)}} required readOnly={!edit2}/> */}
               <input type="text" placeholder="City*" value={city} onChange={(e)=>{setCity(e.target.value)}} required readOnly={!edit2}/>
               <input type="text" placeholder="PIN Code*" value={pincode} onChange={(e)=>{setPincode(e.target.value)}} required readOnly={!edit2}/>
             </div>

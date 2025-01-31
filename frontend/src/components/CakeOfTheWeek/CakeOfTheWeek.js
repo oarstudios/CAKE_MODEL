@@ -4,9 +4,11 @@ import cakeImage from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272
 import { useAuthContext } from "../../hooks/useAuthContext";
 import useNotify from "../../hooks/useNotify";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-const CakeOfTheWeek = () => {
+const CakeOfTheWeek = ({ toggleCart }) => {
   const [quantity, setQuantity] = useState(1);
+  // const navigate = useNavigate(); 
 
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
@@ -149,6 +151,11 @@ const CakeOfTheWeek = () => {
       navigate(`/billing/${quantity}/${encodeURIComponent(weight)}/${price}/${id}`);
     };
 
+
+  const handleBuyNow = () => {
+    navigate("/billing"); // Navigate to the billing page
+  };
+
   return (
     <>
     <section className="cotw-section">
@@ -180,10 +187,8 @@ const CakeOfTheWeek = () => {
       </div>
     </div>
   </section>
-
-  {/* <div className="section-line"></div> */}
-  </>
-  
+    <ToastContainer/>
+    </>
   );
 };
 

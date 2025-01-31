@@ -6,7 +6,7 @@ import useNotify from "../../hooks/useNotify";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { ToastContainer } from "react-toastify";
 
-const Product = () => {
+const Product = ({ toggleCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedWeight, setSelectedWeight] = useState('');
   const [selectedPrice, setSelectedPrice] = useState(0);
@@ -225,18 +225,17 @@ useEffect(() => {
           <button className="cotw-buy-now" onClick={()=>handleBilling(product?.product?._id)}>Buy Now</button>
         </div>
 
-        <div className="product-note">
-          <h4 className="product-note-title">Note:</h4>
-          <ul>
-            <li >Same-day Deliveries will take place between 11 AM and 7 PM on the chosen date. orders will be delivered via Uber, additional charges will apply.</li>
-            <li>Short messages will be inscribed on a plaque, while longer messages will be included on a card.</li>
-          </ul>
+          
+
+          
         </div>
       </div>  
       
     </div>
     <hr className="cotw-divider" />
-    </div>
+    {/* </div> */}
+    {/* <hr className="cotw-divider" /> */}
+    
     <ToastContainer/>
     </>
   );

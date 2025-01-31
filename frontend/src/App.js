@@ -23,6 +23,7 @@ import AddNewProduct from "./components/Admin/AddNewProduct";
 import EditProduct from "./components/Admin/EditProduct";
 import AdminOrders from "./components/Admin/AdminOrders";
 import CreativesPage from "./components/Admin/CreativesPage";
+import AdminCustomersDetails from "./components/Admin/AdminCustomersDetails";
 import BillingForSingle from "./components/BillingPage/BillingForSingle";
 import { useAuthContext } from "./hooks/useAuthContext";
 
@@ -47,6 +48,17 @@ const MainContent = () => {
   // Check if current route is for admin pages
   const isAdminRoute = location.pathname.startsWith("/admin");
 
+  // Function to open the cart (passed as prop to Product)
+  const openCart = () => {
+    const navbarElement = document.querySelector(".navbar");
+    if (navbarElement) {
+      const cartButton = navbarElement.querySelector(".cart-icon");
+      if (cartButton) {
+        cartButton.click(); // Simulates opening the cart from Navbar
+      }
+    }
+  };
+
   return (
     <>
       {user?.userType === "Admin" ? <AdminNavbar /> : <Navbar />}
@@ -58,8 +70,8 @@ const MainContent = () => {
             element={
               <>
                 <SliderComponent />
-                <BestSellingCakes />
-                <CakeOfTheWeek />
+                <BestSellingCakes toggleCart={openCart}/>
+                <CakeOfTheWeek toggleCart={openCart}/>
                 <Banner />
                 <BestSellingCoco />
               </>
@@ -72,12 +84,12 @@ const MainContent = () => {
           {/* Sign In Page Route */}
           <Route path="/signin" element={<SignInPage />} />
 
-          {/* Product Page Route */}
+          {/* Product Page Route with toggleCart passed */}
           <Route
             path="/product/:id"
             element={
               <>
-                <Product />
+                <Product toggleCart={openCart} />
                 <CustomerReviews />
                 <YouMayAlsoLike />
               </>
@@ -100,10 +112,12 @@ const MainContent = () => {
           <Route path="/admin/edit-product/:id" element={<EditProduct />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/creatives" element={<CreativesPage />} />
+          <Route path="/admin/customers" element={<AdminCustomersDetails />} />
         </Routes>
       </div>
     </>
   );
 };
+
 
 export default App;

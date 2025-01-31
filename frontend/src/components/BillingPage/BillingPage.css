@@ -43,7 +43,7 @@ form .different input {
   padding: 6px 8px;
   border: 1px solid rgba(142, 142, 142, 1);
   border-radius: 10px;
-
+  outline: none;
   font-family: "Jost";
   font-size: 20px;
   font-weight: 400;

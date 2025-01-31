@@ -91,7 +91,8 @@ label {
     text-align: left;
 }
 
-input {
+input,
+select {
     padding: 6px 8px;
     border: 1px solid rgba(142, 142, 142, 1);
     border-radius: 10px;
@@ -101,7 +102,26 @@ input {
     font-weight: 400;
     color: rgba(142, 142, 142, 1);
     background-color: transparent;
+    outline: none;
 }
+
+.state-input{
+    /* padding: 0; */
+    margin-bottom: 15px;
+    padding: 6px 8px;
+    border: 1px solid rgba(142, 142, 142, 1);
+    border-radius: 10px;
+    width: 100%;
+    font-family: "Jost";
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(142, 142, 142, 1);
+    background-color: transparent;
+    outline: none;
+
+}
+
+
 
 /* Order Section */
 .orders-item {
@@ -159,8 +179,6 @@ input {
         font-size: 28px; /* Slightly smaller heading for tablets */
     }
 
-    
-
     .orders-details .orders-date {
         font-size: 20px;
     }
@@ -175,67 +193,48 @@ input {
         font-size: 24px;
     }
 
-   
-        input {
-        
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 6px 8px;
-            border: 1px solid rgba(142, 142, 142, 1);
-            border-radius: 10px;
-            font-family: "Jost";
-            font-size: 20px;
-            font-weight: 400;
-            color: rgba(142, 142, 142, 1);
-            background: transparent;
-            
-        }
-   
+    input,
+    select {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 
     .logout-button {
         font-size: 14px;
         padding: 6px 15px;
     }
+    .account-form,
+.address-form {
+    display: grid;
+    gap: 10px;
+}
+
+.form-row {
+    display: flex;
+    gap: 4px;
+}
 }
 
 @media (max-width: 480px) {
     .heading-row {
-        
         align-items: flex-start;
         margin-bottom: 0.5rem;
     }
 
     .edit-button {
-        margin-top: 10px; /* Add spacing between heading and button */
-        font-size: 12px; /* Smaller edit button */
+        margin-top: 10px;
+        font-size: 12px;
     }
 
     .heading {
-        font-size: 20px; /* Even smaller heading for mobile */
+        font-size: 20px;
         margin-bottom: 0.5rem;
     }
 
-    input {
-        
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 6px 8px;
-            border: 1px solid rgba(142, 142, 142, 1);
-            border-radius: 10px;
-            font-family: "Jost";
-            font-size: 20px;
-            font-weight: 400;
-            color: rgba(142, 142, 142, 1);
-            background: transparent;
-            
-        }
-        .account-form, .address-form {
-            display: grid
-        ;
-            gap: 0px;
-        }
-
-   
+    input,
+    select {
+        margin-bottom: 15px;
+    }
 
     .orders-details .orders-date {
         font-size: 16px;
@@ -249,22 +248,57 @@ input {
         font-size: 16px;
         padding: 4px 10px;
     }
+    .account-form,
+    .address-form {
+        display: grid;
+        gap: 10px;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 4px;
+    }
+}
+
+.orders-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+@media (min-width: 1440px) {
+    .my-account-page {
+        height: 100vh;
+    }
+
+    .account-left,
+    .account-right {
+        padding: 4rem;
+    }
 }
 
 
-/* MyAccount.css or a relevant CSS file */
-.orders-link {
-    text-decoration: none;
-    color: inherit; /* Ensures the text color matches its container */
-  }
-  
+
+.my-account-page {
+    
+    height: 100vh; /* Ensure the page takes full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    box-sizing: border-box;
+}
+
+.account-left, .account-right {
+    overflow-y: auto; /* Enable vertical scrolling within each section if needed */
+    max-height: calc(100vh); /* Account for padding and ensure no overflow */
+}
 
 
-  @media (min-width: 1440px){
-    .my-account-page{
-      height: 100vh;
-    }
-    .account-left, .account-right{
-        padding: 4rem;
-    }
-  }
+
+
+select option {
+    font-size: 16px;
+    padding: 10px;
+    color: rgba(71, 29, 6, 1);
+    background-color: rgba(253, 250, 245, 1);
+    border: none;
+}
+
+
