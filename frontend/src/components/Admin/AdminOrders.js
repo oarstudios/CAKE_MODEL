@@ -2,71 +2,95 @@ import React, { useState, useEffect } from "react";
 import "./AdminOrders.css";
 import AdminOrdersMobile from "./AdminOrdersMobile"; // Importing AdminOrdersMobile
 import img1 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const AdminOrders = () => {
   const [activeOrder, setActiveOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false); // State to detect mobile view
   const ordersPerPage = 15;
+  const {user} = useAuthContext();
+  const [orders, setOrders] = useState([])
 
-  const orders = [
+  const fetchBills = async()=>{
+    try{
+      const response = await fetch(`http://localhost:3001/billing/`)
+      const json = await response.json();
+      if(response.ok)
+      {
+        console.log(json)
+        setOrders(json?.data)
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  useEffect(()=>{
+    if(user?.userType === "Admin")
     {
-      id: "#000001",
-      productName: "Dutch Chocolate Truffle Cake",
-      address:
-        "501, Elita Apartments, Sector 6, Plot 22, Kamohe, Navi Mumbai, 410209",
-      date: "21/12/2024",
-      price: "2500",
-      status: "Delivered",
-      customer: {
-        name: "Omkar Garate",
-        customerId: "#000111",
-        contact: "+91 99888 77666",
-        email: "garateomkar89765432875@gmail.com",
-        paymentMethod: "Cash on Delivery",
-      },
-      orderDetails: [
-        { id: 1, name: "Triple Chocolate Cheesecake - Eggless", quantity: 2, image: img1 },
-        { id: 2, name: "Triple Chocolate Cheesecake - Eggless", quantity: 2, image: img1 }
-      ],
-    },
-    {
-      id: "#000002",
-      productName: "Black Forest Cake",
-      address: "601, Pearl Heights, Lokhandwala, Mumbai, 400053",
-      date: "22/12/2024",
-      price: "1800",
-      status: "Pending",
-      customer: {
-        name: "Aarav Patel",
-        customerId: "#000222",
-        contact: "+91 99888 12345",
-        email: "aaravpatel89765432875@gmail.com",
-        paymentMethod: "Online Payment",
-      },
-      orderDetails: [
-        { id: 1, name: "Red Velvet Cupcake", quantity: 4, image: img1 },
-      ],
-    },
-    {
-      id: "#000003",
-      productName: "Vanilla Bean Cake",
-      address: "103, Ocean Breeze Apartments, Andheri West, Mumbai, 400058",
-      date: "23/12/2024",
-      price: "1500",
-      status: "Canceled",
-      customer: {
-        name: "Isha Kapoor",
-        customerId: "#000333",
-        contact: "+91 88777 55666",
-        email: "ishakapoor89765432875@gmail.com",
-        paymentMethod: "Cash on Delivery",
-      },
-      orderDetails: [
-        { id: 1, name: "Blueberry Cheesecake Slice", quantity: 3, image: img1 },
-      ],
-    },
-  ];
+      fetchBills();
+    }
+  },[user])
+
+  // const orders = [
+  //   {
+  //     id: "#000001",
+  //     productName: "Dutch Chocolate Truffle Cake",
+  //     address:
+  //       "501, Elita Apartments, Sector 6, Plot 22, Kamohe, Navi Mumbai, 410209",
+  //     date: "21/12/2024",
+  //     price: "2500",
+  //     status: "Delivered",
+  //     customer: {
+  //       name: "Omkar Garate",
+  //       customerId: "#000111",
+  //       contact: "+91 99888 77666",
+  //       email: "garateomkar89765432875@gmail.com",
+  //       paymentMethod: "Cash on Delivery",
+  //     },
+  //     orderDetails: [
+  //       { id: 1, name: "Triple Chocolate Cheesecake - Eggless", quantity: 2, image: img1 },
+  //       { id: 2, name: "Triple Chocolate Cheesecake - Eggless", quantity: 2, image: img1 }
+  //     ],
+  //   },
+  //   {
+  //     id: "#000002",
+  //     productName: "Black Forest Cake",
+  //     address: "601, Pearl Heights, Lokhandwala, Mumbai, 400053",
+  //     date: "22/12/2024",
+  //     price: "1800",
+  //     status: "Pending",
+  //     customer: {
+  //       name: "Aarav Patel",
+  //       customerId: "#000222",
+  //       contact: "+91 99888 12345",
+  //       email: "aaravpatel89765432875@gmail.com",
+  //       paymentMethod: "Online Payment",
+  //     },
+  //     orderDetails: [
+  //       { id: 1, name: "Red Velvet Cupcake", quantity: 4, image: img1 },
+  //     ],
+  //   },
+  //   {
+  //     id: "#000003",
+  //     productName: "Vanilla Bean Cake",
+  //     address: "103, Ocean Breeze Apartments, Andheri West, Mumbai, 400058",
+  //     date: "23/12/2024",
+  //     price: "1500",
+  //     status: "Canceled",
+  //     customer: {
+  //       name: "Isha Kapoor",
+  //       customerId: "#000333",
+  //       contact: "+91 88777 55666",
+  //       email: "ishakapoor89765432875@gmail.com",
+  //       paymentMethod: "Cash on Delivery",
+  //     },
+  //     orderDetails: [
+  //       { id: 1, name: "Blueberry Cheesecake Slice", quantity: 3, image: img1 },
+  //     ],
+  //   },
+  // ];
 
   const totalPages = Math.ceil(orders.length / ordersPerPage);
 

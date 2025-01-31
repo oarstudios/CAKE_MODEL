@@ -143,7 +143,7 @@ const BillingPage = () => {
   };
 
   const subtotal = cartItems.reduce(
-    (acc, item) => acc + item?.productDetails?.product?.price * item?.quantity,
+    (acc, item) => acc + item?.price * item?.quantity,
     0
   );
 
@@ -170,9 +170,41 @@ const BillingPage = () => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
+  const [randomString, setRandomString] = useState("");
+  
+  const generateRandomString = (length = 6) => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    let result = "#";  // Start with '#'
+    
+    // Add two numbers at random positions
+    let numCount = 0;
+    while (numCount < 2) {
+      const randomChar = numbers.charAt(Math.floor(Math.random() * numbers.length));
+      if (!result.includes(randomChar)) {  // Ensure the number is not repeated
+        result += randomChar;
+        numCount++;
+      }
+    }
+  
+    // Add random letters until the string reaches the desired length
+    while (result.length < length) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+  
+    // Ensure the result has exactly the desired length
+    setRandomString(result.slice(0, length));
+  };
+  
+  
+      useEffect(()=>{
+        generateRandomString();
+      },[user])
+
   const handleBillSubmit = async () => {
     try {
       const formData = {
+        billId: randomString,
         email,
         productIds: cartItems,
         shippingAddress: {
@@ -195,6 +227,7 @@ const BillingPage = () => {
           pincode2: pincode2,
           phoneNo2: phoneNo2
         },
+        billPrice: subtotal
       };
   
       // If the billing address is the same as the shipping address, copy the shipping address to billing address
@@ -566,7 +599,7 @@ const BillingPage = () => {
                   <div className="cart-item" key={item.product}>
                     <div className="cart-product-info">
                       <img
-                        src={item.image}
+                        src={`http://localhost:3001/uploads/${item?.productDetails?.product?.productImages[0]}`}
                         alt={item.name}
                         className="cart-product-image"
                       />
@@ -575,7 +608,7 @@ const BillingPage = () => {
                           {item?.productDetails?.product?.title}
                         </p>
                         <p className="cart-product-price">
-                          Rs {item?.productDetails?.product?.price}
+                          Rs {item?.price}
                         </p>
                       </div>
                     </div>
@@ -607,12 +640,6 @@ const BillingPage = () => {
                   <p className="subtotal-amount">Rs {subtotal}</p>
                 </div>
               </div>
-              <button
-                className="cotw-buy-now"
-                onClick={() => navigate("/billing")}
-              >
-                Proceed to Checkout
-              </button>
             </>
           )}
         </div>

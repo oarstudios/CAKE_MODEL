@@ -12,6 +12,7 @@ const productSchema = mongoose.Schema(
     },
     bestseller: {
       type: Boolean,
+      default: false
     },
     itemInStock: {
       type: Boolean,
@@ -20,7 +21,7 @@ const productSchema = mongoose.Schema(
     productImages: [
       {
         type: String,
-        required: true,
+        // required: true,
       },
     ],
     defaultPrice:{
@@ -42,7 +43,11 @@ const productSchema = mongoose.Schema(
     category:{
         type: String,
         required: true,
-        enum: ["cake", "chocolate", "gifting"]
+        enum: ["Cake", "Chocolate", "Gifting"]
+    },
+    note: {
+        type: String,
+        required: true
     }
   },
   { timestamps: true }
