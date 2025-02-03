@@ -138,15 +138,19 @@ const handleBilling = (id) => {
 
 
 const handleWeightChange = (weight) => {
+
+  console.log("Weight changed to:", weight);
   setSelectedWeight(weight);
 
-  // Find the price for the selected weight
   const matchingPrice = product?.product?.prices.find(
     (price) => price.weight === weight
   );
-  
+
   setSelectedPrice(matchingPrice ? matchingPrice.price : 0);
+  console.log("Price updated to:", matchingPrice?.price || 0);
+
 };
+
 
 useEffect(() => {
   if (product?.product?.prices?.length) {
@@ -188,41 +192,38 @@ useEffect(() => {
         <div className="product-quantity-weight">
           <div className="productPage-quantity-selector">
             <span className="smallHeadings">Quantity</span>
-            <button onClick={decreaseQuantity} className="productPage-quantity-button">-</button>
+            <button onClick={decreaseQuantity} type="button" className="productPage-quantity-button">-</button>
             <span className="productPage-quantity">{quantity}</span>
-            <button onClick={increaseQuantity} className="productPage-quantity-button">+</button>
+            <button onClick={increaseQuantity} type="button" className="productPage-quantity-button">+</button>
           </div>
 
           <div className="weight-selector">
             <span className="smallHeadings">Weight</span>
-            <button
-            type="button"
+            <div
               className={`weight-option ${selectedWeight === "1/2 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("1/2 KG")}
             >
               1/2 KG
-            </button>
-            <button
-            type="button"
+            </div>
+            <div
               className={`weight-option ${selectedWeight === "1 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("1 KG")}
             >
               1 KG
-            </button>
-            <button
-            type="button"
+            </div>
+            <div
               className={`weight-option ${selectedWeight === "2 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("2 KG")}
             >
               2 KG
-            </button>
+            </div>
           </div>
         </div>
 
         <div className="cotw-buttons">
-          <button className="cotw-add-to-cart" onClick={(e)=>handleAddToCart(e)}>Add to Cart</button>
+          <button className="cotw-add-to-cart" type="button" onClick={(e)=>handleAddToCart(e)}>Add to Cart</button>
         
-          <button className="cotw-buy-now" onClick={()=>handleBilling(product?.product?._id)}>Buy Now</button>
+          <button className="cotw-buy-now" type="button" onClick={()=>handleBilling(product?.product?._id)}>Buy Now</button>
         </div>
 
           
