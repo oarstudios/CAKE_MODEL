@@ -50,10 +50,10 @@ const CakeOfTheWeek = ({ toggleCart }) => {
 
 
     useEffect(() => {
-      if (user) {
+      // if (user) {
         fetchCakes();
-      }
-    }, [user]); // Fetch cakes only when user is available
+      // }
+    }, []); // Fetch cakes only when user is available
     
     useEffect(() => {
       if (prd && prd.length > 0) {
@@ -143,7 +143,7 @@ const CakeOfTheWeek = ({ toggleCart }) => {
       }
     };
     const weight = "1/2 KG";
-    const price = ctw?.product?.prices[0]?.price * quantity;
+    const price = ctw?.product?.prices[0]?.price;
     
     console.log(weight, price)
     

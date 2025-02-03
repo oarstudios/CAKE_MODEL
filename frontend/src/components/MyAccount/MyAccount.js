@@ -34,7 +34,7 @@ const MyAccount = () => {
   useEffect(()=>{
     console.log(user)
     setUsername(user?.username)
-    setPassword(user?.password)
+    // setPassword(user?.password)
     setAge(user?.age)
     setGender(user?.gender)
     setFirstName(user?.address?.firstName)
@@ -299,7 +299,7 @@ const MyAccount = () => {
             </div>
             {user?.password?.length > 0 && (
   <div className="form-group">
-    <label htmlFor="password">Password</label>
+    <label htmlFor="password">Set new password</label>
     <input
       type="password"
       id="password"
@@ -347,7 +347,10 @@ const MyAccount = () => {
         </form>
 
         {/* Address Section */}
-        <div className="heading-row">
+
+        {user?.userType === 'User' && (
+          <>
+          <div className="heading-row">
           <h2 className="heading">Address</h2>
           {!edit2 && 
           <button className="edit-button" onClick={()=>setEdit2(!edit2)}>Edit</button> }
@@ -363,7 +366,7 @@ const MyAccount = () => {
               <input type="text" placeholder="Landmark" value={landmark} onChange={(e)=>{setLandmark(e.target.value)}} readOnly={!edit2}/>
             </div>
             <div className="state-city-pincode">
-              <select required className="state-input">
+              <select required className="state-input" onChange={(e)=>{setState(e.target.value)}}>
                 <option value="">Select State*</option>
                 {indianStates.map((state, index) => (
                   <option key={index} value={state}>
@@ -386,6 +389,9 @@ const MyAccount = () => {
 <button className="submit" type="submit" onClick={()=>setEdit2(!edit2)} style={{display: edit2? "block": "none"}}>Submit</button>
 </div>
         </form>
+          </>
+        )}
+        
 
         <button className="logout-button"  onClick={handleLogout}>Logout</button>
       </div>
