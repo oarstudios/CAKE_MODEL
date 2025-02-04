@@ -34,7 +34,7 @@ const MyAccount = () => {
   useEffect(()=>{
     console.log(user)
     setUsername(user?.username)
-    // setPassword(user?.password)
+    setPassword(user?.password)
     setAge(user?.age)
     setGender(user?.gender)
     setFirstName(user?.address?.firstName)
@@ -121,6 +121,7 @@ const MyAccount = () => {
       try{
         const formData = {
           username,
+
           password,
           age,
           gender,

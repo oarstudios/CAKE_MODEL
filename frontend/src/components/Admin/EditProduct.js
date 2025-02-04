@@ -165,6 +165,9 @@ const fetchProduct = async () => {
     }
 };
 
+
+
+
   
   
   
@@ -232,7 +235,7 @@ const fetchProduct = async () => {
   return (
     <div className="add-new-product-container">
       <div className="top-buttons-container">
-        <Link to="/admin" className="admin-navbar-logo-link">
+        <Link to="/" className="admin-navbar-logo-link">
           <button className="back-button">Back</button>
         </Link>
         <div className="top-buttons">
