@@ -22,10 +22,10 @@ const AdminNavbar = () => {
   return (
     <nav className="admin-navbar">
       <div className="admin-navbar-logo-container">
-        <Link to="/admin" className="admin-navbar-logo-link">
+        <Link to="/" className="admin-navbar-logo-link">
           <img src={logo} alt="Keki's Bakery Logo" className="admin-navbar-logo" />
         </Link>
-        <Link to="/admin" style={{ textDecoration: "none", color: "inherit" }} className="admin-navbar-admin-link">
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }} className="admin-navbar-admin-link">
           <span className="admin-text">Admin</span>
         </Link>
       </div>
@@ -36,7 +36,7 @@ const AdminNavbar = () => {
           <Link to="/admin/orders">Orders</Link>
         </li>
         <li>
-          <Link to="/admin">Products</Link>
+          <Link to="/">Products</Link>
         </li>
         <li>
         <Link to="/admin/creatives">Creatives</Link>

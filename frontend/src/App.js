@@ -68,6 +68,7 @@ const MainContent = () => {
           <Route
             path="/"
             element={
+              user?.userType === "Admin" ? <AdminHomePage /> : (
               <>
                 <SliderComponent />
                 <BestSellingCakes toggleCart={openCart}/>
@@ -75,6 +76,8 @@ const MainContent = () => {
                 <Banner />
                 <BestSellingCoco />
               </>
+              )
+              
             }
           />
 
@@ -107,7 +110,7 @@ const MainContent = () => {
           <Route path="/order/:id" element={<OrderSection />} />
 
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminHomePage />} />
+          {/* <Route path="/admin" element={<AdminHomePage />} /> */}
           <Route path="/admin/add-product" element={<AddNewProduct />} />
           <Route path="/admin/edit-product/:id" element={<EditProduct />} />
           <Route path="/admin/orders" element={<AdminOrders />} />

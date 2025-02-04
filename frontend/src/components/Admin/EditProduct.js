@@ -34,11 +34,16 @@ const fetchProduct = async () => {
       setCategory(json?.product?.category);
       setBestseller(json?.product?.bestseller);
         // Process prices array for weights
-        const formattedPrices = json?.product?.prices.reduce((acc, priceObj) => {
-          acc[priceObj.weight] = priceObj.price;
-          return acc;
-        }, {});
-        setWeightPrices(formattedPrices || {});
+        if (json?.product?.prices && Array.isArray(json?.product?.prices)) {
+          const formattedPrices = {};
+          json.product.prices.forEach((priceObj) => {
+            formattedPrices[priceObj.weight] = priceObj.price;
+          });
+  
+          setWeightPrices(formattedPrices);
+        } else {
+          setWeightPrices({});
+        }
       
       // Store existing images separately 
       setImages(json?.product?.productImages || []); // URLs
@@ -67,7 +72,6 @@ const fetchProduct = async () => {
   
     setNewImages((prev) => [...prev, ...uploadedFiles]); // Store new images separately
   };
-  
   
 
   const handleImageDelete = (index, isOldImage = false) => {
@@ -101,7 +105,7 @@ const fetchProduct = async () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-  
+
     formData.append("title", title);
     formData.append("description", description);
     formData.append("bestseller", false);
@@ -109,60 +113,59 @@ const fetchProduct = async () => {
     formData.append("category", category);
     formData.append("defaultPrice", price);
     formData.append("note", note);
-  
-    // Function to convert image URLs to File objects
-    // Function to extract filename from URL
-  const getFileNameFromUrl = (url) => {
-    return url.split("/").pop(); // Extracts the last part of the URL
-  };
 
-  // Function to convert image URLs to File objects with original names
-  const urlToFile = async (url) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    const fileName = getFileNameFromUrl(url);
-    return new File([blob], fileName, { type: blob.type });
-  };
-  
-    // Convert existing image URLs to File objects and append
-    const existingImagesAsFiles = await Promise.all(images.map((url, index) => urlToFile(url, index)));
-    existingImagesAsFiles.forEach((file) => {
-      formData.append("productImages", file);
-    });
-  
-    // Append new images as files
-    newImages?.forEach((file) => {
-      if (file instanceof File) {
-        formData.append("productImages", file);
-      }
-    });
-  
-    console.log("Final Images (Files):", formData.getAll("productImages"));
-  
-    const pricesArray = selectedWeights.map((weight) => ({
-      weight,
-      price: weightPrices[weight],
-    }));
-  
-    formData.append("prices", JSON.stringify(pricesArray));
-  
-    try {
-      const response = await fetch(`http://localhost:3001/products/updateproduct/${id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: formData,
-      });
-  
-      const json = await response.json();
-      if (response.ok) {
-        notify("Product updated successfully", "success");
-      }
-    } catch (error) {
-      notify("Error updating the product", "error");
+    // Function to extract filename from URL
+    const getFileNameFromUrl = (url) => {
+        return url.split("/").pop(); // Extracts the last part of the URL
+    };
+
+    // Function to convert image URLs to File objects
+    const urlToFile = async (url) => {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const fileName = getFileNameFromUrl(url);
+        return new File([blob], fileName, { type: blob.type });
+    };
+
+    // Only process images if they have been changed
+    if (newImages.length > 0) {
+        newImages.forEach((file) => {
+            if (file instanceof File) {
+                formData.append("productImages", file);
+            }
+        });
     }
-  };
+
+    console.log("Final Images (Files):", formData.getAll("productImages"));
+
+    // Ensure prices array persists
+    if (selectedWeights.length > 0) {
+        const pricesArray = selectedWeights.map((weight) => ({
+            weight,
+            price: weightPrices[weight],
+        }));
+        formData.append("prices", JSON.stringify(pricesArray));
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3001/products/updateproduct/${id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+            body: formData,
+        });
+
+        const json = await response.json();
+        if (response.ok) {
+            notify("Product updated successfully", "success");
+        }
+    } catch (error) {
+        notify("Error updating the product", "error");
+    }
+};
+
+  
   
   
 

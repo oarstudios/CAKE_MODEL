@@ -135,6 +135,7 @@ const MyAccount = () => {
             city,
             pincode,
           },
+          phoneNo
         }
 
         const response = await fetch(`http://localhost:3001/users/updateuser/${user?._id}`,{
@@ -329,7 +330,20 @@ const MyAccount = () => {
             </div>
             <div className="form-group">
               <label htmlFor="gender">Gender</label>
-              <input
+              <select
+  required
+  className="state-input"
+  onChange={(e) => setGender(e.target.value)}
+  value={gender}
+  style={{ pointerEvents: edit1 ? 'auto' : 'none' }} // Only allow interaction when edit1 is true
+>
+  <option value="">Select Gender*</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Others">Others</option>
+</select>
+
+              {/* <input
                 type="text"
                 id="gender"
                 value={gender}
@@ -337,7 +351,7 @@ const MyAccount = () => {
                 onChange={(e) =>
                   setGender(e.target.value)
                 }
-              />
+              /> */}
             </div>
           </div>
           <div className="sbBtn">
@@ -366,7 +380,7 @@ const MyAccount = () => {
               <input type="text" placeholder="Landmark" value={landmark} onChange={(e)=>{setLandmark(e.target.value)}} readOnly={!edit2}/>
             </div>
             <div className="state-city-pincode">
-              <select required className="state-input" onChange={(e)=>{setState(e.target.value)}}>
+              <select required className="state-input" onChange={(e)=>{setState(e.target.value)}} value={state} style={{ pointerEvents: edit2 ? 'auto' : 'none' }} >
                 <option value="">Select State*</option>
                 {indianStates.map((state, index) => (
                   <option key={index} value={state}>
@@ -398,7 +412,9 @@ const MyAccount = () => {
 
       {/* Orders Section */}
      {/* Orders Section */}
-<div className="account-right">
+
+     {user?.userType === 'User' && (
+      <div className="account-right">
   <h2 className="heading">Orders</h2>
   {orders.map((order) => (
     <Link to={`/order/${order._id}`} key={order._id} className="orders-link">
@@ -421,6 +437,8 @@ const MyAccount = () => {
     </Link>
   ))}
 </div>
+     )}
+
 
       <ToastContainer/>
     </div>

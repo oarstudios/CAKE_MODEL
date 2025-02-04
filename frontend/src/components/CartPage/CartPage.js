@@ -175,8 +175,8 @@ const handleRemove = async(id) => {
               <span>QUANTITY</span>
             </div>
             <div className="cart-items">
-              {cartItems.map((item) => (
-                <div className="cart-item" key={item.product}>
+              {cartItems.map((item, index) => (
+                <div className="cart-item" key={index}>
                   {console.log(cartItems)}
                   <div className="cart-product-info">
                     <img

@@ -64,7 +64,7 @@ const CakeOfTheWeek = ({ toggleCart }) => {
 
     const {notify} = useNotify();
   const navigate = useNavigate();
-    const [selectedPrice, setSelectedPrice] = useState(0);
+    // const [selectedPrice, setSelectedPrice] = useState(0);
 
     const updatedUserCart = async () => {
       if (!user) return showError();
@@ -114,7 +114,8 @@ const CakeOfTheWeek = ({ toggleCart }) => {
           'productId': ctw?.product?._id,
           'quantity': quantity,
           'weight': "1/2 KG",
-          'price': selectedPrice
+          'price': ctw?.product?.prices[0]?.price
+
         }
         console.log(formData) 
         
