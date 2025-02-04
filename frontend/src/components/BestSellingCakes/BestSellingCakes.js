@@ -197,6 +197,10 @@ const handleAddToCart = async (product) => {
   }
 };
 
+const viewPage = (nv) =>{
+  navigate(nv)
+}
+
   return (
     <>
       <section className="best-selling-cakes">
@@ -216,7 +220,7 @@ const handleAddToCart = async (product) => {
                   <span className="cake-price-span">from</span> Rs. {cake?.prices[0]?.price}
                 </p>
                 <div className="cake-buttons">
-                  <button className="view-button">View</button>
+                  <button className="view-button" onClick={()=>viewPage(`/product/${cake?._id}`)}>View</button>
                   <button className="add-button"  onClick={()=>handleAddToCart(cake)}>Add to Basket</button>
                 </div>
               </div>

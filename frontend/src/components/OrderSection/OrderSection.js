@@ -152,6 +152,9 @@ const OrderSection = () => {
 
   const {notify} = useNotify();
 
+  const [submittedReviews, setSubmittedReviews] = useState({});
+
+
   const handleReviewSubmit = async (e, id) => {
     e.preventDefault();
   
@@ -159,7 +162,7 @@ const OrderSection = () => {
     formData.append("username", user?.username);
     formData.append("review", inputs[id]?.review);
     formData.append("rating", inputs[id]?.rating);
-    
+  
     // Append the media files to formData
     (inputs[id]?.media || []).forEach((file) => {
       formData.append("media", file); // media should match the field name used in the multer upload
@@ -176,7 +179,8 @@ const OrderSection = () => {
   
       const json = await response.json();
       if (response.ok) {
-        notify("Review added successfully", "success")
+        setSubmittedReviews((prev) => ({ ...prev, [id]: true })); // Mark the review as submitted
+        notify("Review added successfully", "success");
         console.log(json);
       } else {
         console.error(json);
@@ -185,6 +189,7 @@ const OrderSection = () => {
       console.log(error);
     }
   };
+  
   
 
   return (
@@ -259,19 +264,22 @@ const OrderSection = () => {
   style={{ display: "none" }}
 />
 
-              <button
-                className="submit-btn"
-                disabled={!isSubmitEnabled(item?.product?.product?._id)}
-                style={{
-                  backgroundColor: isSubmitEnabled(item?.product?.product?._id)
-                    ? " rgba(213, 178, 107, 1)"
-                    : "rgba(200, 200, 200, 1)",
-                  cursor: isSubmitEnabled(item?.product?.product?._id) ? "pointer" : "not-allowed",
-                }}
-                type="submit"
-              >
-                Submit
-              </button>
+<button
+  className="submit-btn"
+  disabled={!isSubmitEnabled(item?.product?.product?._id) || submittedReviews[item?.product?.product?._id]}
+  style={{
+    backgroundColor: isSubmitEnabled(item?.product?.product?._id) && !submittedReviews[item?.product?.product?._id]
+      ? " rgba(213, 178, 107, 1)"
+      : "rgba(200, 200, 200, 1)",
+    cursor: isSubmitEnabled(item?.product?.product?._id) && !submittedReviews[item?.product?.product?._id]
+      ? "pointer"
+      : "not-allowed",
+  }}
+  type="submit"
+>
+  Submit
+</button>
+
             </div>
           </form>
         ))}
