@@ -47,14 +47,14 @@ const BestSellingCoco = () => {
   
 
   useEffect(()=>{
-    setTimeout(() => {
-      console.log(user)
-    }, 1000);
-    if(user)
-    {
+    // setTimeout(() => {
+    //   console.log(user)
+    // }, 1000);
+    // if(user)
+    // {
       fetchCakes();
-    }
-  },[user])
+    // }
+  },[])
 
 const updatedUserCart = async () => {
   if (!user) return showError();

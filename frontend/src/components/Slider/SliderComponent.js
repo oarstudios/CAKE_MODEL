@@ -1,5 +1,7 @@
 import React from 'react';
-import './SliderComponent.css'; // Ensure correct path to your CSS
+import './SliderComponent.css';
+ // Ensure correct path to your CSS
+
 
 function SliderComponent() {
   return (

@@ -4,7 +4,7 @@ import cakeImage from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useNotify from "../../hooks/useNotify";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const Product = ({ toggleCart }) => {
   const [quantity, setQuantity] = useState(1);
@@ -66,7 +66,7 @@ const updatedUserCart = async () => {
     if (response.ok) {
       // setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify({token: user.token, user: updatedUser}));
-      notify('Product added to cart', 'success')
+      
       console.log("updt", user)
     }
   } catch (error) {
@@ -79,54 +79,13 @@ const showError = ()=>{
   // navigate('/signin')
 }
 
-const handleAddToCart = async (e) => {
-    e.preventDefault();
-  try {
-    if(!user)
-      {
+const showSuccess = ()=>{
+  
+  notify('Product added to the basket', "success")
+}
 
-      return showError();
-      // navigate('/signin')
-      // return;
-      }else{
-        console.log(user._id)
-      }
 
-      // 678b9cd33c5c89b51736ef35
-      // 67863b19bbf3cf5b04a2d017
 
-    const formData = {
-      'productId': id,
-      'quantity': quantity,
-      'weight': selectedWeight,
-      'price': selectedPrice
-    }
-    console.log(formData) 
-    
-    const response = await fetch(`http://localhost:3001/users/addtocart/${user?._id}`, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        'Authorization': `Bearer ${user?.token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const json = await response.json();
-    if (response.ok) {
-      console.log('successfully added to the basket', json);
-      // notify('Added to the cart', "success");
-      updatedUserCart()
-      console.log('adt user', user);
-    } else {
-      console.log('Failed to add to basket', json);
-      notify('Failed to add to basket', "error");
-      
-    }
-  } catch (error) {
-    console.log('Error:', error);
-  }
-};
 const weight = selectedWeight;
 const price = selectedPrice;
 
@@ -159,6 +118,52 @@ useEffect(() => {
     setSelectedPrice(product.product.prices[0]?.price);
   }
 }, [product]);
+
+const [animate, setAnimate] = useState(false);
+
+
+const handleAddToCart = async (e) => {
+  e.preventDefault();
+  
+
+  try {
+    if (!user) {
+      return showError();
+    }
+
+    setAnimate(true);
+    setTimeout(() => {
+      setAnimate(false); // Reset after the animation completes
+    }, 1500);
+
+    const formData = {
+      'productId': id,
+      'quantity': quantity,
+      'weight': selectedWeight,
+      'price': selectedPrice
+    };
+
+    const response = await fetch(`http://localhost:3001/users/addtocart/${user?._id}`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        'Authorization': `Bearer ${user?.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const json = await response.json();
+    if (response.ok) {
+      console.log('successfully added to the basket', json);
+      updatedUserCart();
+    }
+  } catch (error) {
+    console.log('Error:', error);
+    showError(); // In case of failure, show the error toast
+  }
+};
+
+
 
   // console.log(mainImage)
   return (
@@ -221,7 +226,7 @@ useEffect(() => {
         </div>
 
         <div className="cotw-buttons">
-          <button className="cotw-add-to-cart" type="button" onClick={(e)=>handleAddToCart(e)}>Add to Cart</button>
+          <button className={`cotw-add-to-cart adtProduct ${animate ? 'animate-travel' : ''}`} type="button" onClick={(e)=>handleAddToCart(e)}>Add to Cart</button>
         
           <button className="cotw-buy-now" type="button" onClick={()=>handleBilling(product?.product?._id)}>Buy Now</button>
         </div>

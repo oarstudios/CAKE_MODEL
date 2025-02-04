@@ -351,3 +351,68 @@
     height: 130px;
   }
 }
+
+
+.adtProduct{
+  /* border: 1px solid black; */
+  position: relative;
+  overflow: hidden;
+}
+
+
+.adtProduct::before{
+  content: "";
+  position: absolute;
+  /* left: 0; */
+  top: 0;
+  height: 100%;
+  /* width: 100%; */
+  width: 0;
+  background-color: red;
+}
+
+@keyframes travel {
+  0% {
+    left: 0;
+    width: 0%;
+    transform: translateX(-100%); /* Start from left */
+  }
+
+  30% {
+    width: 100%;
+    transform: translateX(0%); /* Bounce to the right a little */
+  }
+  60% {
+    width: 100%;
+    transform: translateX(0%); /* Bounce to the right a little */
+  }
+
+  100% {
+    right: 0;
+    width: 0;
+    transform: translateX(100%); /* End at the right */
+  }
+}
+
+
+
+.animate-travel {
+  /* animation: travel 1s ease-in-out forwards; */
+}
+
+.adtProduct.animate-travel::before {
+  content: "Added";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #D5B26B;
+  animation: travel 1.5s ease-in-out forwards;
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-align: center;  /* Ensure text stays centered */
+}
+

@@ -78,8 +78,6 @@ const AdminHomePage = () => {
 
   const {user} = useAuthContext();
 
-  
-
   const fetchProducts = async() =>{
     // e.preventDefault();
     try{

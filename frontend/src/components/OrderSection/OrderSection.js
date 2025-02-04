@@ -71,7 +71,7 @@ const OrderSection = () => {
 
          // Filter out products with duplicate IDs
       const uniqueProducts = updatedCartItems.filter((value, index, self) => 
-        index === self.findIndex((t) => t.product?._id === value.product?._id)
+        index === self.findIndex((t) => t.product?.product?._id === value.product?.product?._id)
       );
 
         const sortedOrders = uniqueProducts.sort(
@@ -81,10 +81,9 @@ const OrderSection = () => {
           (a, b) => new Date(b.product?.createdAt) - new Date(a.product?.createdAt)
         );
 
-
-
         setProducts(sortedOrders2);
         setPrds(sortedOrders);
+        console.log(updatedCartItems)
       } else {
         console.error("Error: Unable to fetch billing data or data is missing.");
       }

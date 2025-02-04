@@ -7,6 +7,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNotify } from "../../hooks/useNotify";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CartPage from "../CartPage/CartPage";
 
 const cakes = [
   {
@@ -113,14 +114,14 @@ const BestSellingCakes = () => {
   
 
   useEffect(()=>{
-    setTimeout(() => {
-      console.log(user)
-    }, 1000);
-    if(user)
-    {
+    // setTimeout(() => {
+    //   console.log(user)
+    // }, 1000);
+    // if(user)
+    // {
       fetchCakes();
-    }
-  },[user])
+    // }
+  },[])
 
 const updatedUserCart = async () => {
   if (!user) return showError();
@@ -231,6 +232,7 @@ const handleAddToCart = async (product) => {
       </section>
       <div className="section-line"></div>
       <ToastContainer />
+      
     </>
   );
 };
