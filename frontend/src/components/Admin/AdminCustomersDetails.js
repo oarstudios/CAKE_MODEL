@@ -2,63 +2,64 @@ import React, { useState, useEffect } from "react";
 import "./AdminOrders.css";
 import "./AdminCustomersDetails.css";
 import AdminCustDetMobile from "./AdminCustDetMobile"; // Importing the mobile version
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const AdminCustomersDetails = () => {
   const [activeOrder, setActiveOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false); // State to detect mobile view
   const ordersPerPage = 15;
+  const [users, setUsers] = useState([]); 
+  const [bills, setBills] = useState([]); 
 
-  const orders = [
-    {
-      id: "#000001",
-      name: "Dutch Chocolate Truffle Cake",
-      address:
-        "501, Elita Apartments, Sector 6, Plot 22, Kamohe, Navi Mumbai, 410209",
-      totalSpent: "21/12/2024",
-      orders: "25",
-      customer: {
-        name: "Omkar Garate",
-        customerId: "#000111",
-        contact: "+91 99888 77666",
-        email: "garateomkar89765432875@gmail.com",
-        gender: "Male",
-        age: "50",
-      },
-    },
-    {
-      id: "#000002",
-      name: "Black Forest Cake",
-      address: "601, Pearl Heights, Lokhandwala, Mumbai, 400053",
-      totalSpent: "22/12/2024",
-      orders: "25",
-      customer: {
-        name: "Aarav Patel",
-        customerId: "#000222",
-        contact: "+91 99888 12345",
-        email: "aaravpatel89765432875@gmail.com",
-        gender: "Male",
-        age: "50",
-      },
-    },
-    {
-      id: "#000003",
-      name: "Vanilla Bean Cake",
-      address: "103, Ocean Breeze Apartments, Andheri West, Mumbai, 400058",
-      totalSpent: "23/12/2024",
-      orders: "25",
-      customer: {
-        name: "Isha Kapoor",
-        customerId: "#000333",
-        contact: "+91 88777 55666",
-        email: "ishakapoor89765432875@gmail.com",
-        gender: "Male",
-        age: "50",
-      },
-    },
-  ];
+  const { user } = useAuthContext();
 
-  const totalPages = Math.ceil(orders.length / ordersPerPage);
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/users/getusers`);
+      const json = await response.json();
+      if (response.ok) {
+        setUsers(json);
+        console.log(json);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchBills = async () => {
+    try {
+      // Fetch bills
+      const response = await fetch(`http://localhost:3001/billing`);
+      const json = await response.json();
+      if (response.ok) {
+        setBills(json);
+        console.log('Fetched Bills:', json);
+      } else {
+        console.error('Failed to fetch bills:', json);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.userType === "Admin") {
+      fetchUsers();
+      fetchBills();
+    }
+  }, [user]);
+
+  // Calculate the total spent and total number of orders for each user
+  const calculateTotalSpentAndOrders = (userId) => {
+    const userBills = bills?.data?.filter(bill => bill?.userId?._id === userId); // Filter bills by userId
+    console.log(userBills)
+    const totalSpent = userBills?.reduce((acc, bill) => acc + parseFloat(bill.billPrice), 0); // Sum up the total spent
+    const totalOrders = userBills?.length; // Count the number of orders
+    return { totalSpent, totalOrders };
+  };
+
+  const totalPages = Math.ceil(users.length / ordersPerPage);
 
   const toggleOrderDetails = (orderId) => {
     setActiveOrder(activeOrder === orderId ? null : orderId);
@@ -87,15 +88,19 @@ const AdminCustomersDetails = () => {
     };
   }, []);
 
+  const formatAddress = (address) => {
+    return `${address?.firstName} ${address?.lastName}, ${address?.address}, ${address?.landmark}, ${address?.city}, ${address?.state}, ${address?.pincode}`;
+  };
+
   return (
     <div className="admin-orders">
       {isMobile ? (
         <AdminCustDetMobile
-          orders={orders}
+          orders={users}
           currentPage={currentPage}
           ordersPerPage={ordersPerPage}
         />
-      )  : (
+      ) : (
         // Render Desktop Version
         <>
           <div className="orders-list">
@@ -111,48 +116,41 @@ const AdminCustomersDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {paginateOrders(orders, currentPage, ordersPerPage).map(
-                  (order, index) => (
-                    <React.Fragment key={order.id}>
+                {paginateOrders(users, currentPage, ordersPerPage).map((user, index) => {
+                  const { totalSpent, totalOrders } = calculateTotalSpentAndOrders(user._id);
+                  return (
+                    <React.Fragment key={user._id}>
                       <tr
-                        onClick={() => toggleOrderDetails(order.id)}
-                        className={`order-row ${
-                          activeOrder === order.id ? "active-order" : ""
-                        }`}
+                        onClick={() => toggleOrderDetails(user._id)}
+                        className={`order-row ${activeOrder === user._id ? "active-order" : ""}`}
                       >
                         <td>{index + 1 + (currentPage - 1) * ordersPerPage}</td>
-                        <td>{order.id}</td>
-                        <td>{order.name}</td>
-                        <td>{order.address}</td>
-                        <td>{order.totalSpent}</td>
-                        <td>{order.orders}</td>
+                        <td>{user._id}</td>
+                        <td>{user.username}</td>
+                        <td>{user?.address ? formatAddress(user?.address) : "-"}</td>
+                        <td>{totalSpent}</td> {/* Format totalSpent */}
+                        <td>{totalOrders}</td>
                       </tr>
-                      {activeOrder === order.id && (
-                        <tr
-                          className={`order-details-row ${
-                            activeOrder === order.id
-                              ? "active-order-details"
-                              : ""
-                          }`}
-                        >
+                      {activeOrder === user._id && (
+                        <tr className={`order-details-row ${activeOrder === user._id ? "active-order-details" : ""}`}>
                           <td colSpan="6">
                             <div className="admin-order-details">
                               <div className="admin-customer-details">
                                 <h3>Customer Details</h3>
-                                <p>Name: {order.customer.name}</p>
-                                <p>Customer ID: {order.customer.customerId}</p>
-                                <p>Contact: {order.customer.contact}</p>
-                                <p>Email: {order.customer.email}</p>
-                                <p>Gender: {order.customer.gender}</p>
-                                <p>Age: {order.customer.age}</p>
+                                <p>Name: {user?.username}</p>
+                                <p>Customer ID: {user?._id}</p>
+                                <p>Contact: {user?.phoneNo}</p>
+                                <p>Email: {user?.email}</p>
+                                <p>Gender: {user?.gender}</p>
+                                <p>Age: {user?.age}</p>
                               </div>
                             </div>
                           </td>
                         </tr>
                       )}
                     </React.Fragment>
-                  )
-                )}
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -160,13 +158,11 @@ const AdminCustomersDetails = () => {
           <div className="pagination">
             <span>
               Showing {ordersPerPage * (currentPage - 1) + 1} -{" "}
-              {Math.min(ordersPerPage * currentPage, orders.length)} of{" "}
-              {orders.length} Orders
+              {Math.min(ordersPerPage * currentPage, users.length)} of{" "}
+              {users.length} Users
             </span>
             <button
-              className={`pagination-btn ${
-                currentPage === 1 ? "disabled" : ""
-              }`}
+              className={`pagination-btn ${currentPage === 1 ? "disabled" : ""}`}
               onClick={() => handlePageClick(currentPage - 1)}
               disabled={currentPage === 1}
             >
@@ -175,18 +171,14 @@ const AdminCustomersDetails = () => {
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={i + 1}
-                className={`pagination-btn ${
-                  currentPage === i + 1 ? "active-page" : ""
-                }`}
+                className={`pagination-btn ${currentPage === i + 1 ? "active-page" : ""}`}
                 onClick={() => handlePageClick(i + 1)}
               >
                 {i + 1}
               </button>
             ))}
             <button
-              className={`pagination-btn ${
-                currentPage === totalPages ? "disabled" : ""
-              }`}
+              className={`pagination-btn ${currentPage === totalPages ? "disabled" : ""}`}
               onClick={() => handlePageClick(currentPage + 1)}
               disabled={currentPage === totalPages}
             >

@@ -4,6 +4,10 @@ const bcrypt = require('bcrypt')
 
 
 const UserModel = mongoose.Schema({
+    userId: {
+        type: String,
+        // required: true
+    },
     username: {
         type: String,
         required: true
@@ -63,6 +67,9 @@ const UserModel = mongoose.Schema({
               },
               weight:{
                 type: String
+              },
+              price: {
+                type: String
               }
         }
     ],
@@ -73,9 +80,9 @@ const UserModel = mongoose.Schema({
     }
 }, {timestamps: true});
 
-UserModel.statics.signup = async function(username, email, password, userType)
+UserModel.statics.signup = async function(username, email, password, userType, userId)
 {
-    if(!username || !email || !password || !userType)
+    if(!username || !email || !password || !userType || !userId)
     {
         throw Error('All fields must be filled')
     }
@@ -100,6 +107,7 @@ UserModel.statics.signup = async function(username, email, password, userType)
     const hash = await bcrypt.hash(password, salt)
 
     const user = await this.create({
+        userId,
         username, 
         email,
         password: hash,

@@ -16,6 +16,7 @@ const OrderSection = () => {
   const [order, setOrder] = useState("");
   const [inputs, setInputs] = useState({});
   const [ratings, setRatings] = useState({});
+  const [prds, setPrds] = useState([])
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -47,6 +48,7 @@ const OrderSection = () => {
 
       if (response.ok && json?.data) {
         setOrder(json);
+        console.log(json)
 
         const productFetches = json.data.productIds.map((item) =>
           fetch(`http://localhost:3001/products/getproductbyid/${item?.product?._id}`, {
@@ -67,11 +69,21 @@ const OrderSection = () => {
           product: products[index],
         }));
 
-        const sortedOrders = updatedCartItems.sort(
+         // Filter out products with duplicate IDs
+      const uniqueProducts = updatedCartItems.filter((value, index, self) => 
+        index === self.findIndex((t) => t.product?.product?._id === value.product?.product?._id)
+      );
+
+        const sortedOrders = uniqueProducts.sort(
+          (a, b) => new Date(b.product?.createdAt) - new Date(a.product?.createdAt)
+        );
+        const sortedOrders2 = updatedCartItems.sort(
           (a, b) => new Date(b.product?.createdAt) - new Date(a.product?.createdAt)
         );
 
-        setProducts(sortedOrders);
+        setProducts(sortedOrders2);
+        setPrds(sortedOrders);
+        console.log(updatedCartItems)
       } else {
         console.error("Error: Unable to fetch billing data or data is missing.");
       }
@@ -83,13 +95,11 @@ const OrderSection = () => {
   useEffect(() => {
     if (user) {
       fetchOrders();
+      
     }
   }, [user]);
 
-  const totalPrice = order?.data?.productIds?.reduce(
-    (acc, item) => acc + (item?.product?.price || 0) * (item?.quantity || 0),
-    0
-  );
+  const totalPrice = order?.billPrice
 
   const handleTextChange = (e, itemId) => {
     const text = e.target.value;
@@ -142,6 +152,9 @@ const OrderSection = () => {
 
   const {notify} = useNotify();
 
+  const [submittedReviews, setSubmittedReviews] = useState({});
+
+
   const handleReviewSubmit = async (e, id) => {
     e.preventDefault();
   
@@ -149,7 +162,7 @@ const OrderSection = () => {
     formData.append("username", user?.username);
     formData.append("review", inputs[id]?.review);
     formData.append("rating", inputs[id]?.rating);
-    
+  
     // Append the media files to formData
     (inputs[id]?.media || []).forEach((file) => {
       formData.append("media", file); // media should match the field name used in the multer upload
@@ -166,7 +179,8 @@ const OrderSection = () => {
   
       const json = await response.json();
       if (response.ok) {
-        notify("Review added successfully", "success")
+        setSubmittedReviews((prev) => ({ ...prev, [id]: true })); // Mark the review as submitted
+        notify("Review added successfully", "success");
         console.log(json);
       } else {
         console.error(json);
@@ -176,14 +190,15 @@ const OrderSection = () => {
     }
   };
   
+  
 
   return (
     <div className="order-section">
       <div className="order-left">
-        <h3 className="order-id">Order ID {order?.data?._id}</h3>
+        <h3 className="order-id">Order ID {order?.data?.billId}</h3>
         <h2 className="order-date">{formatDate(order?.data?.createdAt)}</h2>
         <p className="delivered-date">
-          Delivered on <span>31st Dec 2024</span>
+          {/* Delivered on <span>31st Dec 2024</span> */}
         </p>
         <h3 className="customer-name">{user?.username}</h3>
         <p className="customer-phone">
@@ -194,12 +209,12 @@ const OrderSection = () => {
         </p>
 
         <h3 className="feedback-title">Tell us how much you loved it!</h3>
-        {products?.map((item) => (
+        {prds?.map((item) => (
 
           <form className="feedback-item" key={item?.product?.product?._id} onSubmit={(e)=>handleReviewSubmit(e, item?.product?.product?._id)} encType='multipart/form-data'>
             {/* {console.log(item)} */}
             <div className="item-details">
-              <img src={cake} alt={item.name} className="item-image" />
+              <img src={`http://localhost:3001/uploads/${item?.product?.product?.productImages[0]}`} alt={item.name} className="item-image" />
               <p className="item-name">{item?.product?.product?.title}</p>
             </div>
             <div className="rating-section">
@@ -249,19 +264,22 @@ const OrderSection = () => {
   style={{ display: "none" }}
 />
 
-              <button
-                className="submit-btn"
-                disabled={!isSubmitEnabled(item?.product?.product?._id)}
-                style={{
-                  backgroundColor: isSubmitEnabled(item?.product?.product?._id)
-                    ? " rgba(213, 178, 107, 1)"
-                    : "rgba(200, 200, 200, 1)",
-                  cursor: isSubmitEnabled(item?.product?.product?._id) ? "pointer" : "not-allowed",
-                }}
-                type="submit"
-              >
-                Submit
-              </button>
+<button
+  className="submit-btn"
+  disabled={!isSubmitEnabled(item?.product?.product?._id) || submittedReviews[item?.product?.product?._id]}
+  style={{
+    backgroundColor: isSubmitEnabled(item?.product?.product?._id) && !submittedReviews[item?.product?.product?._id]
+      ? " rgba(213, 178, 107, 1)"
+      : "rgba(200, 200, 200, 1)",
+    cursor: isSubmitEnabled(item?.product?.product?._id) && !submittedReviews[item?.product?.product?._id]
+      ? "pointer"
+      : "not-allowed",
+  }}
+  type="submit"
+>
+  Submit
+</button>
+
             </div>
           </form>
         ))}
@@ -277,13 +295,13 @@ const OrderSection = () => {
               <div className="cart-item" key={item._id}>
                 <div className="cart-product-info">
                   <img
-                    src={cake}
+                    src={`http://localhost:3001/uploads/${item?.product?.product?.productImages[0]}`}
                     alt={item?.product?.title}
                     className="cart-product-image"
                   />
                   <div className="cart-product-details">
                     <p className="cart-product-name">{item?.product?.product?.title}</p>
-                    <p className="cart-product-price">Rs {item?.product?.product?.price}</p>
+                    <p className="cart-product-price">Rs {item?.price}</p>
                   </div>
                 </div>
                 <div className="quantity-info">
@@ -300,7 +318,7 @@ const OrderSection = () => {
           </div>
           <div className="summary-item">
             <span className="shipping-total-heading">Total</span>
-            <span className="shipping-total-amount">Rs {totalPrice}</span>
+            <span className="shipping-total-amount">Rs {order?.data?.billPrice}</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const BillingModel = mongoose.Schema({
+    billId: {
+        type: String, 
+        required: true
+    },
     userId:{
         type: mongoose.Schema.ObjectId,
         ref: 'User',
@@ -22,6 +26,9 @@ const BillingModel = mongoose.Schema({
             weight: {
                 type: String,
                 // required: true,
+            },
+            price: {
+                type: String
             }
         }
     ],
@@ -100,7 +107,9 @@ const BillingModel = mongoose.Schema({
     status: {
         type: String,
         default: "Pending",
-        required: true
+    },
+    billPrice:{
+        type: String
     }
 }, {timestamps: true})
 

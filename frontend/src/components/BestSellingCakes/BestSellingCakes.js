@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./BestSellingCakes.css";
 import cake1 from "../../images/cake1.jpg"
@@ -7,6 +7,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNotify } from "../../hooks/useNotify";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CartPage from "../CartPage/CartPage";
 
 const cakes = [
   {
@@ -83,11 +84,44 @@ const BestSellingCakes = () => {
   const {notify} = useNotify();
   const navigate = useNavigate();
 
+  const [bsCakes, setBsCakes] = useState([])
+
+  const fetchCakes = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/products/getallproducts`);
+      const json = await response.json();
+      
+      console.log("API Response:", json); // Debugging Step
+  
+      if (response.ok) {
+        if (Array.isArray(json.products)) {
+          const filterBsCakes = json.products.filter(
+            (cake) => cake.category === "Cake" 
+            // && cake.bestseller === true    
+          );
+  
+          console.log("Filtered Cakes:", filterBsCakes);
+          setBsCakes(filterBsCakes)
+        } else {
+          console.error("Expected an array but got:", typeof json);
+        }
+      }
+    } catch (error) {
+      console.log("Fetch Error:", error);
+    }
+  };
+  
+  
+
   useEffect(()=>{
-    setTimeout(() => {
-      console.log(user)
-    }, 1000);
-  },[user])
+    // setTimeout(() => {
+    //   console.log(user)
+    // }, 1000);
+    // if(user)
+    // {
+      fetchCakes();
+    // }
+  },[])
 
 const updatedUserCart = async () => {
   if (!user) return showError();
@@ -131,9 +165,10 @@ const handleAddToCart = async (product) => {
       }
 
     const formData = {
-      'productId': "6790feef14a7c655bdab781d",
+      'productId': product._id,
       'quantity': 1,
-      'weight': 1
+      'weight': "1/2 KG",
+      'price': product?.prices[0]?.price
     }
     console.log(formData) 
     
@@ -162,35 +197,46 @@ const handleAddToCart = async (product) => {
   }
 };
 
+const viewPage = (nv) =>{
+  navigate(nv)
+}
+
   return (
     <>
       <section className="best-selling-cakes">
-        <h2 className="section-title">Best Selling Cakes</h2>
+        <h2 className="section-title">Cakes</h2>
         <div className="cake-grid">
-          {cakes.map((cake) => (
-            <div className="cake-card" key={cake.id}>
+          {bsCakes?.length > 0 ? (bsCakes?.map((cake) => (
+            <div className="cake-card" key={cake?._id}>
               <div className="cake-image">
-                <Link to={`/product/678b9cd33c5c89b51736ef35`}>
-                  <img src={cake.image} alt={cake.name} />
+                <Link to={`/product/${cake?._id}`}>
+                  <img src={`http://localhost:3001/uploads/${cake?.productImages[0]}`} alt={cake.name} />
                 </Link>
-                {cake.tag && <span className="cake-tag">{cake.tag}</span>}
+                {cake?.bestseller === true && <span className="cake-tag">Bestseller</span>}
               </div>
               <div className="cake-details">
-                <h3 className="cake-name">{cake.name}</h3>
+                <h3 className="cake-name">{cake?.title}</h3>
                 <p className="cake-price">
-                  <span className="cake-price-span">from</span> Rs. {cake.price}
+                  <span className="cake-price-span">from</span> Rs. {cake?.prices[0]?.price}
                 </p>
                 <div className="cake-buttons">
-                  <button className="view-button">View</button>
+                  <button className="view-button" onClick={()=>viewPage(`/product/${cake?._id}`)}>View</button>
                   <button className="add-button"  onClick={()=>handleAddToCart(cake)}>Add to Basket</button>
                 </div>
               </div>
             </div>
-          ))}
+          ))): (
+            <>
+          <p></p>
+          <p>No product found</p>
+          <p></p>
+          </>
+          )}
         </div>
       </section>
       <div className="section-line"></div>
       <ToastContainer />
+      
     </>
   );
 };

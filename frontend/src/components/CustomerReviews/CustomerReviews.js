@@ -127,8 +127,8 @@ const CustomerReviews = () => {
 
       {/* Conditional rendering: Only display reviews if they are available */}
       {reviews?.reviews?.length > 0 ? (
-        currentReviews.map((review) => (
-          <div key={review.id} className="review-card">
+        currentReviews.map((review, index) => (
+          <div key={index} className="review-card">
             <div className="review-header">
               <div className="review-author">
                 <img src={UserIcon} alt="User Icon" className="user-icon" />

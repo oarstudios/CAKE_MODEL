@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import "./AdminHomePage.css";
 import cake1 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"
 import cake2 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const cakes = [
     {
@@ -73,11 +74,32 @@ const cakes = [
   ];
 
 const AdminHomePage = () => {
-  const [products, setProducts] = useState([
-    { id: 1, name: "Triple Chocolate Cheesecake", price: 2200, image: "cheesecake.jpg" },
-    { id: 2, name: "Straw Berry Chocolate", price: 1600, image: "strawberry.jpg" },
-    { id: 3, name: "Chocolate Mousse", price: 1800, image: "mousse.jpg" },
-  ]);
+  const [products, setProducts] = useState([]);
+
+  const {user} = useAuthContext();
+
+  const fetchProducts = async() =>{
+    // e.preventDefault();
+    try{
+      const response = await fetch('http://localhost:3001/products/getallproducts');
+      const json = await response.json();
+      if(response.ok)
+      {
+        console.log(json)
+        setProducts(json?.products)
+      }
+    }catch(error)
+    {
+      console.log(error)
+    }
+  }
+
+  useEffect(()=>{
+    if(user?.userType === 'Admin')
+    {
+      fetchProducts();
+    }
+  },[user])
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -85,12 +107,29 @@ const AdminHomePage = () => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredProducts = products?.filter((product) =>
+    product?.title?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleDelete = (id) => {
-    setProducts(products.filter((product) => product.id !== id));
+  const handleDelete = async(id) => {
+    // setProducts(products.filter((product) => product.id !== id));
+    try{
+      const response = await fetch(`http://localhost:3001/products/deleteproduct/${id}`,{
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${user?.token}`
+        }
+      })
+      const json = await response.json();
+      if(response.ok)
+      {
+        console.log(json)
+        fetchProducts();
+      }
+    }catch(error)
+    {
+      console.log(error)
+    }
   };
 
   return (
@@ -121,24 +160,24 @@ const AdminHomePage = () => {
 
 
   {/* Cake Cards */}
-  {cakes.map((cake) => (
-    <div className="cakes-card" key={cake.id}>
+  {products?.map((cake) => (
+    <div className="cakes-card" key={cake?._id}>
       <div className="cakes-image">
 
-          <img src={cake.image} alt={cake.name} />
+          <img src={`http://localhost:3001/uploads/${cake?.productImages[0]}`} alt={cake.name} />
   
-        {cake.tag && <span className="cakes-tag">{cake.tag}</span>}
+        {cake?.bestseller === true && <span className="cakes-tag">Bestseller</span>}
       </div>
       <div className="cakes-details">
-        <h3 className="cakes-name">{cake.name}</h3>
+        <h3 className="cakes-name">{cake?.title}</h3>
         <p className="admin-cakes-price">
-          <span className="cakes-price-span">from</span> Rs. {cake.price}
+          <span className="cakes-price-span">from</span> Rs. {cake?.prices[0]?.price ? cake?.prices[0]?.price : cake?.defaultPrice}
         </p>
         <div className="cakes-buttons">
-        <Link to="/admin/edit-product" style={{ textDecoration: 'none' }}>
+        <Link to={`/admin/edit-product/${cake?._id}`} style={{ textDecoration: 'none' }}>
             <button className="cakes-view-button">Edit</button>
           </Link>
-          <button className="cakes-delete-button">Delete Product</button>
+          <button className="cakes-delete-button" onClick={()=>handleDelete(cake?._id)}>Delete Product</button>
         </div>
       </div>
     </div>

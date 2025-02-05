@@ -4,18 +4,21 @@ import cakeImage from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useNotify from "../../hooks/useNotify";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const Product = ({ toggleCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const [selectedWeight, setSelectedWeight] = useState("1 KG");
+  const [selectedWeight, setSelectedWeight] = useState('');
+  const [selectedPrice, setSelectedPrice] = useState(0);
   const [product, setProduct] = useState('')
 
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-  const handleWeightChange = (weight) => setSelectedWeight(weight);
+ 
 
   const {id} = useParams();
+
+  const [mainImage, setMainImage] = useState();
 
   const fetchProduct = async()=>{    
     try{
@@ -24,6 +27,8 @@ const Product = ({ toggleCart }) => {
       if(response.ok)
       {
         setProduct(json)
+        setMainImage(json?.product?.productImages[0])
+        setSelectedWeight(json?.product?.prices[0]?.weight)
         console.log(json);
       }
     }catch(error){
@@ -61,7 +66,7 @@ const updatedUserCart = async () => {
     if (response.ok) {
       // setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify({token: user.token, user: updatedUser}));
-      notify('Product added to cart', 'success')
+      
       console.log("updt", user)
     }
   } catch (error) {
@@ -74,29 +79,70 @@ const showError = ()=>{
   // navigate('/signin')
 }
 
+const showSuccess = ()=>{
+  
+  notify('Product added to the basket', "success")
+}
+
+
+
+const weight = selectedWeight;
+const price = selectedPrice;
+
+console.log(weight, price)
+
+const handleBilling = (id) => {
+  navigate(`/billing/${quantity}/${encodeURIComponent(weight)}/${price}/${id}`);
+};
+
+
+const handleWeightChange = (weight) => {
+
+  console.log("Weight changed to:", weight);
+  setSelectedWeight(weight);
+
+  const matchingPrice = product?.product?.prices.find(
+    (price) => price.weight === weight
+  );
+
+  setSelectedPrice(matchingPrice ? matchingPrice.price : 0);
+  console.log("Price updated to:", matchingPrice?.price || 0);
+
+};
+
+
+useEffect(() => {
+  if (product?.product?.prices?.length) {
+    // Set initial weight and price
+    setSelectedWeight(product.product.prices[0]?.weight);
+    setSelectedPrice(product.product.prices[0]?.price);
+  }
+}, [product]);
+
+const [animate, setAnimate] = useState(false);
+
+
 const handleAddToCart = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  
+
   try {
-    if(!user)
-      {
-
+    if (!user) {
       return showError();
-      // navigate('/signin')
-      // return;
-      }else{
-        console.log(user._id)
-      }
+    }
 
-      // 678b9cd33c5c89b51736ef35
-      // 67863b19bbf3cf5b04a2d017
+    setAnimate(true);
+    setTimeout(() => {
+      setAnimate(false); // Reset after the animation completes
+    }, 1500);
 
     const formData = {
       'productId': id,
       'quantity': quantity,
-      'weight': selectedWeight
-    }
-    console.log(formData) 
-    
+      'weight': selectedWeight,
+      'price': selectedPrice
+    };
+
     const response = await fetch(`http://localhost:3001/users/addtocart/${user?._id}`, {
       method: "POST",
       body: JSON.stringify(formData),
@@ -109,39 +155,41 @@ const handleAddToCart = async (e) => {
     const json = await response.json();
     if (response.ok) {
       console.log('successfully added to the basket', json);
-      // notify('Added to the cart', "success");
-      updatedUserCart()
-      console.log('adt user', user);
-    } else {
-      console.log('Failed to add to basket', json);
-      notify('Failed to add to basket', "error");
-      
+      updatedUserCart();
     }
   } catch (error) {
     console.log('Error:', error);
+    showError(); // In case of failure, show the error toast
   }
 };
 
-const handleBilling = (id) =>{
-  navigate(`/billing/${quantity}/${selectedWeight}/${id}`)
-}
 
+
+  // console.log(mainImage)
   return (
     <>
     <div className="forcolor">
     <div className="product-container">
       <div className="product-image-section">
-        <img src={cakeImage} alt="Triple Chocolate Cheesecake" className="main-image" />
-        <div className="thumbnail-container">
-          <img src={cakeImage} alt="Thumbnail 1" className="thumbnail" />
-          <img src={cakeImage} alt="Thumbnail 2" className="thumbnail" />
-          <img src={cakeImage} alt="Thumbnail 3" className="thumbnail" />
+      <img src={`http://localhost:3001/uploads/${mainImage}`} alt="Main Product" className="main-image" />
+              <div className="thumbnail-container">
+          {product?.product?.productImages.map((image, index)=>(
+
+          <img
+          key={index}
+          src={`http://localhost:3001/uploads/${image}`}
+          alt={`Thumbnail ${index + 1}`}
+          className="thumbnail"
+          onClick={() => setMainImage(image)}
+          style={{ cursor: "pointer", border: mainImage === image ? "2px solid #D5B26B" : "none" }} // Highlight selected image
+          />
+          ))}
         </div>
       </div>
 
       <div className="product-details-section">
         <h1 className="product-name">{product?.product?.title}</h1>
-        <p className="product-price">Rs. {product?.product?.price}</p>
+        <p className="product-price">Rs.  {selectedPrice}</p>
         <p className="product-description">
         {product?.product?.description}
         </p>
@@ -149,47 +197,49 @@ const handleBilling = (id) =>{
         <div className="product-quantity-weight">
           <div className="productPage-quantity-selector">
             <span className="smallHeadings">Quantity</span>
-            <button onClick={decreaseQuantity} className="productPage-quantity-button">-</button>
+            <button onClick={decreaseQuantity} type="button" className="productPage-quantity-button">-</button>
             <span className="productPage-quantity">{quantity}</span>
-            <button onClick={increaseQuantity} className="productPage-quantity-button">+</button>
+            <button onClick={increaseQuantity} type="button" className="productPage-quantity-button">+</button>
           </div>
 
           <div className="weight-selector">
             <span className="smallHeadings">Weight</span>
-            <button
+            <div
               className={`weight-option ${selectedWeight === "1/2 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("1/2 KG")}
             >
               1/2 KG
-            </button>
-            <button
+            </div>
+            <div
               className={`weight-option ${selectedWeight === "1 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("1 KG")}
             >
               1 KG
-            </button>
-            <button
+            </div>
+            <div
               className={`weight-option ${selectedWeight === "2 KG" ? "selected" : ""}`}
               onClick={() => handleWeightChange("2 KG")}
             >
               2 KG
-            </button>
+            </div>
           </div>
         </div>
 
         <div className="cotw-buttons">
-          <button className="cotw-add-to-cart" onClick={(e)=>handleAddToCart(e)}>Add to Cart</button>
+          <button className={`cotw-add-to-cart adtProduct ${animate ? 'animate-travel' : ''}`} type="button" onClick={(e)=>handleAddToCart(e)}>Add to Cart</button>
         
-          <button className="cotw-buy-now" onClick={()=>handleBilling(product?.product?._id)}>Buy Now</button>
+          <button className="cotw-buy-now" type="button" onClick={()=>handleBilling(product?.product?._id)}>Buy Now</button>
         </div>
 
           
 
           
         </div>
-      </div>
-      <hr className="cotw-divider" />
+      </div>  
+      
     </div>
+    <hr className="cotw-divider" />
+    {/* </div> */}
     {/* <hr className="cotw-divider" /> */}
     
     <ToastContainer/>

@@ -9,7 +9,9 @@ exports.createBilling = async (req, res) => {
         email, 
         shippingAddress,
         billingAddress,
-        status 
+        status,
+        billId,
+        billPrice
       } = req.body;
   
       // Ensure that productIds array contains the necessary fields
@@ -17,6 +19,7 @@ exports.createBilling = async (req, res) => {
         product: item?.product,
         quantity: item?.quantity,
         weight: item?.weight,
+        price: item?.price
       }));
   
       // Create the new Billing document with formatted productIds
@@ -26,7 +29,9 @@ exports.createBilling = async (req, res) => {
         email,
         shippingAddress, // Directly use the shippingAddress object
         billingAddress,  // Directly use the billingAddress object
-        status
+        status,
+        billId,
+        billPrice
       };
   
       const newBilling = new Billing(billingData);

@@ -9,10 +9,10 @@ const createToken = (id) =>{
 
 
 const signupUser = async (req, res) => {
-  const { username, email, password, userType } = req.body;
+  const { username, email, password, userType, userId } = req.body;
 
   try {
-    const user = await User.signup(username, email, password, userType);
+    const user = await User.signup(username, email, password, userType, userId);
     const token = createToken(user._id);
     res.status(200).json({user: user, token: token});
   } catch (error) {
@@ -92,11 +92,10 @@ const updateUser = async (req, res) => {
 // Add to Cart
 const addToCart = async (req, res) => {
   const { id } = req.params;
-  const { productId, quantity, weight } = req.body;
+  const { productId, quantity, weight, price } = req.body;
 
   try {
     const product = await Product.findById(productId);
-    console.log(productId, quantity, weight)
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -106,18 +105,23 @@ const addToCart = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const cartItemIndex = user.cart.findIndex(
-      (item) => item.product.toString() === productId
+    // Ensure weight is treated consistently as a string
+    const weightStr = String(weight);
+
+    // Check if the same product with the same weight exists in the cart
+    const existingCartItem = user.cart.find(
+      (item) => item.product.toString() === productId && String(item.weight) === weightStr
     );
 
-    if (cartItemIndex > -1) {
-      user.cart[cartItemIndex].quantity += quantity;
-      user.cart[cartItemIndex].weight = weight;
+    if (existingCartItem) {
+      // If the product with the same weight exists, update its quantity
+      existingCartItem.quantity += quantity;
     } else {
-      user.cart.push({ product: productId, quantity, weight });
+      // If the product with a different weight exists, add a new entry
+      user.cart.push({ product: productId, quantity, weight: weightStr, price });
     }
 
-    // Save the updated user
+    // Save the updated user cart
     await user.save();
 
     res.status(200).json({ message: "Product added to cart", cart: user.cart });
@@ -125,6 +129,7 @@ const addToCart = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 // Remove from Cart
 const removeFromCart = async (req, res) => {
@@ -161,7 +166,6 @@ const updateCart = async (req, res) => {
 
   try {
     const product = await Product.findById(productId);
-    console.log(productId, quantity, weight)
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -171,25 +175,31 @@ const updateCart = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const cartItemIndex = user.cart.findIndex(
-      (item) => item.product.toString() === productId
+    // Ensure weight is treated consistently as a string
+    const weightStr = String(weight);
+
+    // Check if the product with the same weight exists in the cart
+    const existingCartItem = user.cart.find(
+      (item) => item.product.toString() === productId && String(item.weight) === weightStr
     );
 
-    if (cartItemIndex > -1) {
-      user.cart[cartItemIndex].quantity = quantity;
-      user.cart[cartItemIndex].weight = weight;
-    } else{
-      return res.status(404).json({ message: "Product not found" });
+    if (existingCartItem) {
+      // If the product with the same weight exists, update its quantity
+      existingCartItem.quantity = quantity;
+    } else {
+      // If the product has a different weight, add a new entry
+      user.cart.push({ product: productId, quantity, weight: weightStr });
     }
 
-    // Save the updated user
+    // Save the updated user cart
     await user.save();
 
-    res.status(200).json({ message: "Product updated in the cart", cart: user.cart });
+    res.status(200).json({ message: "Cart updated successfully", cart: user.cart });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 module.exports = {
   signupUser,

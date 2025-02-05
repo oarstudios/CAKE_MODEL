@@ -68,6 +68,7 @@ const MainContent = () => {
           <Route
             path="/"
             element={
+              user?.userType === "Admin" ? <AdminHomePage /> : (
               <>
                 <SliderComponent />
                 <BestSellingCakes toggleCart={openCart}/>
@@ -75,6 +76,8 @@ const MainContent = () => {
                 <Banner />
                 <BestSellingCoco />
               </>
+              )
+              
             }
           />
 
@@ -98,7 +101,7 @@ const MainContent = () => {
 
           {/* Billing Page Route */}
           <Route path="/billing" element={<BillingPage />} />
-          <Route path="/billing/:quantity/:weight/:id" element={<BillingForSingle />} />
+          <Route path="/billing/:quantity/:weight/:price/:id" element={<BillingForSingle />} />
 
           {/* My Account Page Route */}
           <Route path="/my-account" element={<MyAccount />} />
@@ -107,9 +110,9 @@ const MainContent = () => {
           <Route path="/order/:id" element={<OrderSection />} />
 
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminHomePage />} />
+          {/* <Route path="/admin" element={<AdminHomePage />} /> */}
           <Route path="/admin/add-product" element={<AddNewProduct />} />
-          <Route path="/admin/edit-product" element={<EditProduct />} />
+          <Route path="/admin/edit-product/:id" element={<EditProduct />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/creatives" element={<CreativesPage />} />
           <Route path="/admin/customers" element={<AdminCustomersDetails />} />
