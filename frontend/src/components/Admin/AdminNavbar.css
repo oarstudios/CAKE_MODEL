@@ -245,3 +245,32 @@ font-weight: 600;
     }
   }
   
+
+  .admin-navbar-search-input {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #d5b26b;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 16px;
+    outline: none;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .admin-navbar-search-icon {
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-navbar-search-input {
+      width: 150px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .admin-navbar-search-input {
+      width: 120px;
+      font-size: 14px;
+    }
+  }
+  
