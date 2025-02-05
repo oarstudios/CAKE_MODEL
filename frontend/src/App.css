@@ -17,6 +17,10 @@
 *::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
 }
+body {
+  overflow: auto;
+}
+
 
 /* Striped background for App */
 /* Striped background for App */
@@ -58,10 +62,15 @@
 
 
 /* Navbar and Footer should have solid background */
-.navbar, .footer {
+.navbar{
+    /* background: #fff; */
+    position: relative;
+    z-index: 10; /* Ensure they overlay the background */
+  }
+ .footer {
   /* background: #fff; */
-  position: relative;
-  z-index: 10; /* Ensure they overlay the background */
+  /* position: relative; */
+  /* z-index: 10;  */
 }
 
 
@@ -93,5 +102,5 @@
   height: calc(100vh - 80px);
   position: fixed;
   background-color: #e5e1d75f;
-  backdrop-filter: blur(3px);
+  /* backdrop-filter: blur(3px); */
 }

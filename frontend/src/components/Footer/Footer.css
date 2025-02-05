@@ -1,6 +1,9 @@
 .footer {
   background: #e5e1d7;
   padding: 4rem 2rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-top {

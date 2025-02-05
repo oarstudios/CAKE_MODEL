@@ -266,9 +266,7 @@ select {
 }
 
 @media (min-width: 1440px) {
-    .my-account-page {
-        height: 100vh;
-    }
+    
 
     .account-left,
     .account-right {
@@ -278,17 +276,6 @@ select {
 
 
 
-.my-account-page {
-    
-    height: 100vh; /* Ensure the page takes full viewport height */
-    overflow-y: auto; /* Enable vertical scrolling */
-    box-sizing: border-box;
-}
-
-.account-left, .account-right {
-    overflow-y: auto; /* Enable vertical scrolling within each section if needed */
-    max-height: calc(100vh); /* Account for padding and ensure no overflow */
-}
 
 
 

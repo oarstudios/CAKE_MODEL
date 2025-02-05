@@ -7,6 +7,7 @@ import search from "../../images/Group.png"; // Import search icon
 
 const AdminNavbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
 
   // Toggle hamburger menu
@@ -14,9 +15,14 @@ const AdminNavbar = () => {
     setMenuOpen(!menuOpen);
   };
 
+  // Toggle search bar visibility
+  const toggleSearch = () => {
+    setSearchOpen(!searchOpen);
+  };
+
   // Navigate to My Account page
   const handleAdminClick = () => {
-    navigate("/my-account"); // Replace '/my-account' with your actual route path
+    navigate("/my-account");
   };
 
   return (
@@ -39,7 +45,7 @@ const AdminNavbar = () => {
           <Link to="/">Products</Link>
         </li>
         <li>
-        <Link to="/admin/creatives">Creatives</Link>
+          <Link to="/admin/creatives">Creatives</Link>
         </li>
         <li>
           <Link to="/admin/customers">Customers</Link>
@@ -47,7 +53,19 @@ const AdminNavbar = () => {
       </ul>
 
       <div className="admin-navbar-icons">
-        <img src={search} alt="Search Icon" className="admin-navbar-search-icon" />
+        {searchOpen && (
+          <input
+            type="text"
+            placeholder="Search..."
+            className="admin-navbar-search-input"
+          />
+        )}
+        <img
+          src={search}
+          alt="Search Icon"
+          className="admin-navbar-search-icon"
+          onClick={toggleSearch}
+        />
         <img src={admin} alt="Admin Icon" onClick={handleAdminClick} />
         <button className="admin-hamburger" onClick={toggleMenu}>
           <div className="admin-hamburger-line"></div>
