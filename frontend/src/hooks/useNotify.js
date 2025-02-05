@@ -18,8 +18,6 @@ export const useNotify = () => {
       toast.success(message, config);
     } else if (type === "error") {
       toast.error(message, config);
-    } else if (type === "info") {
-      toast.info(message, config);
     }
   };
 

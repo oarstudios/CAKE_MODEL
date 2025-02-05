@@ -242,7 +242,7 @@ const handleAddToCart = async (e) => {
     {/* </div> */}
     {/* <hr className="cotw-divider" /> */}
     
-    <ToastContainer/>
+    {/* <ToastContainer/> */}
     </>
   );
 };

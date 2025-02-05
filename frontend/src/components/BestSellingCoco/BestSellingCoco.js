@@ -164,7 +164,7 @@ const handleAddToCart = async (product) => {
         </div>
       </section>
       <div className="section-line"></div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 };
