@@ -243,7 +243,7 @@ const AddNewProduct = () => {
           </button>
         </div>
       </form>
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
     </div>
   );
 };

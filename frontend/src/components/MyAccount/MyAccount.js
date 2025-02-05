@@ -16,8 +16,8 @@ const MyAccount = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [age, setAge] = useState()
-  const [gender, setGender] = useState('')
+  const [age, setAge] = useState("")
+  const [gender, setGender] = useState("")
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [address, setAddress] = useState('')
@@ -28,7 +28,7 @@ const MyAccount = () => {
   const [phoneNo, setPhoneNo] = useState()
   const [edit1, setEdit1] = useState(false)
   const [edit2, setEdit2] = useState(false)
-
+  const [newPass, setNewPass] = useState("")
   
 
   useEffect(()=>{
@@ -78,6 +78,30 @@ const MyAccount = () => {
     },
   ]);
 
+  useEffect(()=>{
+
+    if(!newPass === "")
+    {
+      setPassword(newPass)
+    }
+  },[newPass])
+
+  const [error, setError] = useState(false);
+
+  const validatePassword = (password) => {
+    const strongPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!strongPasswordRegex.test(password)) {
+      setError(true)
+      
+    } else {
+      setError(false);
+    }
+    setPassword(password);
+    setNewPass(password);
+  };
+
   const indianStates = [
     "Andhra Pradesh",
     "Arunachal Pradesh",
@@ -118,6 +142,16 @@ const MyAccount = () => {
   ];
     const handleSubmit = async(e)=>{
       e.preventDefault();
+
+      if(error){
+        console.log(password)
+        setEdit1(!edit1)
+        return notify(
+          "Password must be at least 8 characters, with uppercase, lowercase, number, and special character.", "error"
+        );
+
+      }
+
       try{
         const formData = {
           username,
@@ -306,8 +340,8 @@ const MyAccount = () => {
       type="password"
       id="password"
       placeholder="********"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
+      value={newPass}
+      onChange={(e) => validatePassword(e.target.value)}
       readOnly={!edit1}
     />
   </div>
@@ -441,7 +475,7 @@ const MyAccount = () => {
      )}
 
 
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
     </div>
   );
 };

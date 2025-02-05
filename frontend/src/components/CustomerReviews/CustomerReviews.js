@@ -156,7 +156,7 @@ const CustomerReviews = () => {
 
       {/* Render Pagination */}
       {renderPagination()}
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
     </section>
   );
 };

@@ -26,6 +26,7 @@ import CreativesPage from "./components/Admin/CreativesPage";
 import AdminCustomersDetails from "./components/Admin/AdminCustomersDetails";
 import BillingForSingle from "./components/BillingPage/BillingForSingle";
 import { useAuthContext } from "./hooks/useAuthContext";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
 
@@ -117,6 +118,7 @@ const MainContent = () => {
           <Route path="/admin/creatives" element={<CreativesPage />} />
           <Route path="/admin/customers" element={<AdminCustomersDetails />} />
         </Routes>
+        <ToastContainer/>
       </div>
     </>
   );

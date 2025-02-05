@@ -188,7 +188,7 @@ const CakeOfTheWeek = ({ toggleCart }) => {
       </div>
     </div>
   </section>
-    <ToastContainer/>
+    {/* <ToastContainer/> */}
     </>
   );
 };

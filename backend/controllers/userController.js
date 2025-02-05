@@ -1,6 +1,7 @@
 const User = require("../models/UserModel");
 const Product = require("../models/ProductModel");
 const jwt = require('jsonwebtoken')
+const bcrypt = require("bcrypt");
 require('dotenv').config()
 
 const createToken = (id) =>{
@@ -74,18 +75,28 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const data = req.body;
+  let { password, ...otherData } = req.body; // Extract password separately
   const { id } = req.params;
 
   try {
-    const user = await User.findByIdAndUpdate(id, data, { new: true });
-    if (!user) {
-      return res.status(404).json("User not found");
+    // If password is provided, hash it
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      password = await bcrypt.hash(password, salt);
     }
-    // const token = createToken(user._id);
-    res.status(200).json({user: user});
+
+    // Merge password into the data object if it's present
+    const updatedData = password ? { ...otherData, password } : otherData;
+
+    const user = await User.findByIdAndUpdate(id, updatedData, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json({ user });
   } catch (error) {
-    res.status(400).json({ error: error });
+    res.status(400).json({ error: error.message });
   }
 };
 

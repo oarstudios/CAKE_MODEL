@@ -235,7 +235,7 @@ const viewPage = (nv) =>{
         </div>
       </section>
       <div className="section-line"></div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       
     </>
   );
