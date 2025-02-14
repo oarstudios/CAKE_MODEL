@@ -32,7 +32,7 @@ body {
     #ffffff 30px,
     #ffffff 60px
   );
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 /* Adjust stripe width for mobile view */

@@ -85,6 +85,8 @@ margin: 0;
     width: 100%;
     height: auto;
     display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
   }
   
   .cakes-tag {

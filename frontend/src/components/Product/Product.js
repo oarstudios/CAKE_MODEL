@@ -189,7 +189,7 @@ const handleAddToCart = async (e) => {
 
       <div className="product-details-section">
         <h1 className="product-name">{product?.product?.title}</h1>
-        <p className="product-price">Rs.  {selectedPrice}</p>
+        <p className="product-price">₹  {selectedPrice}</p>
         <p className="product-description">
         {product?.product?.description}
         </p>

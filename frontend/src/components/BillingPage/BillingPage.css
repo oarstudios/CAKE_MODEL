@@ -384,7 +384,7 @@ font-weight: 600;
 
   @media (min-width: 1440px){
     .billing-page{
-      height: 120vh;
+      /* height: 120vh; */
     }
     .billing-left, .billing-right{
       padding: 4rem;

@@ -40,8 +40,9 @@
 .cake-image img {
   width: 100%;
   /* height: auto; */
-  aspect-ratio: 2/2;
+  aspect-ratio: 4/3;
   display: block;
+  object-fit: cover;
 }
 
 .cake-tag {
@@ -96,8 +97,8 @@
 }
 
 .view-button {
-  flex: 1;
-  /* padding: 0.7rem 1.5rem; */
+  /* flex: 1; */
+  padding: 0.8rem 2.5rem;
   color: #FDFAF5;
   background-color: #D5B26B;
   border: none;
@@ -109,6 +110,7 @@
 }
 
 .add-button {
+  flex: 3;
   background-color: #FDFAF5;
   border: 1px solid #D5B26B;
   flex: 2;
@@ -143,6 +145,11 @@
 
   .cake-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 cards per row for tablets */
+  }
+}
+@media (max-width: 1234px) {
+  .cake-grid {
+      grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -217,8 +224,8 @@
   
 
   .view-button {
-    flex: 2; /* 40% of the total width */
-    /* padding: 0.8rem 3.5rem; */
+    /* flex: 2;  */
+    padding: 0.8rem 3.5rem;
   }
 
   .add-button {

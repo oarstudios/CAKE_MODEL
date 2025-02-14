@@ -5,7 +5,7 @@ import removeIcon from "../../images/remove-icon.png";
 import cake from "../../images/cake1.jpg";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
-const CartPage = () => {
+const CartPage = ({closeCart}) => {
 
   const {user} = useAuthContext(); 
   const [adtItems, setAdtItems] = useState([]);
@@ -224,7 +224,7 @@ const handleRemove = async(id) => {
             <button
               className="cotw-buy-now"
               onClick={() => {
-                // closeCart();
+                closeCart();
                 navigate("/billing");
               }}
             >
