@@ -18,7 +18,7 @@
     display: flex;
     gap: 40px; /* Increase this for more spacing between links */
     flex: 1;
-    justify-content: center; /* Center links in the middle */
+
   }
   
   .admin-navbar-logo-link {
@@ -158,7 +158,8 @@ font-weight: 600;
     display: flex;
     gap: 40px;
     flex: 1;
-    justify-content: center;
+    justify-content: left;
+    margin-left: 2.5rem;
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
   }
