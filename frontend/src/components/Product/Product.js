@@ -15,7 +15,6 @@ const Product = ({ toggleCart }) => {
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
  
-
   const {id} = useParams();
 
   const [mainImage, setMainImage] = useState();
@@ -203,26 +202,20 @@ const handleAddToCart = async (e) => {
           </div>
 
           <div className="weight-selector">
-            <span className="smallHeadings">Weight</span>
-            <div
-              className={`weight-option ${selectedWeight === "1/2 KG" ? "selected" : ""}`}
-              onClick={() => handleWeightChange("1/2 KG")}
-            >
-              1/2 KG
-            </div>
-            <div
-              className={`weight-option ${selectedWeight === "1 KG" ? "selected" : ""}`}
-              onClick={() => handleWeightChange("1 KG")}
-            >
-              1 KG
-            </div>
-            <div
-              className={`weight-option ${selectedWeight === "2 KG" ? "selected" : ""}`}
-              onClick={() => handleWeightChange("2 KG")}
-            >
-              2 KG
-            </div>
-          </div>
+  <span className="smallHeadings">Weight</span>
+  {product?.product?.prices
+    ?.filter(price => price.price > 0) // Only show weights with a valid price
+    .map((price, index) => (
+      <div
+        key={index}
+        className={`weight-option ${selectedWeight === price.weight ? "selected" : ""}`}
+        onClick={() => handleWeightChange(price.weight)}
+      >
+        {price.weight}
+      </div>
+    ))}
+</div>
+
         </div>
 
         <div className="cotw-buttons">

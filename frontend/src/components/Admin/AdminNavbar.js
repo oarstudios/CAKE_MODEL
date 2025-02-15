@@ -53,7 +53,7 @@ const AdminNavbar = () => {
       </ul>
 
       <div className="admin-navbar-icons">
-        {searchOpen && (
+        {/* {searchOpen && (
           <input
             type="text"
             placeholder="Search..."
@@ -65,7 +65,7 @@ const AdminNavbar = () => {
           alt="Search Icon"
           className="admin-navbar-search-icon"
           onClick={toggleSearch}
-        />
+        /> */}
         <img src={admin} alt="Admin Icon" onClick={handleAdminClick} />
         <button className="admin-hamburger" onClick={toggleMenu}>
           <div className="admin-hamburger-line"></div>

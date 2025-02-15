@@ -3,6 +3,7 @@ import "./AdminOrders.css";
 import AdminOrdersMobile from "./AdminOrdersMobile"; // Importing AdminOrdersMobile
 import img1 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import useNotify from "../../hooks/useNotify";
 
 const AdminOrders = () => {
   const [activeOrder, setActiveOrder] = useState(null);
@@ -13,6 +14,7 @@ const AdminOrders = () => {
   const [opd, setOpd] = useState([])
   const [orders, setOrders] = useState([])
   const [sts, setSts] = useState()
+  const {notify} = useNotify();
 
 
   const fetchBills = async (status = 'all') => {
@@ -255,10 +257,12 @@ const AdminOrders = () => {
       if(response.ok)
       {
         console.log(json)
+         notify("Changed the status of order", "success")
         fetchBills();
       }
     }catch(error){
       console.log(error)
+      notify("Error changing the status of order", "error")
     }
 
    
