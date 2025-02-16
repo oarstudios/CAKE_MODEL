@@ -22,7 +22,7 @@
   aspect-ratio: 5/4;
   background: #ffffff;
   border-radius: 50% 50% 0% 0%;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .signup-title {
@@ -45,7 +45,7 @@
   border-radius: 20px;
   font-family: "Josefin Sans", serif;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   color: #a09f9f;
 }
 
@@ -202,15 +202,15 @@
     gap: 2rem;
   }
   .signup-input{
-    font-size: 34px;
+    font-size: 24px;
   }
   .error-message{
     font-size: 26px;
   }
   .signup-button, .google-signin-button{
-    font-size: 34px;
+    font-size: 24px;
   }
   .signin-link{
-    font-size: 34px;
+    font-size: 24px;
   }
 }

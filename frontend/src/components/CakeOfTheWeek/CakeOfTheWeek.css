@@ -29,6 +29,7 @@
     /* height: auto; */
     aspect-ratio: 2/2;
     border-radius: 20px;
+    object-fit: cover;
 }
 
 .cotw-details {

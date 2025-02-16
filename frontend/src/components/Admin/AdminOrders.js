@@ -85,18 +85,18 @@ const AdminOrders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!opd || opd.length === 0) return;
+        if (!opd || opd?.length === 0) return;
   
         // Fetch products in batch
-        const allProductIds = opd.flatMap(order => order.productIds.map(item => item.product._id));
+        const allProductIds = opd.flatMap(order => order?.productIds.map(item => item?.product?._id));
         const products = await fetchProductsByIds(allProductIds);
   
         // Attach products to orders and merge product details into productIds
         const updatedOrders = opd.map(order => {
           return {
             ...order,
-            productIds: order.productIds.map(item => {
-              const product = products.find(p => p.product._id === item.product._id);
+            productIds: order?.productIds.map(item => {
+              const product = products.find(p => p?.product?._id === item?.product?._id);
               return product ? {
                 ...item,
                 productDetails: product.product, // Add product details (like title, description, etc.)
@@ -109,7 +109,7 @@ const AdminOrders = () => {
   
         // Fetch user data in batch
         const updatedOrdersWithUsers = await Promise.all(updatedOrders.map(async (order) => {
-          const userId = order.userId?._id;
+          const userId = order?.userId?._id;
           const userData = userId ? await fetchUserById(userId) : {};
           return {
             ...order,

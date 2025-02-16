@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop"; // Import ScrollToTop
 import "./App.css";
@@ -29,14 +29,16 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
+  
 
-
-
+  const {user} = useAuthContext();
+  console.log(user)
   return (
     <Router>
       <ScrollToTop /> {/* Scroll to top on route change */}
       <MainContent />
-      <Footer />
+      {(user?.userType === 'User' || !user) && <Footer />}
+      
     </Router>
   );
 };
@@ -46,8 +48,6 @@ const MainContent = () => {
   const {user} = useAuthContext();
   console.log(user)
 
-  // Check if current route is for admin pages
-  const isAdminRoute = location.pathname.startsWith("/admin");
 
   // Function to open the cart (passed as prop to Product)
   const openCart = () => {

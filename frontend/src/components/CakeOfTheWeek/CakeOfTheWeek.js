@@ -179,7 +179,7 @@ const CakeOfTheWeek = ({ toggleCart }) => {
           <button onClick={increaseQuantity} className="cotw-quantity-button">+</button>
         </div>
         <p className="cotw-description">
-          Indulge in the ultimate chocolate lover’s dream with our Triple Chocolate Cheesecake. This decadent dessert features a rich, velvety chocolate cheesecake layered atop a buttery chocolate cookie crust.
+         {ctw?.product?.description}
         </p>
         <div className="cotw-buttons">
           <button className="cotw-add-to-cart" onClick={(e)=>handleAddToCart(e)}>Add to Cart</button>
