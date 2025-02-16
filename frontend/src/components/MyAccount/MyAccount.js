@@ -257,6 +257,7 @@ const MyAccount = () => {
           });
     
           const products = await Promise.all(productPromises);
+          console.log(products)
     
           const ordersWithDetails = filterOrders.map((order, index) => {
             return {
@@ -264,12 +265,13 @@ const MyAccount = () => {
               products: products[index].map((product, idx) => ({
                 name: product?.product?.title,
                 quantity: order.productIds[idx]?.quantity,
-                image: product?.image, // Assuming `image` is part of the product response
+                image: product?.product?.productImages?.[0] || "", // Fetch first image
               })),
               billingTime: formatDate(order?.createdAt),
               status: order.status,
             };
           });
+          
     
           // Sort the orders based on billingTime in descending order
           const sortedOrders = ordersWithDetails.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -454,7 +456,8 @@ const MyAccount = () => {
   {orders.map((order) => (
     <Link to={`/order/${order._id}`} key={order._id} className="orders-link">
       <div className="orders-item">
-        <img src={cake} alt="Order" className="orders-image" />
+        <img src={`http://localhost:3001/uploads/${order?.products[0]?.image}`} alt="Order" className="orders-image" />
+        {/* <p>{order?.products?.image}</p> */}
         <div className="orders-details">
           <p className="orders-date">{order.billingTime}</p>
           <p className={`orders-status ${order.status.toLowerCase()}`}>

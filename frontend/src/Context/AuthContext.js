@@ -1,5 +1,14 @@
 import { createContext, useReducer, useEffect } from 'react';
 
+// create context 
+// create reducer
+// create context provider
+    // use the created reducer 
+    // create function for storage change 
+    // useEffect for storage 
+    // function to update local storage manually 
+
+
 export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {

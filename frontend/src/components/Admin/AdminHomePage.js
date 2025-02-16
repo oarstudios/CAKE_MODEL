@@ -5,6 +5,7 @@ import "./AdminHomePage.css";
 import cake1 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"
 import cake2 from "../../images/WhatsApp Image 2025-01-16 at 18.44.01_8f1272c7.jpg"
 import { useAuthContext } from "../../hooks/useAuthContext";
+import useNotify from "../../hooks/useNotify";
 
 const cakes = [
     {
@@ -77,6 +78,7 @@ const AdminHomePage = () => {
   const [products, setProducts] = useState([]);
 
   const {user} = useAuthContext();
+  const {notify} = useNotify();
 
   const fetchProducts = async() =>{
     // e.preventDefault();
@@ -110,6 +112,7 @@ const AdminHomePage = () => {
   const filteredProducts = products?.filter((product) =>
     product?.title?.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  
 
   const handleDelete = async(id) => {
     // setProducts(products.filter((product) => product.id !== id));
@@ -125,10 +128,12 @@ const AdminHomePage = () => {
       {
         console.log(json)
         fetchProducts();
+        notify("Successfully deleted the product", "success")
       }
     }catch(error)
     {
       console.log(error)
+      notify("Error deleting the product", "error")
     }
   };
 
@@ -160,28 +165,28 @@ const AdminHomePage = () => {
 
 
   {/* Cake Cards */}
-  {products?.map((cake) => (
-    <div className="cakes-card" key={cake?._id}>
-      <div className="cakes-image">
-
-          <img src={`http://localhost:3001/uploads/${cake?.productImages[0]}`} alt={cake.name} />
-  
-        {cake?.bestseller === true && <span className="cakes-tag">Bestseller</span>}
-      </div>
-      <div className="cakes-details">
-        <h3 className="cakes-name">{cake?.title}</h3>
-        <p className="admin-cakes-price">
-          <span className="cakes-price-span">from</span> Rs. {cake?.prices[0]?.price ? cake?.prices[0]?.price : cake?.defaultPrice}
-        </p>
-        <div className="cakes-buttons">
+  {/* Cake Cards */}
+{filteredProducts?.map((cake) => (
+  <div className="cakes-card" key={cake?._id}>
+    <div className="cakes-image">
+      <img src={`http://localhost:3001/uploads/${cake?.productImages[0]}`} alt={cake.name} />
+      {cake?.bestseller === true && <span className="cakes-tag">Bestseller</span>}
+    </div>
+    <div className="cakes-details">
+      <h3 className="cakes-name">{cake?.title}</h3>
+      <p className="admin-cakes-price">
+        <span className="cakes-price-span">from</span> Rs. {cake?.prices[0]?.price ? cake?.prices[0]?.price : cake?.defaultPrice}
+      </p>
+      <div className="cakes-buttons">
         <Link to={`/admin/edit-product/${cake?._id}`} style={{ textDecoration: 'none' }}>
-            <button className="cakes-view-button">Edit</button>
-          </Link>
-          <button className="cakes-delete-button" onClick={()=>handleDelete(cake?._id)}>Delete Product</button>
-        </div>
+          <button className="cakes-view-button">Edit</button>
+        </Link>
+        <button className="cakes-delete-button" onClick={() => handleDelete(cake?._id)}>Delete Product</button>
       </div>
     </div>
-  ))}
+  </div>
+))}
+
 </div>
 
 

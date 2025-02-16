@@ -247,10 +247,10 @@ const BillingPage = () => {
       const json = await response.json();
   
       if (response.ok) {
-        console.log(json);
+        console.log("order",json);
         notify('Order successfully placed', "success");
         setTimeout(() => {
-          navigate('/my-account');
+          navigate(`/order/${json?.data?._id}`);
         }, 1000);
       }
   

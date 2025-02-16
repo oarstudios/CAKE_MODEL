@@ -19,13 +19,15 @@ const AdminCustomersDetails = () => {
       const response = await fetch(`http://localhost:3001/users/getusers`);
       const json = await response.json();
       if (response.ok) {
-        setUsers(json);
-        console.log(json);
+        const filteredUsers = json.filter(user => user.userType !== "Admin"); // Exclude admins
+        setUsers(filteredUsers);
+        console.log(filteredUsers);
       }
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   const fetchBills = async () => {
     try {

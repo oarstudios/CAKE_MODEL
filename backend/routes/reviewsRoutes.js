@@ -15,6 +15,8 @@ const {
   router.post('/createreview/:id', upload, addReview);
   
   router.get('/getproductreview/:id', getReviewsByProduct);
+
+  router.get('/getallreviews', getAllReviews)
   
   router.patch('/updatereview', updateReview);
   

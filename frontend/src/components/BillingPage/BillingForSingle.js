@@ -265,7 +265,7 @@ const BillingForSingle = () => {
         console.log(json);
         notify('Order successfully placed', "success");
         setTimeout(() => {
-          navigate('/my-account');
+          navigate(`/order/${json?.data?._id}`);
         }, 1000);
       }
   

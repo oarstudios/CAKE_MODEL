@@ -119,7 +119,7 @@ const CustomerReviews = () => {
 
   return (
     <section className="customer-reviews">
-      <h2>Customer Reviews ({reviews.length})</h2>
+      <h2>Customer Reviews ({reviews?.reviews?.length})</h2>
       <div className="rating-summary">
       <div className="stars">{renderStars(Math.round(averageRating))}</div>
         <p>{averageRating > 0 ? averageRating : 0}  out of 5</p>
